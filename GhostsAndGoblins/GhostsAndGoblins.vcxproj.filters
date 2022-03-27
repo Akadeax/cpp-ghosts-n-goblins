@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\Core.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Matrix2x3.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pch.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SoundEffect.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SoundStream.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\structs.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SVGParser.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Vector2f.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component.cpp">
+      <Filter>Engine\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EntityManager.cpp">
+      <Filter>Engine\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity.cpp">
+      <Filter>Engine\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureCache.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RendererComponent.cpp">
+      <Filter>Engine\DefaultComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TransformComponent.cpp">
+      <Filter>Engine\DefaultComponents</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Core.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Matrix2x3.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoundEffect.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoundStream.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\structs.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SVGParser.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vector2f.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Component.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EntityManager.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureCache.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RendererComponent.h">
+      <Filter>Engine\DefaultComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TransformComponent.h">
+      <Filter>Engine\DefaultComponents</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{d77908ad-d541-4cc6-8a80-3382a1bc660d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{a52e9dee-e171-436c-a1a3-1775e228704e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{f6e38247-0419-4e88-81e5-e5ceae9a3d56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\DefaultComponents">
+      <UniqueIdentifier>{1549361d-f127-488e-8fdd-93e38c2f616a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ECS">
+      <UniqueIdentifier>{dfc8f8c1-42e1-4277-9618-6c365fbe2d92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ECS\Entity">
+      <UniqueIdentifier>{83fbcbf2-df66-4ba4-ba73-f5389867dd20}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
