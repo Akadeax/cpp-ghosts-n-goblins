@@ -29,6 +29,10 @@ void Game::Initialize()
 	m_EntityManager = new EntityManager();
 	m_Camera = new Camera();
 	m_TextureCache = new TextureCache();
+
+	m_Ent = m_EntityManager->CreateEntity();
+	m_Ent->AddComponent(new TransformComponent(m_Ent, Point2f(0, 0)));
+	m_Ent->AddComponent(new RendererComponent(m_Ent, m_TextureCache->GetTexture(TextureCache::Spritesheet::Player)));
 }
 
 void Game::Cleanup()

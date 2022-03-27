@@ -14,7 +14,7 @@ public:
 	virtual ~Entity();
 
 	template<typename TComponent>
-	TComponent* GetComponent(Component::Type type) const;
+	TComponent* GetComponent(std::string type) const;
 	void AddComponent(Component* comp);
 	std::set<Component*> GetComponents() const;
 
@@ -36,7 +36,7 @@ private:
 
 // Definition in header because templates are... interesting
 template<typename TComponent>
-TComponent* Entity::GetComponent(Component::Type type) const
+TComponent* Entity::GetComponent(std::string type) const
 {
 	for (Component* comp : m_Components)
 	{

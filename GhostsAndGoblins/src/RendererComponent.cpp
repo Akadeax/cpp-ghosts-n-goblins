@@ -1,22 +1,24 @@
 #include "pch.h"
 
-#include "RendererComponent.h"
 #include <iostream>
-#include "Texture.h"
-#include "TransformComponent.h"
 #include <cassert>
 
+#include "RendererComponent.h"
+#include "TransformComponent.h"
+#include "Texture.h"
+
+const std::string RendererComponent::TYPE = "renderer";
+
 RendererComponent::RendererComponent(Entity* parent, Texture* texture)
-	: Component(Component::Type::Renderer, parent),
+	: Component(TYPE, parent),
 	m_pTexture{texture}
 {
-	m_pParentTransform = parent->GetComponent<TransformComponent>(Component::Type::Transform);
+	m_pParentTransform = parent->GetComponent<TransformComponent>(TransformComponent::TYPE);
 	assert(m_pParentTransform != nullptr);
 }
 
 RendererComponent::~RendererComponent()
 {
-	delete m_pTexture;
 }
 
 void RendererComponent::Draw() const

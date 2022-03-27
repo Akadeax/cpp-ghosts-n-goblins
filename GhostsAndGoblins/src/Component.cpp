@@ -2,7 +2,7 @@
 
 #include "Component.h"
 
-Component::Component(Type type, Entity* parent)
+Component::Component(std::string type, Entity* parent)
 {
 	m_Type = type;
 	m_pParent = parent;
@@ -17,7 +17,7 @@ Entity* Component::GetParent() const
 	return m_pParent;
 }
 
-Component::Type Component::GetType() const
+std::string Component::GetType() const
 {
 	return m_Type;
 }
