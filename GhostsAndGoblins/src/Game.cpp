@@ -50,7 +50,7 @@ void Game::Update(float deltaTime)
 	const Uint8* state = SDL_GetKeyboardState(nullptr);
 	if (state[SDL_SCANCODE_SPACE])
 	{
-		m_Ent->GetComponent<TransformComponent>(TransformComponent::TYPE)->MovePosition(Vector2f(600, 600) * deltaTime);
+		m_Ent->GetComponent<TransformComponent>()->MovePosition(Vector2f(600, 600) * deltaTime);
 	}
 }
 

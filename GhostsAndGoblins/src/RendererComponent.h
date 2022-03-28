@@ -8,8 +8,6 @@ class RendererComponent
 	: public Component
 {
 public:
-	const static std::string TYPE;
-
 	RendererComponent(Entity* parent, Texture* texture);
 	RendererComponent& operator=(const RendererComponent& other) = delete;
 	RendererComponent(const RendererComponent& other) = delete;

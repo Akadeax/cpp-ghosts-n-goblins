@@ -40,12 +40,6 @@
     <ClCompile Include="src\Component.cpp">
       <Filter>Engine\ECS</Filter>
     </ClCompile>
-    <ClCompile Include="src\EntityManager.cpp">
-      <Filter>Engine\ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Entity.cpp">
-      <Filter>Engine\ECS</Filter>
-    </ClCompile>
     <ClCompile Include="src\TextureCache.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -57,6 +51,12 @@
     </ClCompile>
     <ClCompile Include="src\TransformComponent.cpp">
       <Filter>Engine\DefaultComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity.cpp">
+      <Filter>Engine\ECS\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EntityManager.cpp">
+      <Filter>Engine\ECS\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,12 +96,6 @@
     <ClInclude Include="src\Component.h">
       <Filter>Engine\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="src\EntityManager.h">
-      <Filter>Engine\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Entity.h">
-      <Filter>Engine\ECS</Filter>
-    </ClInclude>
     <ClInclude Include="src\TextureCache.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -113,6 +107,12 @@
     </ClInclude>
     <ClInclude Include="src\TransformComponent.h">
       <Filter>Engine\DefaultComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity.h">
+      <Filter>Engine\ECS\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EntityManager.h">
+      <Filter>Engine\ECS\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

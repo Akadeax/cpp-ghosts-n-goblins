@@ -4,10 +4,9 @@
 #include <iostream>
 #include "Component.h"
 
-const std::string TransformComponent::TYPE = "transform";
 
 TransformComponent::TransformComponent(Entity* parent, Point2f startingPos)
-	: Component(TYPE, parent),
+	: Component(parent),
 	m_Position{ startingPos } 
 {
 }

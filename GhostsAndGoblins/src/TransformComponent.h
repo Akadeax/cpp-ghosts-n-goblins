@@ -9,8 +9,6 @@ class TransformComponent final
 	: public Component
 {
 public:
-	const static std::string TYPE;
-
 	TransformComponent(Entity* parent, Point2f startingPos);
 	TransformComponent& operator=(const TransformComponent& other) = delete;
 	TransformComponent(const TransformComponent& other) = delete;

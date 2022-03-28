@@ -14,7 +14,7 @@ public:
 	virtual ~Entity();
 
 	template<typename TComponent>
-	TComponent* GetComponent(std::string type) const;
+	TComponent* GetComponent() const;
 	void AddComponent(Component* comp);
 	std::set<Component*> GetComponents() const;
 
@@ -36,11 +36,13 @@ private:
 
 // Definition in header because templates are... interesting
 template<typename TComponent>
-TComponent* Entity::GetComponent(std::string type) const
+TComponent* Entity::GetComponent() const
 {
+	static_assert(std::is_base_of<Component, TComponent>::value, "Provided template argument is not a component");
+
 	for (Component* comp : m_Components)
 	{
-		if (comp->GetType() == type)
+		if (typeid(*comp) == typeid(TComponent))
 		{
 			return reinterpret_cast<TComponent*>(comp);
 		}

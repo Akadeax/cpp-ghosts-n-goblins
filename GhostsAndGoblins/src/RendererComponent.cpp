@@ -7,14 +7,12 @@
 #include "TransformComponent.h"
 #include "Texture.h"
 
-const std::string RendererComponent::TYPE = "renderer";
-
 RendererComponent::RendererComponent(Entity* parent, Texture* texture)
-	: Component(TYPE, parent),
+	: Component(parent),
 	m_pTexture{texture}
 {
-	m_pParentTransform = parent->GetComponent<TransformComponent>(TransformComponent::TYPE);
-	assert(m_pParentTransform != nullptr);
+	m_pParentTransform = parent->GetComponent<TransformComponent>();
+	assert(m_pParentTransform != nullptr && "Entity has renderer component but not transform component");
 }
 
 RendererComponent::~RendererComponent()
