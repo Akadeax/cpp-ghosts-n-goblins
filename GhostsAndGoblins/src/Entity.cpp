@@ -3,7 +3,6 @@
 #include "Entity.h"
 #include "Component.h"
 #include <iostream>
-#include "TransformComponent.h"
 
 Entity::Entity()
 	: m_IsActive{true}

@@ -46,10 +46,10 @@
     <ClCompile Include="src\Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\RendererComponent.cpp">
+    <ClCompile Include="src\Renderer.cpp">
       <Filter>Engine\DefaultComponents</Filter>
     </ClCompile>
-    <ClCompile Include="src\TransformComponent.cpp">
+    <ClCompile Include="src\Transform.cpp">
       <Filter>Engine\DefaultComponents</Filter>
     </ClCompile>
     <ClCompile Include="src\Entity.cpp">
@@ -102,10 +102,10 @@
     <ClInclude Include="src\Game.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\RendererComponent.h">
+    <ClInclude Include="src\Renderer.h">
       <Filter>Engine\DefaultComponents</Filter>
     </ClInclude>
-    <ClInclude Include="src\TransformComponent.h">
+    <ClInclude Include="src\Transform.h">
       <Filter>Engine\DefaultComponents</Filter>
     </ClInclude>
     <ClInclude Include="src\Entity.h">

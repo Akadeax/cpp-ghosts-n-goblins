@@ -8,10 +8,10 @@
 
 #include "Entity.h"
 #include "EntityManager.h"
-
-#include "TransformComponent.h"
-#include "RendererComponent.h"
 #include "TextureCache.h"
+
+#include "Transform.h"
+#include "Renderer.h"
 
 Game::Game(const Window& window) 
 	:m_Window{window}
@@ -31,8 +31,8 @@ void Game::Initialize()
 	m_TextureCache = new TextureCache();
 
 	m_Ent = m_EntityManager->CreateEntity();
-	m_Ent->AddComponent(new TransformComponent(m_Ent, Point2f(0, 0)));
-	m_Ent->AddComponent(new RendererComponent(m_Ent, m_TextureCache->GetTexture(TextureCache::Spritesheet::Player)));
+	m_Ent->AddComponent(new Transform(m_Ent, Point2f(0, 0)));
+	m_Ent->AddComponent(new Renderer(m_Ent, m_TextureCache->GetTexture(TextureCache::Spritesheet::Player)));
 }
 
 void Game::Cleanup()
@@ -50,7 +50,7 @@ void Game::Update(float deltaTime)
 	const Uint8* state = SDL_GetKeyboardState(nullptr);
 	if (state[SDL_SCANCODE_SPACE])
 	{
-		m_Ent->GetComponent<TransformComponent>()->MovePosition(Vector2f(600, 600) * deltaTime);
+		m_Ent->GetComponent<Transform>()->MovePosition(Vector2f(600, 600) * deltaTime);
 	}
 }
 
