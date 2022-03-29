@@ -12,6 +12,9 @@
 
 #include "Transform.h"
 #include "Renderer.h"
+#include "AnimatorRenderer.h"
+
+#include "PlayerIdleState.h"
 
 Game::Game(const Window& window) 
 	:m_Window{window}
@@ -27,12 +30,22 @@ Game::~Game()
 void Game::Initialize()
 {
 	m_EntityManager = new EntityManager();
-	m_Camera = new Camera();
+	m_Camera = new Camera(Point2f(0, 0), 5);
 	m_TextureCache = new TextureCache();
 
 	m_Ent = m_EntityManager->CreateEntity();
 	m_Ent->AddComponent(new Transform(m_Ent, Point2f(0, 0)));
-	m_Ent->AddComponent(new Renderer(m_Ent, m_TextureCache->GetTexture(TextureCache::Spritesheet::Player)));
+
+	Texture* playerTexture = m_TextureCache->GetTexture(TextureCache::Spritesheet::Player);
+	std::unordered_map<std::string, AnimatorState*> states = std::unordered_map<std::string, AnimatorState*>
+	{
+		{ "idle", new PlayerIdleState() }
+	};
+	std::set<AnimatorTransition*> transitions = std::set<AnimatorTransition*>
+	{
+
+	};
+	m_Ent->AddComponent(new AnimatorRenderer(m_Ent, new Texture("resources/test.png"), states, transitions, "idle"));
 }
 
 void Game::Cleanup()

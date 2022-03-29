@@ -11,6 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\PlayerIdleState.cpp" />
+    <ClCompile Include="src\AnimatorTransition.cpp" />
+    <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\AnimationFrame.cpp" />
+    <ClCompile Include="src\AnimatorState.cpp" />
+    <ClCompile Include="src\AnimatorRenderer.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\Component.cpp" />
@@ -32,6 +39,13 @@
     <ClCompile Include="src\TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\PlayerIdleState.h" />
+    <ClInclude Include="src\AnimatorTransition.h" />
+    <ClInclude Include="src\Animation.h" />
+    <ClInclude Include="src\AnimationFrame.h" />
+    <ClInclude Include="src\AnimatorState.h" />
+    <ClInclude Include="src\AnimatorRenderer.h" />
+    <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\EntityManager.h" />
     <ClInclude Include="src\Component.h" />

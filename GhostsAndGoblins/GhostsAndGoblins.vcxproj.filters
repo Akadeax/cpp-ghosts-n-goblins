@@ -34,9 +34,6 @@
     <ClCompile Include="src\Vector2f.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="src\Camera.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="src\Component.cpp">
       <Filter>Engine\ECS</Filter>
     </ClCompile>
@@ -47,16 +44,40 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer.cpp">
-      <Filter>Engine\DefaultComponents</Filter>
+      <Filter>Engine\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\Transform.cpp">
-      <Filter>Engine\DefaultComponents</Filter>
+      <Filter>Engine\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\Entity.cpp">
       <Filter>Engine\ECS\Entity</Filter>
     </ClCompile>
     <ClCompile Include="src\EntityManager.cpp">
       <Filter>Engine\ECS\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimatorRenderer.cpp">
+      <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation.cpp">
+      <Filter>Engine\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationFrame.cpp">
+      <Filter>Engine\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimatorState.cpp">
+      <Filter>Engine\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimatorTransition.cpp">
+      <Filter>Engine\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerIdleState.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,9 +111,6 @@
     <ClInclude Include="src\Vector2f.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="src\Camera.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="src\Component.h">
       <Filter>Engine\ECS</Filter>
     </ClInclude>
@@ -103,16 +121,40 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="src\Renderer.h">
-      <Filter>Engine\DefaultComponents</Filter>
+      <Filter>Engine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Transform.h">
-      <Filter>Engine\DefaultComponents</Filter>
+      <Filter>Engine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Entity.h">
       <Filter>Engine\ECS\Entity</Filter>
     </ClInclude>
     <ClInclude Include="src\EntityManager.h">
       <Filter>Engine\ECS\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimatorRenderer.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation.h">
+      <Filter>Engine\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationFrame.h">
+      <Filter>Engine\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimatorState.h">
+      <Filter>Engine\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimatorTransition.h">
+      <Filter>Engine\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerIdleState.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,14 +167,17 @@
     <Filter Include="Game">
       <UniqueIdentifier>{f6e38247-0419-4e88-81e5-e5ceae9a3d56}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\DefaultComponents">
-      <UniqueIdentifier>{1549361d-f127-488e-8fdd-93e38c2f616a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ECS">
       <UniqueIdentifier>{dfc8f8c1-42e1-4277-9618-6c365fbe2d92}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\ECS\Entity">
       <UniqueIdentifier>{83fbcbf2-df66-4ba4-ba73-f5389867dd20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Components">
+      <UniqueIdentifier>{1549361d-f127-488e-8fdd-93e38c2f616a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animator">
+      <UniqueIdentifier>{fcb37543-849a-451e-afff-6fc58a83d32a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

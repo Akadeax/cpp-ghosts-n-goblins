@@ -13,10 +13,11 @@ public:
 	Renderer(const Renderer& other) = delete;
 	Renderer(Renderer&&) = delete;
 	Renderer& operator=(Renderer&&) = delete;
-	~Renderer();
+	virtual ~Renderer();
 
-	void Draw() const override;
-private:
+	virtual void Draw() const override;
+
+protected:
 	Texture* m_pTexture;
 	Transform* m_pParentTransform;
 };

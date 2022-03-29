@@ -22,6 +22,11 @@ Renderer::~Renderer()
 void Renderer::Draw() const
 {
 	Transform* transform = m_pParentTransform;
-	Rectf dstRect = Rectf(transform->GetPosition().x, transform->GetPosition().y, 17 * 5, 17 * 5);
-	m_pTexture->Draw(dstRect, Rectf(0, 0, 17, 17));
+	Rectf dstRect = Rectf(
+		transform->GetPosition().x,
+		transform->GetPosition().y,
+		m_pTexture->GetWidth(),
+		m_pTexture->GetHeight());
+
+	m_pTexture->Draw(dstRect, Rectf(0, 0, m_pTexture->GetWidth(), m_pTexture->GetHeight()));
 }

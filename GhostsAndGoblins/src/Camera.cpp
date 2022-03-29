@@ -2,6 +2,12 @@
 
 #include "Camera.h"
 
+Camera::Camera(Point2f initialPos, float initialScale)
+{
+	m_Position = initialPos;
+	m_Scale = initialScale;
+}
+
 void Camera::Update(float deltaTime)
 {
 	const Uint8* state = SDL_GetKeyboardState(nullptr);
@@ -24,11 +30,22 @@ void Camera::Update(float deltaTime)
 	{
 		MovePosition(Vector2f(-moveVal, 0));
 	}
+	
+
+	if (state[SDL_SCANCODE_Q])
+	{
+		m_Scale += 1 * deltaTime;
+	}
+	else if (state[SDL_SCANCODE_W])
+	{
+		m_Scale -= 1 * deltaTime;
+	}
 }
 
 void Camera::Draw() const
 {
 	glTranslatef(-m_Position.x, -m_Position.y, 0);
+	glScalef(m_Scale, m_Scale, 0);
 }
 
 Point2f Camera::GetPosition() const
