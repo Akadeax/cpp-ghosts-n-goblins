@@ -61,9 +61,6 @@
     <ClCompile Include="src\Player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\AnimatorRenderer.cpp">
-      <Filter>Engine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\Animation.cpp">
       <Filter>Engine\Animator</Filter>
     </ClCompile>
@@ -73,11 +70,29 @@
     <ClCompile Include="src\AnimatorState.cpp">
       <Filter>Engine\Animator</Filter>
     </ClCompile>
-    <ClCompile Include="src\AnimatorTransition.cpp">
+    <ClCompile Include="src\AnimatorRenderer.cpp">
       <Filter>Engine\Animator</Filter>
     </ClCompile>
+    <ClCompile Include="src\AnimatorTransition.cpp">
+      <Filter>Engine\Animator\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationEndTransition.cpp">
+      <Filter>Engine\Animator\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ConditionalTransition.cpp">
+      <Filter>Engine\Animator\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TimedTransition.cpp">
+      <Filter>Engine\Animator\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerJumpState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerWalkState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
     <ClCompile Include="src\PlayerIdleState.cpp">
-      <Filter>Game</Filter>
+      <Filter>Game\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +153,6 @@
     <ClInclude Include="src\Player.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\AnimatorRenderer.h">
-      <Filter>Engine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="src\Animation.h">
       <Filter>Engine\Animator</Filter>
     </ClInclude>
@@ -150,11 +162,29 @@
     <ClInclude Include="src\AnimatorState.h">
       <Filter>Engine\Animator</Filter>
     </ClInclude>
-    <ClInclude Include="src\AnimatorTransition.h">
+    <ClInclude Include="src\AnimatorRenderer.h">
       <Filter>Engine\Animator</Filter>
     </ClInclude>
+    <ClInclude Include="src\AnimatorTransition.h">
+      <Filter>Engine\Animator\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationEndTransition.h">
+      <Filter>Engine\Animator\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ConditionalTransition.h">
+      <Filter>Engine\Animator\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TimedTransition.h">
+      <Filter>Engine\Animator\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerJumpState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerWalkState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
     <ClInclude Include="src\PlayerIdleState.h">
-      <Filter>Game</Filter>
+      <Filter>Game\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +208,12 @@
     </Filter>
     <Filter Include="Engine\Animator">
       <UniqueIdentifier>{fcb37543-849a-451e-afff-6fc58a83d32a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animator\Transition">
+      <UniqueIdentifier>{8b613d45-07df-45d4-9eb3-2fb1dbea89f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States">
+      <UniqueIdentifier>{37bd6d01-26e2-43b3-8067-08b632de801f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

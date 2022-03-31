@@ -15,6 +15,10 @@
 #include "AnimatorRenderer.h"
 
 #include "PlayerIdleState.h"
+#include "PlayerWalkState.h"
+#include "PlayerJumpState.h"
+
+#include "ConditionalTransition.h"
 
 Game::Game(const Window& window) 
 	:m_Window{window}
@@ -33,19 +37,29 @@ void Game::Initialize()
 	m_Camera = new Camera(Point2f(0, 0), 5);
 	m_TextureCache = new TextureCache();
 
-	m_Ent = m_EntityManager->CreateEntity();
-	m_Ent->AddComponent(new Transform(m_Ent, Point2f(0, 0)));
+	m_Player = m_EntityManager->CreateEntity();
+	m_Player->AddComponent(new Transform(m_Player));
 
 	Texture* playerTexture = m_TextureCache->GetTexture(TextureCache::Spritesheet::Player);
 	std::unordered_map<std::string, AnimatorState*> states = std::unordered_map<std::string, AnimatorState*>
 	{
-		{ "idle", new PlayerIdleState() }
+		{ "idle", new PlayerIdleState() },
+		{ "walk", new PlayerWalkState() },
+		{ "jump", new PlayerJumpState() },
 	};
+
+
 	std::set<AnimatorTransition*> transitions = std::set<AnimatorTransition*>
 	{
+		new ConditionalTransition("idle", "walk", std::unordered_map<std::string, int>{ {"isWalking", 1}, }),
+		new ConditionalTransition("walk", "idle", std::unordered_map<std::string, int>{ {"isWalking", 0}, }),
 
+		new ConditionalTransition("idle", "jump", std::unordered_map<std::string, int>{ {"isGrounded", 0}, }),
+		new ConditionalTransition("walk", "jump", std::unordered_map<std::string, int>{ {"isGrounded", 0}, }),
+		new ConditionalTransition("jump", "idle", std::unordered_map<std::string, int>{ {"isGrounded", 1}, }),
 	};
-	m_Ent->AddComponent(new AnimatorRenderer(m_Ent, new Texture("resources/test.png"), states, transitions, "idle"));
+
+	m_Player->AddComponent(new AnimatorRenderer(m_Player, playerTexture, states, transitions, "idle"));
 }
 
 void Game::Cleanup()
@@ -63,7 +77,25 @@ void Game::Update(float deltaTime)
 	const Uint8* state = SDL_GetKeyboardState(nullptr);
 	if (state[SDL_SCANCODE_SPACE])
 	{
-		m_Ent->GetComponent<Transform>()->MovePosition(Vector2f(600, 600) * deltaTime);
+		m_Player->GetComponent<Transform>()->MovePosition(Vector2f(100, 100) * deltaTime);
+	}
+
+	if (state[SDL_SCANCODE_J])
+	{
+		m_Player->GetComponent<AnimatorRenderer>()->SetParameter("isGrounded", 0);
+	}
+	else
+	{
+		m_Player->GetComponent<AnimatorRenderer>()->SetParameter("isGrounded", 1);
+	}
+
+	if (state[SDL_SCANCODE_H])
+	{
+		m_Player->GetComponent<AnimatorRenderer>()->SetParameter("isWalking", 1);
+	}
+	else
+	{
+		m_Player->GetComponent<AnimatorRenderer>()->SetParameter("isWalking", 0);
 	}
 }
 

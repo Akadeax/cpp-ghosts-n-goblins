@@ -34,7 +34,7 @@ private:
 	TextureCache* m_TextureCache;
 	Camera* m_Camera;
 
-	Entity* m_Ent;
+	Entity* m_Player;
 
 	// FUNCTIONS
 	void Initialize();

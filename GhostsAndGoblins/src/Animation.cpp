@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "Animation.h"
 #include "AnimationFrame.h"
+#include <iostream>
 
-Animation::Animation(std::vector<AnimationFrame*> frames, bool canLoop)
+Animation::Animation(std::vector<AnimationFrame*> frames)
 {
     m_Frames = frames;
-    m_CanLoop = canLoop;
     for (AnimationFrame* frame : frames)
     {
         m_TotalDuration += frame->GetDuration();
@@ -33,9 +33,4 @@ std::vector<AnimationFrame*> Animation::GetFrames() const
 float Animation::GetTotalDuration() const
 {
     return m_TotalDuration;
-}
-
-bool Animation::CanLoop() const
-{
-    return m_CanLoop;
 }

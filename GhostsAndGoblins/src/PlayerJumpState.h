@@ -1,10 +1,10 @@
 #pragma once
 #include "AnimatorState.h"
 
-class PlayerIdleState :
+class PlayerJumpState :
     public AnimatorState
 {
 public:
-    PlayerIdleState();
+    PlayerJumpState();
 };
 

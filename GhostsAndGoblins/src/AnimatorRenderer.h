@@ -25,12 +25,21 @@ public:
     int GetParameter(std::string paramName);
     void SetParameter(std::string paramName, int newValue);
 
+    AnimatorState* GetCurrentState() const;
+    std::unordered_map<std::string, AnimatorState*> GetStates() const;
+
+    void SetState(std::string newState);
+
     void Pause();
     void Unpause();
     bool IsPaused() const;
 
     void Update(float deltaTime) override;
-    void Draw() const override;
+    void DrawSprite() const override;
+
+    float GetCurrentStateTime() const;
+    float GetCurrentLoopTime() const;
+    int GetCurrentLoopFrame() const;
 
 private:
     std::unordered_map<std::string, AnimatorState*> m_States;
@@ -40,7 +49,10 @@ private:
     AnimatorState* m_CurrentState;
 
     bool m_IsPaused = false;
-    float m_CurrentAnimationTime = 0.f;
-    int m_CurrentAnimationFrame = 0;
+    // The time the animator has been in the current state
+    float m_CurrentStateTime = 0.f;
+    // Time until animation has to be looped
+    float m_CurrentLoopTime = 0.f;
+    int m_CurrentLoopFrame = 0;
 };
 

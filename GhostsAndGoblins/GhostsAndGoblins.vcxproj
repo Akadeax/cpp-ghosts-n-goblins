@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\PlayerJumpState.cpp" />
+    <ClCompile Include="src\PlayerWalkState.cpp" />
+    <ClCompile Include="src\AnimationEndTransition.cpp" />
+    <ClCompile Include="src\ConditionalTransition.cpp" />
     <ClCompile Include="src\PlayerIdleState.cpp" />
     <ClCompile Include="src\AnimatorTransition.cpp" />
     <ClCompile Include="src\Animation.cpp" />
@@ -37,8 +41,13 @@
     <ClCompile Include="src\Vector2f.cpp" />
     <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\TextureCache.cpp" />
+    <ClCompile Include="src\TimedTransition.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\PlayerJumpState.h" />
+    <ClInclude Include="src\PlayerWalkState.h" />
+    <ClInclude Include="src\AnimationEndTransition.h" />
+    <ClInclude Include="src\ConditionalTransition.h" />
     <ClInclude Include="src\PlayerIdleState.h" />
     <ClInclude Include="src\AnimatorTransition.h" />
     <ClInclude Include="src\Animation.h" />
@@ -64,6 +73,7 @@
     <ClInclude Include="src\Vector2f.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\TextureCache.h" />
+    <ClInclude Include="src\TimedTransition.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

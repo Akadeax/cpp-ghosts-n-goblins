@@ -1,15 +1,15 @@
 #include "pch.h"
 
-#include "PlayerIdleState.h"
+#include "PlayerJumpState.h"
 #include <vector>
 #include "Animation.h"
 #include "AnimationFrame.h"
 
-PlayerIdleState::PlayerIdleState()
+PlayerJumpState::PlayerJumpState()
 	: AnimatorState(new Animation
 	(
 		std::vector<AnimationFrame*>
-{
-	new AnimationFrame(1.f, Rectf(22, 25, 22, 25)),
-}
+		{
+			new AnimationFrame(1.f, Rectf(22 * 3, 25, 22, 25)),
+		}
 )) {}

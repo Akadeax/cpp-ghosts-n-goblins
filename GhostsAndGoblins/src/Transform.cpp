@@ -5,9 +5,8 @@
 #include "Component.h"
 
 
-Transform::Transform(Entity* parent, Point2f startingPos)
-	: Component(parent),
-	m_Position{ startingPos } 
+Transform::Transform(Entity* parent)
+	: Component(parent)
 {
 }
 
@@ -28,5 +27,15 @@ void Transform::SetPosition(Point2f newPos)
 void Transform::MovePosition(Vector2f moveVec)
 {
 	m_Position += moveVec;
+}
+
+void Transform::SetScale(float newScale)
+{
+	m_Scale = newScale;
+}
+
+float Transform::GetScale() const
+{
+	return m_Scale;
 }
 

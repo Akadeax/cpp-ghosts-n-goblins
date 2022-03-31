@@ -19,6 +19,11 @@ AnimatorRenderer::AnimatorRenderer(
 	m_States = states;
 	m_Transitions = transitions;
 	m_CurrentState = m_States[entryState];
+
+	for (auto& transition : m_Transitions)
+	{
+		transition->SetAnimatorRef(this);
+	}
 }
 
 AnimatorRenderer::~AnimatorRenderer()
@@ -44,6 +49,29 @@ void AnimatorRenderer::SetParameter(std::string paramName, int newValue)
 	m_Parameters[paramName] = newValue;
 }
 
+AnimatorState* AnimatorRenderer::GetCurrentState() const
+{
+	return m_CurrentState;
+}
+
+std::unordered_map<std::string, AnimatorState*> AnimatorRenderer::GetStates() const
+{
+	return m_States;
+}
+
+void AnimatorRenderer::SetState(std::string newState)
+{
+	if (m_States[newState] == m_CurrentState) return;
+
+	m_CurrentLoopFrame = 0;
+	m_CurrentLoopTime = 0;
+	m_CurrentStateTime = 0;
+
+	m_CurrentState->OnStateExit(this);
+	m_CurrentState = m_States[newState];
+	m_CurrentState->OnStateEnter(this);
+}
+
 void AnimatorRenderer::Pause()
 {
 	m_IsPaused = true;
@@ -63,13 +91,15 @@ void AnimatorRenderer::Update(float deltaTime)
 {
 	if (IsPaused()) return;
 
-	m_CurrentAnimationTime += deltaTime;
+	m_CurrentState->OnStateUpdate(this, deltaTime);
 
-	bool animationFinished = m_CurrentAnimationTime >= m_CurrentState->GetAnimation()->GetTotalDuration();
-	bool canLoop = m_CurrentState->GetAnimation()->CanLoop();
-	if (animationFinished && canLoop)
+	m_CurrentStateTime += deltaTime;
+	m_CurrentLoopTime += deltaTime;
+
+
+	if (m_CurrentLoopTime >= m_CurrentState->GetAnimation()->GetTotalDuration())
 	{
-		m_CurrentAnimationTime = 0;
+		m_CurrentLoopTime = 0;
 	}
 
 	// Determine current animation frame
@@ -78,20 +108,30 @@ void AnimatorRenderer::Update(float deltaTime)
 	for (int i = 0; i < frames.size(); i++)
 	{
 		currentIntervalEnd += frames[i]->GetDuration();
-		if (m_CurrentAnimationTime < currentIntervalEnd)
+		if (m_CurrentLoopTime < currentIntervalEnd)
 		{
-			m_CurrentAnimationFrame = i;
+			m_CurrentLoopFrame = i;
+			break;
+		}
+	}
+
+	// Check whether animator should transition states
+	for (AnimatorTransition* transition : m_Transitions)
+	{
+		bool inCorrectOriginState = m_CurrentState == m_States[transition->GetOriginState()];
+		bool shouldTransition = transition->ShouldTransition();
+		if (inCorrectOriginState && shouldTransition)
+		{
+			SetState(transition->GetDestinationState());
 			break;
 		}
 	}
 }
 
-void AnimatorRenderer::Draw() const
+void AnimatorRenderer::DrawSprite() const
 {
-	std::cout << m_CurrentAnimationFrame << std::endl;
-
-	AnimationFrame* currentFrame = m_CurrentState->GetAnimation()->GetFrame(m_CurrentAnimationFrame);
-	m_pTexture->Draw(
+	AnimationFrame* currentFrame = m_CurrentState->GetAnimation()->GetFrame(m_CurrentLoopFrame);
+	m_pTexture->DrawCentered(
 		Rectf(
 			m_pParentTransform->GetPosition().x,
 			m_pParentTransform->GetPosition().y,
@@ -100,4 +140,19 @@ void AnimatorRenderer::Draw() const
 		),
 		currentFrame->GetSpriteData()
 	);
+}
+
+float AnimatorRenderer::GetCurrentStateTime() const
+{
+	return m_CurrentStateTime;
+}
+
+float AnimatorRenderer::GetCurrentLoopTime() const
+{
+	return m_CurrentLoopTime;
+}
+
+int AnimatorRenderer::GetCurrentLoopFrame() const
+{
+	return m_CurrentLoopFrame;
 }

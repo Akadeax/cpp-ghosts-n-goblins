@@ -6,17 +6,14 @@ class AnimationFrame;
 class Animation final
 {
 public:
-	Animation(std::vector<AnimationFrame*> frames, bool canLoop);
+	Animation(std::vector<AnimationFrame*> frames);
 	~Animation();
 
 	AnimationFrame* GetFrame(int frameNr);
 	std::vector<AnimationFrame*> GetFrames() const;
 	float GetTotalDuration() const;
-	bool CanLoop() const;
 
 private:
 	std::vector<AnimationFrame*> m_Frames;
-	bool m_CanLoop;
-	float m_TotalDuration;
+	float m_TotalDuration = 0;
 };
-
