@@ -19,6 +19,8 @@ public:
 	void AddComponent(Component* comp);
 	std::list<Component*> GetComponents() const;
 
+	void Initialize();
+
 	void SetTag(std::string newTag);
 	std::string GetTag() const;
 

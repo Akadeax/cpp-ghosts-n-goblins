@@ -28,6 +28,14 @@ std::list<Component*> Entity::GetComponents() const
 	return m_Components;
 }
 
+void Entity::Initialize()
+{
+	for (auto& component : m_Components)
+	{
+		component->Initialize();
+	}
+}
+
 void Entity::SetTag(std::string newTag)
 {
 	m_Tag = newTag;

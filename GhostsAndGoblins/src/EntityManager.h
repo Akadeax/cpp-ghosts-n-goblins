@@ -13,7 +13,6 @@ public:
 	Entity* CreateEntity();
 	void DeleteEntity(Entity* entity);
 
-	void InitializeEntities();
 	void UpdateEntities(float deltaTime);
 	void DrawEntities() const;
 private:
