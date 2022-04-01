@@ -64,7 +64,7 @@ void Game::Initialize()
 	m_Player->AddComponent(new AnimatorRenderer(m_Player, playerTexture, states, transitions, "idle"));
 	m_Player->AddComponent(new Player(m_Player));
 
-	m_EntityManager->InitializeEntities();
+	m_Player->Initialize();
 }
 
 void Game::Cleanup()
@@ -78,6 +78,22 @@ void Game::Update(float deltaTime)
 {
 	m_EntityManager->UpdateEntities(deltaTime);
 	m_Camera->Update(deltaTime);
+
+	const Uint8* state = SDL_GetKeyboardState(nullptr);
+	if (state[SDL_SCANCODE_H] && m_Player != nullptr)
+	{
+		m_EntityManager->DeleteEntity(m_Player);
+		m_Player = nullptr;
+	}
+
+	if (state[SDL_SCANCODE_J] && m_Player == nullptr)
+	{
+		m_Player = m_EntityManager->CreateEntity();
+		m_Player->AddComponent(new Transform(m_Player));
+		Texture* playerTexture = m_TextureCache->GetTexture(TextureCache::Spritesheet::Player);
+		m_Player->AddComponent(new Renderer(m_Player, playerTexture));
+		m_Player->Initialize();
+	}
 }
 
 void Game::Draw() const

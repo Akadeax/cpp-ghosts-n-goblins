@@ -25,19 +25,10 @@ Entity* EntityManager::CreateEntity()
 
 void EntityManager::DeleteEntity(Entity* entity)
 {
+    if (entity == nullptr) return;
+
     m_Entities.remove(entity);
     delete entity;
-}
-
-void EntityManager::InitializeEntities()
-{
-    for (Entity* entity : m_Entities)
-    {
-        for (Component* comp : entity->GetComponents())
-        {
-            comp->Initialize();
-        }
-    }
 }
 
 void EntityManager::UpdateEntities(float deltaTime)

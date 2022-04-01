@@ -15,6 +15,7 @@ public:
 	Renderer& operator=(Renderer&&) = delete;
 	virtual ~Renderer();
 
+	void Initialize() override;
 	// general draw call that applies to all renderer subclasses
 	void Draw() const override final;
 	// function that can be overriden for specific renderer subclass
@@ -27,7 +28,7 @@ public:
 
 protected:
 	Texture* m_pTexture;
-	Transform* m_pParentTransform;
+	Transform* m_pParentTransform = nullptr;
 
 	bool m_FlipX = false;
 	bool m_FlipY = false;

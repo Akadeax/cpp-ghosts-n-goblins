@@ -52,9 +52,4 @@ void Player::Update(float deltaTime)
 	{
 		m_Transform->MovePosition(Vector2f(0, -150 * deltaTime));
 	}
-
-	if (state[SDL_SCANCODE_H])
-	{
-		delete this;
-	}
 }

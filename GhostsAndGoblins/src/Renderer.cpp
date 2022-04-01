@@ -11,12 +11,17 @@ Renderer::Renderer(Entity* parent, Texture* texture)
 	: Component(parent)
 {
 	m_pTexture = texture;
-	m_pParentTransform = parent->GetComponent<Transform>();
-	assert(m_pParentTransform != nullptr && "Entity has renderer component but not transform component");
+	
 }
 
 Renderer::~Renderer()
 {
+}
+
+void Renderer::Initialize()
+{
+	m_pParentTransform = m_pParent->GetComponent<Transform>();
+	assert(m_pParentTransform != nullptr && "Entity has renderer component but not transform component");
 }
 
 void Renderer::Draw() const
