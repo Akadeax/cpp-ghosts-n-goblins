@@ -22,29 +22,21 @@ Renderer::~Renderer()
 void Renderer::Draw() const
 {
 	const float& rendScale = m_pParentTransform->GetScale();
-	if (m_FlipX)
-	{
-		glScalef(-rendScale, rendScale, 0);
-	}
-	else
-	{
-		glScalef(rendScale, rendScale, 0);
-	}
 
+	glTranslatef(m_pParentTransform->GetPosition().x, m_pParentTransform->GetPosition().y, 0);
+	glScalef(
+		m_FlipX ? -rendScale : rendScale,
+		m_FlipY ? -rendScale : rendScale,
+		0
+	);
+	
 	DrawSprite();
 }
 
 void Renderer::DrawSprite() const
 {
 	const Transform* transform = m_pParentTransform;
-	Rectf dstRect = Rectf(
-		transform->GetPosition().x,
-		transform->GetPosition().y,
-		m_pTexture->GetWidth(),
-		m_pTexture->GetHeight()
-	);
-
-	m_pTexture->DrawCentered(dstRect, Rectf(0, 0, m_pTexture->GetWidth(), m_pTexture->GetHeight()));
+	m_pTexture->DrawCentered(Rectf(0, 0, m_pTexture->GetWidth(), m_pTexture->GetHeight()));
 }
 
 bool Renderer::GetFlipX() const
