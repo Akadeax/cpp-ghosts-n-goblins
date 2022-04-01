@@ -94,6 +94,9 @@
     <ClCompile Include="src\PlayerIdleState.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -185,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="src\PlayerIdleState.h">
       <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

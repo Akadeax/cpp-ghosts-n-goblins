@@ -2,24 +2,10 @@
 #include "Game.h"
 
 #include <iostream>
-
-#include "Camera.h"
-#include "Texture.h"
-
 #include "Entity.h"
-#include "EntityManager.h"
 #include "TextureCache.h"
+#include "Scene.h"
 
-#include "Transform.h"
-#include "Renderer.h"
-#include "AnimatorRenderer.h"
-
-#include "Player.h"
-#include "PlayerIdleState.h"
-#include "PlayerWalkState.h"
-#include "PlayerJumpState.h"
-
-#include "ConditionalTransition.h"
 
 Game::Game(const Window& window) 
 	:m_Window{window}
@@ -34,66 +20,21 @@ Game::~Game()
 
 void Game::Initialize()
 {
-	m_EntityManager = new EntityManager();
+	m_pTextureCache = new TextureCache();
+	m_pScene = new Scene(this);
 
-	m_Camera = new Camera(Point2f(-60, -60), 5);
-	m_TextureCache = new TextureCache();
-
-	m_Player = m_EntityManager->CreateEntity();
-	m_Player->AddComponent(new Transform(m_Player));
-
-	Texture* playerTexture = m_TextureCache->GetTexture(TextureCache::Spritesheet::Player);
-	std::unordered_map<std::string, AnimatorState*> states = std::unordered_map<std::string, AnimatorState*>
-	{
-		{ "idle", new PlayerIdleState() },
-		{ "walk", new PlayerWalkState() },
-		{ "jump", new PlayerJumpState() },
-	};
-
-
-	std::list<AnimatorTransition*> transitions = std::list<AnimatorTransition*>
-	{
-		new ConditionalTransition("idle", "walk", std::unordered_map<std::string, int>{ {"isWalking", 1}, }),
-		new ConditionalTransition("walk", "idle", std::unordered_map<std::string, int>{ {"isWalking", 0}, }),
-
-		new ConditionalTransition("idle", "jump", std::unordered_map<std::string, int>{ {"isGrounded", 0}, }),
-		new ConditionalTransition("walk", "jump", std::unordered_map<std::string, int>{ {"isGrounded", 0}, }),
-		new ConditionalTransition("jump", "idle", std::unordered_map<std::string, int>{ {"isGrounded", 1}, }),
-	};
-
-	m_Player->AddComponent(new AnimatorRenderer(m_Player, playerTexture, states, transitions, "idle"));
-	m_Player->AddComponent(new Player(m_Player));
-
-	m_Player->Initialize();
+	m_pScene->Initialize();
 }
 
 void Game::Cleanup()
 {
-	delete m_EntityManager;
-	delete m_Camera;
-	delete m_TextureCache;
+	delete m_pTextureCache;
+	delete m_pScene;
 }
 
 void Game::Update(float deltaTime)
 {
-	m_EntityManager->UpdateEntities(deltaTime);
-	m_Camera->Update(deltaTime);
-
-	const Uint8* state = SDL_GetKeyboardState(nullptr);
-	if (state[SDL_SCANCODE_H] && m_Player != nullptr)
-	{
-		m_EntityManager->DeleteEntity(m_Player);
-		m_Player = nullptr;
-	}
-
-	if (state[SDL_SCANCODE_J] && m_Player == nullptr)
-	{
-		m_Player = m_EntityManager->CreateEntity();
-		m_Player->AddComponent(new Transform(m_Player));
-		Texture* playerTexture = m_TextureCache->GetTexture(TextureCache::Spritesheet::Player);
-		m_Player->AddComponent(new Renderer(m_Player, playerTexture));
-		m_Player->Initialize();
-	}
+	m_pScene->Update(deltaTime);
 }
 
 void Game::Draw() const
@@ -101,8 +42,7 @@ void Game::Draw() const
 	ClearBackground();
 
 	glPushMatrix();
-	m_Camera->Draw();
-	m_EntityManager->DrawEntities();
+	m_pScene->Draw();
 	glPopMatrix();
 }
 
@@ -166,6 +106,11 @@ void Game::ProcessMouseUpEvent(const SDL_MouseButtonEvent& e)
 	//	std::cout << " middle button " << std::endl;
 	//	break;
 	//}
+}
+
+TextureCache* Game::GetTextureCache()
+{
+	return m_pTextureCache;
 }
 
 void Game::ClearBackground() const

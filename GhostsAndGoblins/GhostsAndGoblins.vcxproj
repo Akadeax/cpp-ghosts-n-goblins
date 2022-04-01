@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\PlayerJumpState.cpp" />
     <ClCompile Include="src\PlayerWalkState.cpp" />
     <ClCompile Include="src\AnimationEndTransition.cpp" />
@@ -44,6 +45,7 @@
     <ClCompile Include="src\TimedTransition.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\PlayerJumpState.h" />
     <ClInclude Include="src\PlayerWalkState.h" />
     <ClInclude Include="src\AnimationEndTransition.h" />

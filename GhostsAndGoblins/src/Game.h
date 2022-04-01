@@ -2,9 +2,7 @@
 #include <SDL.h>
 
 class Entity;
-class EntityManager;
-class TransformComponent;
-class Camera;
+class Scene;
 class TextureCache;
 
 class Game final
@@ -27,14 +25,13 @@ public:
 	void ProcessMouseDownEvent(const SDL_MouseButtonEvent& e);
 	void ProcessMouseUpEvent(const SDL_MouseButtonEvent& e);
 
+	TextureCache* GetTextureCache();
+
 private:
 	// DATA MEMBERS
 	const Window m_Window;
-	EntityManager* m_EntityManager;
-	TextureCache* m_TextureCache;
-	Camera* m_Camera;
-
-	Entity* m_Player;
+	TextureCache* m_pTextureCache;
+	Scene* m_pScene;
 
 	// FUNCTIONS
 	void Initialize();
