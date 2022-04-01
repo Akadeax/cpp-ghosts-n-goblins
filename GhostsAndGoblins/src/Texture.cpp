@@ -60,6 +60,16 @@ Texture::~Texture()
 	glDeleteTextures(1, &m_Id);
 }
 
+void Texture::DrawCentered(const Rectf& srcRect, const Point2f& offset) const
+{
+	const Point2f centeredDstPoint = Point2f(
+		offset.x - (srcRect.width / 2),
+		offset.y - (srcRect.height / 2)
+	);
+
+	Draw(centeredDstPoint, srcRect);
+}
+
 void Texture::CreateFromImage(const std::string& path)
 {
 	m_CreationOk = true;
@@ -321,14 +331,7 @@ void Texture::Draw(const Rectf& dstRect, const Rectf& srcRect) const
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Texture::DrawCentered(const Rectf& dstRect, const Rectf& srcRect) const
-{
-	const Point2f centeredDstPoint = Point2f(
-		dstRect.left - (dstRect.width / 2),
-		dstRect.bottom - (dstRect.height / 2)
-	);
-	Draw(centeredDstPoint, srcRect);
-}
+
 
 float Texture::GetWidth() const
 {

@@ -12,7 +12,7 @@ public:
 	Texture& operator=(Texture&& other) noexcept;
 	~Texture();
 
-	void DrawCentered(const Rectf& dstRect = {}, const Rectf& srcRect = {}) const;
+	void DrawCentered(const Rectf& srcRect, const Point2f& offset = {}) const;
 
 	float GetWidth() const;
 	float GetHeight() const;
