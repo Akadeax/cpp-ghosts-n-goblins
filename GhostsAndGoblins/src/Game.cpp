@@ -12,6 +12,14 @@
 
 #include "Transform.h"
 #include "Renderer.h"
+#include "AnimatorRenderer.h"
+
+#include "Player.h"
+#include "PlayerIdleState.h"
+#include "PlayerWalkState.h"
+#include "PlayerJumpState.h"
+
+#include "ConditionalTransition.h"
 
 Game::Game(const Window& window) 
 	:m_Window{window}
@@ -27,12 +35,33 @@ Game::~Game()
 void Game::Initialize()
 {
 	m_EntityManager = new EntityManager();
-	m_Camera = new Camera();
+	m_Camera = new Camera(Point2f(-60, -60), 5);
 	m_TextureCache = new TextureCache();
 
-	m_Ent = m_EntityManager->CreateEntity();
-	m_Ent->AddComponent(new Transform(m_Ent, Point2f(0, 0)));
-	m_Ent->AddComponent(new Renderer(m_Ent, m_TextureCache->GetTexture(TextureCache::Spritesheet::Player)));
+	m_Player = m_EntityManager->CreateEntity();
+	m_Player->AddComponent(new Transform(m_Player));
+
+	Texture* playerTexture = m_TextureCache->GetTexture(TextureCache::Spritesheet::Player);
+	std::unordered_map<std::string, AnimatorState*> states = std::unordered_map<std::string, AnimatorState*>
+	{
+		{ "idle", new PlayerIdleState() },
+		{ "walk", new PlayerWalkState() },
+		{ "jump", new PlayerJumpState() },
+	};
+
+
+	std::set<AnimatorTransition*> transitions = std::set<AnimatorTransition*>
+	{
+		new ConditionalTransition("idle", "walk", std::unordered_map<std::string, int>{ {"isWalking", 1}, }),
+		new ConditionalTransition("walk", "idle", std::unordered_map<std::string, int>{ {"isWalking", 0}, }),
+
+		new ConditionalTransition("idle", "jump", std::unordered_map<std::string, int>{ {"isGrounded", 0}, }),
+		new ConditionalTransition("walk", "jump", std::unordered_map<std::string, int>{ {"isGrounded", 0}, }),
+		new ConditionalTransition("jump", "idle", std::unordered_map<std::string, int>{ {"isGrounded", 1}, }),
+	};
+
+	m_Player->AddComponent(new AnimatorRenderer(m_Player, playerTexture, states, transitions, "idle"));
+	m_Player->AddComponent(new Player(m_Player));
 }
 
 void Game::Cleanup()
@@ -46,12 +75,6 @@ void Game::Update(float deltaTime)
 {
 	m_EntityManager->UpdateEntities(deltaTime);
 	m_Camera->Update(deltaTime);
-
-	const Uint8* state = SDL_GetKeyboardState(nullptr);
-	if (state[SDL_SCANCODE_SPACE])
-	{
-		m_Ent->GetComponent<Transform>()->MovePosition(Vector2f(600, 600) * deltaTime);
-	}
 }
 
 void Game::Draw() const

@@ -5,7 +5,7 @@
 
 TextureCache::TextureCache()
 {
-	m_SheetLocations[Spritesheet::Player] = "resources/grid.png";
+	m_SheetLocations[Spritesheet::Player] = "resources/player.png";
 }
 
 TextureCache::~TextureCache()

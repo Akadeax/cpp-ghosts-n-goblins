@@ -13,11 +13,23 @@ public:
 	Renderer(const Renderer& other) = delete;
 	Renderer(Renderer&&) = delete;
 	Renderer& operator=(Renderer&&) = delete;
-	~Renderer();
+	virtual ~Renderer();
 
-	void Draw() const override;
-private:
+	// general draw call that applies to all renderer subclasses
+	void Draw() const override final;
+	// function that can be overriden for specific renderer subclass
+	virtual void DrawSprite() const;
+
+	bool GetFlipX() const;
+	void SetFlipX(bool newState);
+	bool GetFlipY() const;
+	void SetFlipY(bool newState);
+
+protected:
 	Texture* m_pTexture;
 	Transform* m_pParentTransform;
+
+	bool m_FlipX = false;
+	bool m_FlipY = false;
 };
 

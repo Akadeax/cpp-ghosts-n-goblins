@@ -12,8 +12,7 @@ public:
 	Texture& operator=(Texture&& other) noexcept;
 	~Texture();
 
-	void Draw(const Point2f& dstBottomLeft = {}, const Rectf& srcRect = {}) const;
-	void Draw(const Rectf& dstRect, const Rectf& srcRect = {}) const;
+	void DrawCentered(const Rectf& srcRect, const Point2f& offset = {}) const;
 
 	float GetWidth() const;
 	float GetHeight() const;
@@ -32,4 +31,7 @@ private:
 	void CreateFromString(const std::string& text, const std::string& fontPath, int ptSize, const Color4f& textColor);
 	void CreateFromSurface(SDL_Surface* pSurface);
 	void DrawFilledRect(const Rectf& dstRect) const;
+
+	void Draw(const Point2f& dstBottomLeft = {}, const Rectf& srcRect = {}) const;
+	void Draw(const Rectf& dstRect, const Rectf& srcRect = {}) const;
 };

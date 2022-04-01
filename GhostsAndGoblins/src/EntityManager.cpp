@@ -52,9 +52,11 @@ void EntityManager::DrawEntities() const
 {
     for (Entity* entity : m_Entities)
     {
+        glPushMatrix();
         for (Component* comp : entity->GetComponents())
         {
             comp->Draw();
         }
+        glPopMatrix();
     }
 }
