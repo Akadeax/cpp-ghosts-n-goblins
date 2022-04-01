@@ -13,7 +13,7 @@ public:
         Entity* parent,
         Texture* texture,
         std::unordered_map<std::string, AnimatorState*> states,
-        std::set<AnimatorTransition*> transitions,
+        std::list<AnimatorTransition*> transitions,
         std::string entryState
     );
     AnimatorRenderer(const AnimatorRenderer& other) = delete;
@@ -43,7 +43,7 @@ public:
 
 private:
     std::unordered_map<std::string, AnimatorState*> m_States;
-    std::set<AnimatorTransition*> m_Transitions;
+    std::list<AnimatorTransition*> m_Transitions;
     std::unordered_map<std::string, int> m_Parameters;
 
     AnimatorState* m_CurrentState;

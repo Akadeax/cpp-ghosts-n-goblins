@@ -1,28 +1,29 @@
 #include "pch.h"
 
+#include "EntityManager.h"
 #include "Entity.h"
 #include "Component.h"
 #include <iostream>
 
 Entity::Entity()
-	: m_IsActive{true}
 {
 }
 
 Entity::~Entity()
 {
-	for (Component* component : m_Components)
+	for (Component* comp : m_Components)
 	{
-		delete component;
+		delete comp;
+		comp = nullptr;
 	}
 }
 
 void Entity::AddComponent(Component* comp)
 {
-	m_Components.insert(comp);
+	m_Components.push_back(comp);
 }
 
-std::set<Component*> Entity::GetComponents() const
+std::list<Component*> Entity::GetComponents() const
 {
 	return m_Components;
 }

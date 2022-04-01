@@ -10,9 +10,10 @@ TextureCache::TextureCache()
 
 TextureCache::~TextureCache()
 {
-	for (std::pair<Spritesheet, Texture*> const& item : m_Spritesheets)
+	for (auto& spritesheet : m_Spritesheets)
 	{
-		delete item.second;
+		delete spritesheet.second;
+		spritesheet.second = nullptr;
 	}
 }
 

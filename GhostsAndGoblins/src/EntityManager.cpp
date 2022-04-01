@@ -9,32 +9,35 @@ EntityManager::EntityManager()
 
 EntityManager::~EntityManager()
 {
-    for (Entity* entity : m_Entities)
+    for (auto& entity : m_Entities)
     {
         delete entity;
+        entity = nullptr;
     }
 }
 
 Entity* EntityManager::CreateEntity()
 {
-    Entity* newEntity = new Entity();
-    m_Entities.insert(newEntity);
-    return newEntity;
+    Entity* newEnt = new Entity();
+    m_Entities.push_back(newEnt);
+    return newEnt;
 }
 
-bool EntityManager::DeleteEntity(Entity* entity)
+void EntityManager::DeleteEntity(Entity* entity)
 {
-    for (Entity* entPointer : m_Entities)
+    m_Entities.remove(entity);
+    delete entity;
+}
+
+void EntityManager::InitializeEntities()
+{
+    for (Entity* entity : m_Entities)
     {
-        if (entPointer == entity)
+        for (Component* comp : entity->GetComponents())
         {
-            m_Entities.erase(entity);
-            delete entity;
-            return true;
+            comp->Initialize();
         }
     }
-
-    return false;
 }
 
 void EntityManager::UpdateEntities(float deltaTime)

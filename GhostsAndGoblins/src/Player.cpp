@@ -7,12 +7,16 @@
 #include "Transform.h"
 #include "AnimatorRenderer.h"
 
-Player::Player(Entity* parent)
-	: Component(parent)
+Player::Player(Entity* entity)
+	: Component(entity)
 {
-	m_Animator = parent->GetComponent<AnimatorRenderer>();
+}
+
+void Player::Initialize()
+{
+	m_Animator = m_pParent->GetComponent<AnimatorRenderer>();
 	assert(m_Animator != nullptr && "Player has no Animator");
-	m_Transform = parent->GetComponent<Transform>();
+	m_Transform = m_pParent->GetComponent<Transform>();
 	assert(m_Transform != nullptr && "Player has no Transform");
 }
 
@@ -47,5 +51,10 @@ void Player::Update(float deltaTime)
 	if (m_Transform->GetPosition().y > 0)
 	{
 		m_Transform->MovePosition(Vector2f(0, -150 * deltaTime));
+	}
+
+	if (state[SDL_SCANCODE_H])
+	{
+		delete this;
 	}
 }

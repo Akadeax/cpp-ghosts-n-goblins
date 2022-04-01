@@ -12,7 +12,7 @@ AnimatorRenderer::AnimatorRenderer(
 	Entity* parent,
 	Texture* texture,
 	std::unordered_map<std::string, AnimatorState*> states,
-	std::set<AnimatorTransition*> transitions,
+	std::list<AnimatorTransition*> transitions,
 	std::string entryState
 ) : Renderer(parent, texture)
 {
@@ -28,11 +28,11 @@ AnimatorRenderer::AnimatorRenderer(
 
 AnimatorRenderer::~AnimatorRenderer()
 {
-	for (auto& pair : m_States)
+	for (auto& state : m_States)
 	{
-		delete pair.second;
+		delete state.second;
+		state.second = nullptr;
 	}
-
 	for (auto& transition : m_Transitions)
 	{
 		delete transition;

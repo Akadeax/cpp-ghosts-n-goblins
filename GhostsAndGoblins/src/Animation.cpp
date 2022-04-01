@@ -17,6 +17,7 @@ Animation::~Animation()
     for (auto& frame : m_Frames)
     {
         delete frame;
+        frame = nullptr;
     }
 }
 

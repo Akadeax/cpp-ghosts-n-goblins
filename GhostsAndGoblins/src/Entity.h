@@ -1,8 +1,10 @@
 #pragma once
-#include <set>
 #include <string>
 #include <iostream>
+#include <list>
 #include "Component.h"
+
+class EntityManager;
 
 class Entity
 {
@@ -11,12 +13,11 @@ public:
 	Entity(const Entity& other) = delete;
 	Entity(Entity&&) = delete;
 	Entity& operator=(Entity&&) = delete;
-	virtual ~Entity();
 
 	template<typename TComponent>
 	TComponent* GetComponent() const;
 	void AddComponent(Component* comp);
-	std::set<Component*> GetComponents() const;
+	std::list<Component*> GetComponents() const;
 
 	void SetTag(std::string newTag);
 	std::string GetTag() const;
@@ -25,12 +26,14 @@ public:
 	bool IsActive() const;
 
 private:
-	bool m_IsActive;
-	std::set<Component*> m_Components;
+	bool m_IsActive = true;
+	std::list<Component*> m_Components;
 	std::string m_Tag;
 
 	Entity();
-	// only allow EntityManager to make instances of Entity
+	virtual ~Entity();
+
+	// Allow EntityManager to manage lifecycle of Entities
 	friend class EntityManager;
 };
 

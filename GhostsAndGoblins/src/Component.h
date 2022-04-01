@@ -13,13 +13,13 @@ public:
 
 	Entity* GetParent() const;
 
+	virtual void Initialize();
 	virtual void Update(float deltaTime);
 	virtual void Draw() const;
 
 protected:
-	Component(Entity* parent);
-
-private:
 	Entity* m_pParent;
+
+	Component(Entity* parent);
 };
 

@@ -1,5 +1,5 @@
 #pragma once
-#include <set>
+#include <list>
 
 class Entity;
 class Component;
@@ -11,11 +11,12 @@ public:
 	~EntityManager();
 
 	Entity* CreateEntity();
-	bool DeleteEntity(Entity* entity);
+	void DeleteEntity(Entity* entity);
 
+	void InitializeEntities();
 	void UpdateEntities(float deltaTime);
 	void DrawEntities() const;
 private:
-	std::set<Entity*> m_Entities;
+	std::list<Entity*> m_Entities;
 };
 

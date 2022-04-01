@@ -9,11 +9,12 @@ class Player :
     public Component
 {
 public:
-    Player(Entity* parent);
+    Player(Entity* entity);
+    void Initialize() override;
     void Update(float deltaTime) override;
 
 private:
-    AnimatorRenderer* m_Animator;
-    Transform* m_Transform;
+    AnimatorRenderer* m_Animator = nullptr;
+    Transform* m_Transform = nullptr;
 };
 

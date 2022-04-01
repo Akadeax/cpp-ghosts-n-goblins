@@ -35,6 +35,7 @@ Game::~Game()
 void Game::Initialize()
 {
 	m_EntityManager = new EntityManager();
+
 	m_Camera = new Camera(Point2f(-60, -60), 5);
 	m_TextureCache = new TextureCache();
 
@@ -50,7 +51,7 @@ void Game::Initialize()
 	};
 
 
-	std::set<AnimatorTransition*> transitions = std::set<AnimatorTransition*>
+	std::list<AnimatorTransition*> transitions = std::list<AnimatorTransition*>
 	{
 		new ConditionalTransition("idle", "walk", std::unordered_map<std::string, int>{ {"isWalking", 1}, }),
 		new ConditionalTransition("walk", "idle", std::unordered_map<std::string, int>{ {"isWalking", 0}, }),
@@ -62,6 +63,8 @@ void Game::Initialize()
 
 	m_Player->AddComponent(new AnimatorRenderer(m_Player, playerTexture, states, transitions, "idle"));
 	m_Player->AddComponent(new Player(m_Player));
+
+	m_EntityManager->InitializeEntities();
 }
 
 void Game::Cleanup()

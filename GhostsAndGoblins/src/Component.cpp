@@ -16,6 +16,8 @@ Entity* Component::GetParent() const
 	return m_pParent;
 }
 
+void Component::Initialize() {}
+
 void Component::Update(float deltaTime) {}
 
 void Component::Draw() const {}
