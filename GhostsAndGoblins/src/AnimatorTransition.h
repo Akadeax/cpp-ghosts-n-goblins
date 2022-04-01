@@ -5,7 +5,7 @@ class AnimatorTransition
 {
 public:
 	AnimatorTransition(std::string origin, std::string destination);
-	~AnimatorTransition();
+	virtual ~AnimatorTransition();
 
 	std::string GetOriginState() const;
 	std::string GetDestinationState() const;
