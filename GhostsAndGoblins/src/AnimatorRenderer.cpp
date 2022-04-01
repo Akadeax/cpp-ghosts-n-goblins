@@ -132,12 +132,6 @@ void AnimatorRenderer::DrawSprite() const
 {
 	AnimationFrame* currentFrame = m_CurrentState->GetAnimation()->GetFrame(m_CurrentLoopFrame);
 	m_pTexture->DrawCentered(
-		Rectf(
-			m_pParentTransform->GetPosition().x,
-			m_pParentTransform->GetPosition().y,
-			currentFrame->GetSpriteData().width,
-			currentFrame->GetSpriteData().height
-		),
 		currentFrame->GetSpriteData()
 	);
 }

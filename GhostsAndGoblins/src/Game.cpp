@@ -14,6 +14,7 @@
 #include "Renderer.h"
 #include "AnimatorRenderer.h"
 
+#include "Player.h"
 #include "PlayerIdleState.h"
 #include "PlayerWalkState.h"
 #include "PlayerJumpState.h"
@@ -34,7 +35,7 @@ Game::~Game()
 void Game::Initialize()
 {
 	m_EntityManager = new EntityManager();
-	m_Camera = new Camera(Point2f(0, 0), 5);
+	m_Camera = new Camera(Point2f(-60, -60), 5);
 	m_TextureCache = new TextureCache();
 
 	m_Player = m_EntityManager->CreateEntity();
@@ -60,6 +61,7 @@ void Game::Initialize()
 	};
 
 	m_Player->AddComponent(new AnimatorRenderer(m_Player, playerTexture, states, transitions, "idle"));
+	m_Player->AddComponent(new Player(m_Player));
 }
 
 void Game::Cleanup()
@@ -73,30 +75,6 @@ void Game::Update(float deltaTime)
 {
 	m_EntityManager->UpdateEntities(deltaTime);
 	m_Camera->Update(deltaTime);
-
-	const Uint8* state = SDL_GetKeyboardState(nullptr);
-	if (state[SDL_SCANCODE_SPACE])
-	{
-		m_Player->GetComponent<Transform>()->MovePosition(Vector2f(100, 100) * deltaTime);
-	}
-
-	if (state[SDL_SCANCODE_J])
-	{
-		m_Player->GetComponent<AnimatorRenderer>()->SetParameter("isGrounded", 0);
-	}
-	else
-	{
-		m_Player->GetComponent<AnimatorRenderer>()->SetParameter("isGrounded", 1);
-	}
-
-	if (state[SDL_SCANCODE_H])
-	{
-		m_Player->GetComponent<AnimatorRenderer>()->SetParameter("isWalking", 1);
-	}
-	else
-	{
-		m_Player->GetComponent<AnimatorRenderer>()->SetParameter("isWalking", 0);
-	}
 }
 
 void Game::Draw() const
