@@ -2,6 +2,7 @@
 
 #include "Scene.h"
 #include "EntityManager.h"
+#include "PhysicsHandler.h"
 #include "Camera.h"
 #include "Player.h"
 #include "TextureCache.h"
@@ -13,6 +14,7 @@
 #include "Transform.h"
 #include "AnimatorRenderer.h"
 #include "RectCollider.h"
+#include "PhysicsBody.h"
 
 #include "PlayerIdleState.h"
 #include "PlayerWalkState.h"
@@ -33,8 +35,8 @@ Scene::~Scene()
 
 void Scene::Initialize()
 {
-
-	m_pEntityManager = new EntityManager();
+	m_pEntityManager = new EntityManager(this);
+	m_pPhysicsHandler = new PhysicsHandler(this);
 	m_pCamera = new Camera(Point2f(-60, -60), 5);
 
 	CreatePlayer();
@@ -43,6 +45,7 @@ void Scene::Initialize()
 void Scene::Update(float deltaTime)
 {
 	m_pEntityManager->UpdateEntities(deltaTime);
+	m_pPhysicsHandler->UpdateCollision();
 }
 
 void Scene::Draw() const
@@ -54,6 +57,11 @@ void Scene::Draw() const
 EntityManager* Scene::GetEntityManager() const
 {
 	return m_pEntityManager;
+}
+
+PhysicsHandler* Scene::GetPhysicsHandler() const
+{
+	return m_pPhysicsHandler;
 }
 
 Camera* Scene::GetCamera() const
@@ -88,7 +96,8 @@ void Scene::CreatePlayer()
 	m_pPlayer->AddComponent(new AnimatorRenderer(m_pPlayer, playerTexture, states, transitions, "idle"));
 	m_pPlayer->AddComponent(new Player(m_pPlayer));
 
-	//m_pPlayer->AddComponent(new RectCollider(m_pPlayer, Vector2f(0, 0), Vector2f(10, 10)));
+	m_pPlayer->AddComponent(new RectCollider(m_pPlayer, Vector2f(0, 0), Vector2f(10, 10)));
+	m_pPlayer->AddComponent(new PhysicsBody(m_pPlayer));
 
 	m_pPlayer->Initialize();
 }

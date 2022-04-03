@@ -2,6 +2,7 @@
 
 class Game;
 class EntityManager;
+class PhysicsHandler;
 class Camera;
 
 class Entity;
@@ -17,6 +18,7 @@ public:
 	void Draw() const;
 
 	EntityManager* GetEntityManager() const;
+	PhysicsHandler* GetPhysicsHandler() const;
 	Camera* GetCamera() const;
 
 private:
@@ -24,6 +26,7 @@ private:
 	Game* m_pGame;
 
 	EntityManager* m_pEntityManager = nullptr;
+	PhysicsHandler* m_pPhysicsHandler = nullptr;
 	Camera* m_pCamera = nullptr;
 
 	// Persistent Entities

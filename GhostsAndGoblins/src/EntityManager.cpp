@@ -3,8 +3,9 @@
 #include "EntityManager.h"
 #include "Entity.h"
 
-EntityManager::EntityManager()
+EntityManager::EntityManager(Scene* scene)
 {
+    m_pScene = scene;
 }
 
 EntityManager::~EntityManager()
@@ -18,7 +19,7 @@ EntityManager::~EntityManager()
 
 Entity* EntityManager::CreateEntity()
 {
-    Entity* newEnt = new Entity();
+    Entity* newEnt = new Entity(m_pScene);
     m_Entities.push_back(newEnt);
     return newEnt;
 }

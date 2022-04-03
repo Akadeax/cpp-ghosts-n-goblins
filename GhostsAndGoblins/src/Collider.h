@@ -14,6 +14,7 @@ public:
     };
 
     Collider(Entity* entity, Type type);
+    virtual ~Collider();
     void Initialize() override;
 
     bool Intersecting(Collider* other) const;
@@ -24,7 +25,7 @@ public:
 
 protected:
     bool m_IsTrigger = false;
-    Transform* m_Transform;
+    Transform* m_pTransform = nullptr;
 
     virtual bool IntersectingRect(RectCollider* other) const = 0;
 

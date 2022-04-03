@@ -4,6 +4,9 @@
 #include "Entity.h"
 #include <cassert>
 #include "RectCollider.h"
+#include "PhysicsHandler.h"
+#include "Transform.h"
+#include "Scene.h"
 
 Collider::Collider(Entity* entity, Type type)
 	: Component(entity)
@@ -11,10 +14,16 @@ Collider::Collider(Entity* entity, Type type)
 	m_Type = type;
 }
 
+Collider::~Collider()
+{
+	PhysicsHandler* ph = m_pParent->GetScene()->GetPhysicsHandler();
+	ph->RemoveCollider(this);
+}
+
 void Collider::Initialize()
 {
-	m_Transform = m_pParent->GetComponent<Transform>();
-	assert(m_Transform != nullptr && "Entity has collider but no transform");
+	m_pTransform = m_pParent->GetComponent<Transform>();
+	assert(m_pTransform != nullptr && "Entity has collider but no transform");
 }
 
 bool Collider::Intersecting(Collider* other) const
