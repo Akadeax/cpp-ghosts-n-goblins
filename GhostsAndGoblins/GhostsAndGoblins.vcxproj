@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Collider.cpp" />
+    <ClCompile Include="src\PhysicsBody.cpp" />
+    <ClCompile Include="src\PhysicsHandler.cpp" />
+    <ClCompile Include="src\RectCollider.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\PlayerJumpState.cpp" />
     <ClCompile Include="src\PlayerWalkState.cpp" />
@@ -45,6 +49,10 @@
     <ClCompile Include="src\TimedTransition.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Collider.h" />
+    <ClInclude Include="src\PhysicsBody.h" />
+    <ClInclude Include="src\PhysicsHandler.h" />
+    <ClInclude Include="src\RectCollider.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\PlayerJumpState.h" />
     <ClInclude Include="src\PlayerWalkState.h" />

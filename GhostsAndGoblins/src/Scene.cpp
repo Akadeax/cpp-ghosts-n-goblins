@@ -4,13 +4,15 @@
 #include "EntityManager.h"
 #include "Camera.h"
 #include "Player.h"
-#include "Transform.h"
-#include "AnimatorRenderer.h"
 #include "TextureCache.h"
 #include "TextureCache.h"
 #include "Entity.h"
 #include "Game.h"
 #include "ConditionalTransition.h"
+
+#include "Transform.h"
+#include "AnimatorRenderer.h"
+#include "RectCollider.h"
 
 #include "PlayerIdleState.h"
 #include "PlayerWalkState.h"
@@ -85,6 +87,8 @@ void Scene::CreatePlayer()
 
 	m_pPlayer->AddComponent(new AnimatorRenderer(m_pPlayer, playerTexture, states, transitions, "idle"));
 	m_pPlayer->AddComponent(new Player(m_pPlayer));
+
+	//m_pPlayer->AddComponent(new RectCollider(m_pPlayer, Vector2f(0, 0), Vector2f(10, 10)));
 
 	m_pPlayer->Initialize();
 }
