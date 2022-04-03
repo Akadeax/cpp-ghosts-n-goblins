@@ -5,10 +5,13 @@
 #include "Component.h"
 
 class EntityManager;
+class Scene;
 
 class Entity
 {
 public:
+	Entity(Scene* scene);
+
 	Entity& operator=(const Entity& other) = delete;
 	Entity(const Entity& other) = delete;
 	Entity(Entity&&) = delete;
@@ -27,7 +30,11 @@ public:
 	void SetActive(bool newState);
 	bool IsActive() const;
 
+	Scene* GetScene() const;
+
 private:
+	Scene* m_pScene;
+
 	bool m_IsActive = true;
 	std::list<Component*> m_Components;
 	std::string m_Tag;
@@ -47,10 +54,9 @@ TComponent* Entity::GetComponent() const
 
 	for (Component* comp : m_Components)
 	{
-		if (typeid(*comp) == typeid(TComponent))
-		{
-			return reinterpret_cast<TComponent*>(comp);
-		}
+		TComponent* castComponent = dynamic_cast<TComponent*>(comp);
+		if (castComponent) return castComponent;
+		else continue;
 	}
 
 	return nullptr;

@@ -5,8 +5,9 @@
 #include "Component.h"
 #include <iostream>
 
-Entity::Entity()
+Entity::Entity(Scene* scene)
 {
+	m_pScene = scene;
 }
 
 Entity::~Entity()
@@ -54,4 +55,9 @@ void Entity::SetActive(bool newState)
 bool Entity::IsActive() const
 {
 	return m_IsActive;
+}
+
+Scene* Entity::GetScene() const
+{
+	return m_pScene;
 }
