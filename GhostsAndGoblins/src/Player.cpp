@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Entity.h"
 #include "Transform.h"
+#include "PhysicsBody.h"
 #include "AnimatorRenderer.h"
 
 Player::Player(Entity* entity)
@@ -18,38 +19,34 @@ void Player::Initialize()
 	assert(m_Animator != nullptr && "Player has no Animator");
 	m_Transform = m_pParent->GetComponent<Transform>();
 	assert(m_Transform != nullptr && "Player has no Transform");
+	m_PhysicsBody = m_pParent->GetComponent<PhysicsBody>();
+	assert(m_PhysicsBody != nullptr && "Player has no physics body");
 }
 
 void Player::Update(float deltaTime)
 {
-	const int MOVE_SPEED = 50;
+	const int MOVE_SPEED = 100;
 	const Uint8* state = SDL_GetKeyboardState(nullptr);
 	if (state[SDL_SCANCODE_A])
 	{
-		m_Transform->MovePosition(Vector2f(-MOVE_SPEED * deltaTime, 0));
+		m_PhysicsBody->SetXVelocity(-MOVE_SPEED);
 		m_Animator->SetParameter("isWalking", true);
 		m_Animator->SetFlipX(true);
 	}
 	else if (state[SDL_SCANCODE_D])
 	{
-		m_Transform->MovePosition(Vector2f(MOVE_SPEED * deltaTime, 0));
+		m_PhysicsBody->SetXVelocity(MOVE_SPEED);
 		m_Animator->SetParameter("isWalking", true);
 		m_Animator->SetFlipX(false);
 	}
 	else
 	{
+		m_PhysicsBody->SetXVelocity(0);
 		m_Animator->SetParameter("isWalking", false);
 	}
 
 	if (state[SDL_SCANCODE_SPACE])
 	{
-		
-		m_Transform->MovePosition(Vector2f(0, 350 * deltaTime));
-	}
-
-	m_Animator->SetParameter("isGrounded", m_Transform->GetPosition().y <= 0);
-	if (m_Transform->GetPosition().y > 0)
-	{
-		m_Transform->MovePosition(Vector2f(0, -150 * deltaTime));
+		m_PhysicsBody->AddVelocity(Vector2f(0, 50));
 	}
 }

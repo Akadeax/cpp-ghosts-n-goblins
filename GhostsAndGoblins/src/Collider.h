@@ -17,9 +17,10 @@ public:
     virtual ~Collider();
     void Initialize() override;
 
-    bool Intersecting(Collider* other) const;
+    bool Intersecting(const Collider* other) const;
 
     virtual void OnCollisionUpdate(Collider* other, float deltaTime);
+    virtual void DrawCollider() const = 0;
 
     Type GetType() const;
 
@@ -27,7 +28,7 @@ protected:
     bool m_IsTrigger = false;
     Transform* m_pTransform = nullptr;
 
-    virtual bool IntersectingRect(RectCollider* other) const = 0;
+    virtual bool IntersectingRect(const RectCollider* other) const = 0;
 
 private:
     Type m_Type;

@@ -3,6 +3,7 @@
 
 class AnimatorRenderer;
 class Transform;
+class PhysicsBody;
 class Entity;
 
 class Player :
@@ -16,5 +17,6 @@ public:
 private:
     AnimatorRenderer* m_Animator = nullptr;
     Transform* m_Transform = nullptr;
+    PhysicsBody* m_PhysicsBody = nullptr;
 };
 

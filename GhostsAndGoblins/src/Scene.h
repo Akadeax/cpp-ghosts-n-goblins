@@ -32,5 +32,8 @@ private:
 	// Persistent Entities
 	Entity* m_pPlayer = nullptr;
 	void CreatePlayer();
+
+	Entity* m_pPlatform = nullptr;
+	void CreatePlatform();
 };
 

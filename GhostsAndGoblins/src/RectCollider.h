@@ -11,9 +11,11 @@ public:
     Vector2f GetOffset() const;
     Vector2f GetSize() const;
 
+    void DrawCollider() const override;
+
 protected:
     Vector2f m_Offset;
     Vector2f m_Size;
 
-    bool IntersectingRect(RectCollider* other) const override;
+    bool IntersectingRect(const RectCollider* other) const override;
 };

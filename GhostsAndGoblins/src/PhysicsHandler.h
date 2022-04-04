@@ -11,8 +11,10 @@ public:
 	PhysicsHandler(Scene* scene);
 	~PhysicsHandler();
 
-	void UpdateCollision();
+	void UpdatePhysics(float deltaTime);
 	
+	void DrawColliders() const;
+
 	void AddCollider(Collider* collider);
 	void AddPhysicsBody(PhysicsBody* physicsBody);
 
@@ -24,5 +26,8 @@ private:
 	std::list<PhysicsBody*> m_PhysicsBodies;
 
 	Scene* m_pScene;
+
+	void HandleCollisions();
+	void ApplyVelocity(float deltaTime);
 };
 

@@ -24,14 +24,15 @@ void Collider::Initialize()
 {
 	m_pTransform = m_pParent->GetComponent<Transform>();
 	assert(m_pTransform != nullptr && "Entity has collider but no transform");
+	m_pParent->GetScene()->GetPhysicsHandler()->AddCollider(this);
 }
 
-bool Collider::Intersecting(Collider* other) const
+bool Collider::Intersecting(const Collider* other) const
 {
 	switch (other->GetType())
 	{
 	case Type::Rect:
-		return IntersectingRect(static_cast<RectCollider*>(other));
+		return IntersectingRect(static_cast<const RectCollider*>(other));
 	default:
 		return false;
 	}

@@ -41,9 +41,7 @@ void Game::Draw() const
 {
 	ClearBackground();
 
-	glPushMatrix();
 	m_pScene->Draw();
-	glPopMatrix();
 }
 
 void Game::ProcessKeyDownEvent(const SDL_KeyboardEvent & e)
