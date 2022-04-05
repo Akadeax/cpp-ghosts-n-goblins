@@ -28,20 +28,49 @@ void PhysicsHandler::UpdatePhysics(float deltaTime)
 {
 	for (PhysicsBody* currentPhysicsBody : m_PhysicsBodies)
 	{
-
-		Vector2f moveBy = currentPhysicsBody->GetVelocity() * deltaTime;
-		currentPhysicsBody->GetTransform()->MovePosition(moveBy);
-
 		for (Collider* currentCollider : m_Colliders)
 		{
 			if (currentPhysicsBody->GetCollider() == currentCollider) continue;
-			if (currentPhysicsBody->GetCollider()->Intersecting(currentCollider))
+
+
+			if (currentPhysicsBody->GetCollider()->IsAABBCollidingWith(currentCollider, currentPhysicsBody->GetVelocity() * deltaTime))
 			{
-				std::cout << "Colliding" << std::endl;
+				static int collC = 0;
+				std::cout << "Colliding " << collC++ << std::endl;
+
+				Vector2f distance = currentPhysicsBody->GetCollider()->CalculateAABBDistanceTo(currentCollider);
+				Vector2f velocity = currentPhysicsBody->GetVelocity();
+				float xAxisTimeToCollide = velocity.x != 0 ? std::abs(distance.x / velocity.x) : 0;
+				float yAxisTimeToCollide = velocity.y != 0 ? std::abs(distance.y / velocity.y) : 0;
+
+				float shortestTime = 0.f;
+				if (velocity.x != 0 && velocity.y == 0)
+				{
+					// Collision on X-Axis only
+					shortestTime = xAxisTimeToCollide;
+					currentPhysicsBody->SetVelocity(Vector2f(shortestTime * velocity.x * deltaTime, 0));
+				}
+				else if (velocity.x == 0 && velocity.y != 0)
+				{
+					// Collision on Y-Axis only
+					shortestTime = yAxisTimeToCollide;
+					currentPhysicsBody->SetVelocity(Vector2f(0, shortestTime * velocity.y * deltaTime));
+				}
+				else
+				{
+					// Collision on X- and Y-Axis (e.g. slide up against a wall)
+					shortestTime = std::min(std::abs(xAxisTimeToCollide), std::abs(yAxisTimeToCollide));
+					currentPhysicsBody->SetVelocity(Vector2f(
+						shortestTime * velocity.x * deltaTime,
+						shortestTime * velocity.y * deltaTime
+					));
+				}
 			}
+
 			
 		}
-		currentPhysicsBody->AddVelocity(Vector2f(0, -100 * deltaTime));
+		// Apply Velocity
+		currentPhysicsBody->GetTransform()->MovePosition(currentPhysicsBody->GetVelocity() * deltaTime);
 	}
 }
 
@@ -50,6 +79,19 @@ void PhysicsHandler::DrawColliders() const
 	for (Collider* coll : m_Colliders)
 	{
 		coll->DrawCollider();
+	}
+
+	for (PhysicsBody* currentPhysicsBody : m_PhysicsBodies)
+	{
+		for (Collider* currentCollider : m_Colliders)
+		{
+			if (currentPhysicsBody->GetCollider() == currentCollider) continue;
+
+			Vector2f distance = currentPhysicsBody->GetCollider()->CalculateAABBDistanceTo(currentCollider);
+			Vector2f physicsBodyPos = currentPhysicsBody->GetTransform()->GetPosition();
+			//std::cout << distance.x << ", " << distance.y << std::endl;
+			utils::DrawLine(physicsBodyPos.ToPoint2f(), (physicsBodyPos + distance).ToPoint2f(), 2);
+		}
 	}
 }
 

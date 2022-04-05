@@ -45,8 +45,26 @@ void Player::Update(float deltaTime)
 		m_Animator->SetParameter("isWalking", false);
 	}
 
+	if (state[SDL_SCANCODE_W])
+	{
+		m_PhysicsBody->SetYVelocity(MOVE_SPEED);
+		m_Animator->SetParameter("isWalking", true);
+		m_Animator->SetFlipY(false);
+	}
+	else if (state[SDL_SCANCODE_S])
+	{
+		m_PhysicsBody->SetYVelocity(-MOVE_SPEED);
+		m_Animator->SetParameter("isWalking", true);
+		m_Animator->SetFlipY(true);
+	}
+	else
+	{
+		m_PhysicsBody->SetYVelocity(0);
+		m_Animator->SetParameter("isWalking", false);
+	}
+
 	if (state[SDL_SCANCODE_SPACE])
 	{
-		m_PhysicsBody->AddVelocity(Vector2f(0, 10));
+		m_PhysicsBody->AddVelocity(Vector2f(0, 100));
 	}
 }

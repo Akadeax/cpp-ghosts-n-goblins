@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "Vector2f.h"
 
 class Transform;
 class RectCollider;
@@ -8,28 +9,23 @@ class Collider :
     public Component
 {
 public:
-    enum class Type
-    {
-        Rect
-    };
-
-    Collider(Entity* entity, Type type);
-    virtual ~Collider();
+    Collider(Entity* entity, Vector2f offset, Vector2f size);
+    ~Collider();
     void Initialize() override;
 
-    bool Intersecting(const Collider* other) const;
-
     virtual void OnCollisionUpdate(Collider* other, float deltaTime);
-    virtual void DrawCollider() const = 0;
+    void DrawCollider() const;
 
-    Type GetType() const;
+    Vector2f GetOffset() const;
+    Vector2f GetSize() const;
+
+    bool IsAABBCollidingWith(const Collider* other, Vector2f vel) const;
+    Vector2f CalculateAABBDistanceTo(const Collider* other) const;
 
 protected:
     bool m_IsTrigger = false;
     Transform* m_pTransform = nullptr;
 
-    virtual bool IntersectingRect(const RectCollider* other) const = 0;
-
-private:
-    Type m_Type;
+    Vector2f m_Offset;
+    Vector2f m_Size;
 };

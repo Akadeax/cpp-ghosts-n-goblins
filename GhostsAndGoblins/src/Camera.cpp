@@ -30,16 +30,6 @@ void Camera::Update(float deltaTime)
 	{
 		MovePosition(Vector2f(-moveVal, 0));
 	}
-	
-
-	if (state[SDL_SCANCODE_Q])
-	{
-		m_Scale += 1 * deltaTime;
-	}
-	else if (state[SDL_SCANCODE_W])
-	{
-		m_Scale -= 1 * deltaTime;
-	}
 }
 
 void Camera::Draw() const

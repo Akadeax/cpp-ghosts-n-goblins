@@ -34,6 +34,7 @@ private:
 	void CreatePlayer();
 
 	Entity* m_pPlatform = nullptr;
+	Entity* m_pPlatform2 = nullptr;
 	void CreatePlatform();
 };
 

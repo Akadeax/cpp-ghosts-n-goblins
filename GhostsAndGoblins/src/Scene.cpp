@@ -14,7 +14,7 @@
 
 #include "Transform.h"
 #include "AnimatorRenderer.h"
-#include "RectCollider.h"
+#include "Collider.h"
 #include "PhysicsBody.h"
 
 #include "PlayerIdleState.h"
@@ -38,7 +38,7 @@ void Scene::Initialize()
 {
 	m_pEntityManager = new EntityManager(this);
 	m_pPhysicsHandler = new PhysicsHandler(this);
-	m_pCamera = new Camera(Point2f(-60, -60), 3);
+	m_pCamera = new Camera(Point2f(-60, -60), 2.5f);
 
 	CreatePlayer();
 	CreatePlatform();
@@ -47,7 +47,9 @@ void Scene::Initialize()
 void Scene::Update(float deltaTime)
 {
 	m_pEntityManager->UpdateEntities(deltaTime);
-	m_pPhysicsHandler->UpdatePhysics(deltaTime);
+	// Resolve collisions twice to stabilize multi-collisions
+	m_pPhysicsHandler->UpdatePhysics(deltaTime / 2);
+	m_pPhysicsHandler->UpdatePhysics(deltaTime / 2);
 	m_pCamera->Update(deltaTime);
 }
 
@@ -102,7 +104,7 @@ void Scene::CreatePlayer()
 	m_pPlayer->AddComponent(new AnimatorRenderer(m_pPlayer, playerTexture, states, transitions, "idle"));
 	m_pPlayer->AddComponent(new Player(m_pPlayer));
 
-	m_pPlayer->AddComponent(new RectCollider(m_pPlayer, Vector2f(0, 0), Vector2f(25, 25)));
+	m_pPlayer->AddComponent(new Collider(m_pPlayer, Vector2f(0, 0), Vector2f(25, 25)));
 	m_pPlayer->AddComponent(new PhysicsBody(m_pPlayer));
 
 	m_pPlayer->Initialize();
@@ -110,15 +112,29 @@ void Scene::CreatePlayer()
 
 void Scene::CreatePlatform()
 {
+	Texture* platformTexture = m_pGame->GetTextureCache()->GetTexture(TextureCache::Spritesheet::Platform);
+
+
 	m_pPlatform = m_pEntityManager->CreateEntity();
 	Transform* platformTransform = new Transform(m_pPlatform, Vector2f(50, 0));
 	m_pPlatform->AddComponent(platformTransform);
 	platformTransform->SetScale(0.5f);
 	
-	Texture* platformTexture = m_pGame->GetTextureCache()->GetTexture(TextureCache::Spritesheet::Platform);
 	m_pPlatform->AddComponent(new Renderer(m_pPlatform, platformTexture));
 
-	m_pPlatform->AddComponent(new RectCollider(m_pPlatform, Vector2f(0, 0), Vector2f(125, 25)));
+	m_pPlatform->AddComponent(new Collider(m_pPlatform, Vector2f(0, 0), Vector2f(125, 50)));
 
 	m_pPlatform->Initialize();
+
+
+	m_pPlatform2 = m_pEntityManager->CreateEntity();
+	Transform* platformTransform2 = new Transform(m_pPlatform2, Vector2f(100, 150));
+	m_pPlatform2->AddComponent(platformTransform2);
+	platformTransform2->SetScale(0.5f);
+
+	m_pPlatform2->AddComponent(new Renderer(m_pPlatform2, platformTexture));
+
+	m_pPlatform2->AddComponent(new Collider(m_pPlatform2, Vector2f(0, 0), Vector2f(125, 50)));
+
+	m_pPlatform2->Initialize();
 }
