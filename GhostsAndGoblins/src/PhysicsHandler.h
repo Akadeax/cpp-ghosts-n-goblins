@@ -26,8 +26,5 @@ private:
 	std::list<PhysicsBody*> m_PhysicsBodies;
 
 	Scene* m_pScene;
-
-	void HandleCollisions();
-	void ApplyVelocity(float deltaTime);
 };
 

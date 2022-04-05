@@ -47,6 +47,6 @@ void Player::Update(float deltaTime)
 
 	if (state[SDL_SCANCODE_SPACE])
 	{
-		m_PhysicsBody->AddVelocity(Vector2f(0, 50));
+		m_PhysicsBody->AddVelocity(Vector2f(0, 10));
 	}
 }

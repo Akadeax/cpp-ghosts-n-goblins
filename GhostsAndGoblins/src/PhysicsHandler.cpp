@@ -26,8 +26,23 @@ PhysicsHandler::~PhysicsHandler()
 
 void PhysicsHandler::UpdatePhysics(float deltaTime)
 {
-	HandleCollisions();
-	ApplyVelocity(deltaTime);
+	for (PhysicsBody* currentPhysicsBody : m_PhysicsBodies)
+	{
+
+		Vector2f moveBy = currentPhysicsBody->GetVelocity() * deltaTime;
+		currentPhysicsBody->GetTransform()->MovePosition(moveBy);
+
+		for (Collider* currentCollider : m_Colliders)
+		{
+			if (currentPhysicsBody->GetCollider() == currentCollider) continue;
+			if (currentPhysicsBody->GetCollider()->Intersecting(currentCollider))
+			{
+				std::cout << "Colliding" << std::endl;
+			}
+			
+		}
+		currentPhysicsBody->AddVelocity(Vector2f(0, -100 * deltaTime));
+	}
 }
 
 void PhysicsHandler::DrawColliders() const
@@ -56,31 +71,4 @@ void PhysicsHandler::RemoveCollider(Collider* collider)
 void PhysicsHandler::RemovePhysicsBody(PhysicsBody* physicsBody)
 {
 	m_PhysicsBodies.remove(physicsBody);
-}
-
-void PhysicsHandler::HandleCollisions()
-{
-	for (PhysicsBody* currentPhysicsBody : m_PhysicsBodies)
-	{
-		for (Collider* currentCollider : m_Colliders)
-		{
-			if (currentPhysicsBody->GetCollider() == currentCollider) continue;
-
-			if (currentPhysicsBody->GetCollider()->Intersecting(currentCollider))
-			{
-				std::cout << "Colliding!" << std::endl;
-			}
-		}
-	}
-}
-
-void PhysicsHandler::ApplyVelocity(float deltaTime)
-{
-	for (PhysicsBody* currentPhysicsBody : m_PhysicsBodies)
-	{
-		Vector2f moveBy = currentPhysicsBody->GetVelocity() * deltaTime;
-		currentPhysicsBody->GetTransform()->MovePosition(moveBy);
-		// Apply gravity
-		currentPhysicsBody->AddVelocity(Vector2f(0, -10 * deltaTime));
-	}
 }
