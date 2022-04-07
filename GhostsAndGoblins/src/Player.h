@@ -13,6 +13,7 @@ public:
     Player(Entity* entity);
     void Initialize() override;
     void Update(float deltaTime) override;
+    void Draw() const override;
 
 private:
     AnimatorRenderer* m_Animator = nullptr;

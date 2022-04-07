@@ -15,8 +15,7 @@ PhysicsBody::PhysicsBody(Entity* entity)
 
 PhysicsBody::~PhysicsBody()
 {
-    PhysicsHandler* ph = m_pParent->GetScene()->GetPhysicsHandler();
-    ph->RemovePhysicsBody(this);
+    GetPhysicsHandler()->RemovePhysicsBody(this);
 }
 
 void PhysicsBody::Initialize()
@@ -25,7 +24,7 @@ void PhysicsBody::Initialize()
     assert(m_Collider != nullptr && "Entity has physics body but no collider");
     m_Transform = m_pParent->GetComponent<Transform>();
     assert(m_Transform != nullptr && "Entity has physics body but no transform");
-    m_pParent->GetScene()->GetPhysicsHandler()->AddPhysicsBody(this);
+    GetPhysicsHandler()->AddPhysicsBody(this);
 }
 
 Transform* PhysicsBody::GetTransform()

@@ -18,9 +18,12 @@ public:
 
     Vector2f GetOffset() const;
     Vector2f GetSize() const;
+    Transform* GetTransform();
 
     bool IsAABBCollidingWith(const Collider* other, Vector2f vel) const;
     Vector2f CalculateAABBDistanceTo(const Collider* other) const;
+
+    Vector2f GetBottomLeftPosition() const;
 
 protected:
     bool m_IsTrigger = false;

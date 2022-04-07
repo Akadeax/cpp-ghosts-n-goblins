@@ -7,6 +7,9 @@
 #include "Transform.h"
 #include "PhysicsBody.h"
 #include "AnimatorRenderer.h"
+#include "Collider.h"
+#include "PhysicsHandler.h"
+#include "utils.h"
 
 Player::Player(Entity* entity)
 	: Component(entity)
@@ -48,23 +51,25 @@ void Player::Update(float deltaTime)
 	if (state[SDL_SCANCODE_W])
 	{
 		m_PhysicsBody->SetYVelocity(MOVE_SPEED);
-		m_Animator->SetParameter("isWalking", true);
-		m_Animator->SetFlipY(false);
 	}
 	else if (state[SDL_SCANCODE_S])
 	{
 		m_PhysicsBody->SetYVelocity(-MOVE_SPEED);
-		m_Animator->SetParameter("isWalking", true);
-		m_Animator->SetFlipY(true);
 	}
 	else
 	{
 		m_PhysicsBody->SetYVelocity(0);
-		m_Animator->SetParameter("isWalking", false);
 	}
+
+
 
 	if (state[SDL_SCANCODE_SPACE])
 	{
 		m_PhysicsBody->AddVelocity(Vector2f(0, 100));
 	}
+}
+
+void Player::Draw() const
+{
+
 }

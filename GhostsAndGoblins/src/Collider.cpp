@@ -17,28 +17,27 @@ Collider::Collider(Entity* entity, Vector2f offset, Vector2f size)
 
 Collider::~Collider()
 {
-	PhysicsHandler* ph = m_pParent->GetScene()->GetPhysicsHandler();
-	ph->RemoveCollider(this);
+	GetPhysicsHandler()->RemoveCollider(this);
 }
 
 void Collider::Initialize()
 {
 	m_pTransform = m_pParent->GetComponent<Transform>();
 	assert(m_pTransform != nullptr && "Entity has collider but no transform");
-	m_pParent->GetScene()->GetPhysicsHandler()->AddCollider(this);
+	GetPhysicsHandler()->AddCollider(this);
 }
 
 bool Collider::IsAABBCollidingWith(const Collider* other, Vector2f vel) const
 {
 	Rectf thisRect = Rectf(
-		m_pTransform->GetPosition().x + m_Offset.x - (m_Size.x / 2) + vel.x,
-		m_pTransform->GetPosition().y + m_Offset.y - (m_Size.y / 2) + vel.y,
+		GetBottomLeftPosition().x + vel.x,
+		GetBottomLeftPosition().y + vel.y,
 		m_Size.x,
 		m_Size.y
 	);
 	Rectf otherRect = Rectf(
-		other->m_pTransform->GetPosition().x + other->m_Offset.x - (other->m_Size.x / 2),
-		other->m_pTransform->GetPosition().y + other->m_Offset.y - (other->m_Size.y / 2),
+		other->GetBottomLeftPosition().x,
+		other->GetBottomLeftPosition().y,
 		other->m_Size.x,
 		other->m_Size.y
 	);
@@ -57,17 +56,9 @@ Vector2f Collider::CalculateAABBDistanceTo(const Collider* other) const
 	float dx = 0;
 	float dy = 0;
 
-	Vector2f thisPos = m_pTransform->GetPosition();
-	Vector2f thisBottomLeft = Vector2f(
-		thisPos.x - (m_Size.x / 2),
-		thisPos.y - (m_Size.y / 2)
-	);
+	Vector2f thisBottomLeft = GetBottomLeftPosition();
 
-	Vector2f otherPos = other->m_pTransform->GetPosition();
-	Vector2f otherBottomLeft = Vector2f(
-		otherPos.x - (other->m_Size.x / 2),
-		otherPos.y - (other->m_Size.y / 2)
-	);
+	Vector2f otherBottomLeft = other->GetBottomLeftPosition();
 
 	if (thisBottomLeft.x + m_Size.x < otherBottomLeft.x)
 	{
@@ -90,6 +81,14 @@ Vector2f Collider::CalculateAABBDistanceTo(const Collider* other) const
 	return Vector2f(dx, dy);
 }
 
+Vector2f Collider::GetBottomLeftPosition() const
+{
+	return Vector2f(
+		m_pTransform->GetPosition().x + m_Offset.x - (m_Size.x / 2),
+		m_pTransform->GetPosition().y + m_Offset.y - (m_Size.y / 2)
+	);
+}
+
 void Collider::OnCollisionUpdate(Collider* other, float deltaTime)
 {
 	std::cout << "Coll" << std::endl;
@@ -99,8 +98,8 @@ void Collider::DrawCollider() const
 {
 	utils::SetColor(Color4f(1, 0, 0, 1));
 	Rectf thisRect = Rectf(
-		m_pTransform->GetPosition().x + m_Offset.x - (m_Size.x / 2),
-		m_pTransform->GetPosition().y + m_Offset.y - (m_Size.y / 2),
+		GetBottomLeftPosition().x,
+		GetBottomLeftPosition().y,
 		m_Size.x,
 		m_Size.y
 	);
@@ -115,4 +114,9 @@ Vector2f Collider::GetOffset() const
 Vector2f Collider::GetSize() const
 {
 	return m_Size;
+}
+
+Transform* Collider::GetTransform()
+{
+	return m_pTransform;
 }
