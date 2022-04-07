@@ -12,10 +12,13 @@ public:
 	~EntityManager();
 
 	Entity* CreateEntity();
+	Entity* CreateEntity(std::string tag);
 	void DeleteEntity(Entity* entity);
 
 	void UpdateEntities(float deltaTime);
 	void DrawEntities() const;
+
+	Entity* GetEntityWithTag(std::string tag);
 private:
 	Scene* m_pScene;
 

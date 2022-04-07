@@ -89,14 +89,19 @@ Vector2f Collider::GetBottomLeftPosition() const
 	);
 }
 
-void Collider::OnCollisionUpdate(Collider* other, float deltaTime)
+void Collider::CollidingUpdate(Collider* other, float deltaTime)
 {
-	std::cout << "Coll" << std::endl;
+}
+
+void Collider::NotCollidingUpdate(float deltaTime)
+{
 }
 
 void Collider::DrawCollider() const
 {
-	utils::SetColor(Color4f(1, 0, 0, 1));
+	// Change color if it's trigger
+	utils::SetColor(Color4f(m_IsTrigger ? 0.f : 1.f, m_IsTrigger ? 1.f : 0.f, 0.f, 1.f));
+
 	Rectf thisRect = Rectf(
 		GetBottomLeftPosition().x,
 		GetBottomLeftPosition().y,
@@ -116,7 +121,22 @@ Vector2f Collider::GetSize() const
 	return m_Size;
 }
 
+void Collider::SetTrigger(bool newVal)
+{
+	m_IsTrigger = newVal;
+}
+
+bool Collider::IsTrigger() const
+{
+	return m_IsTrigger;
+}
+
 Transform* Collider::GetTransform()
 {
 	return m_pTransform;
+}
+
+bool Collider::CompareTag(std::string tag) const
+{
+	return m_pParent->GetTag() == tag;
 }

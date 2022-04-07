@@ -13,12 +13,18 @@ public:
     ~Collider();
     void Initialize() override;
 
-    virtual void OnCollisionUpdate(Collider* other, float deltaTime);
+    virtual void CollidingUpdate(Collider* other, float deltaTime);
+    virtual void NotCollidingUpdate(float deltaTime);
+
     void DrawCollider() const;
 
     Vector2f GetOffset() const;
     Vector2f GetSize() const;
     Transform* GetTransform();
+    bool CompareTag(std::string tag) const;
+
+    void SetTrigger(bool newVal);
+    bool IsTrigger() const;
 
     bool IsAABBCollidingWith(const Collider* other, Vector2f vel) const;
     Vector2f CalculateAABBDistanceTo(const Collider* other) const;

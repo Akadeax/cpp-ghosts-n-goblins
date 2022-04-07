@@ -19,10 +19,17 @@ EntityManager::~EntityManager()
 
 Entity* EntityManager::CreateEntity()
 {
+    return CreateEntity("");
+}
+
+Entity* EntityManager::CreateEntity(std::string tag)
+{
     Entity* newEnt = new Entity(m_pScene);
     m_Entities.push_back(newEnt);
+    newEnt->SetTag(tag);
     return newEnt;
 }
+
 
 void EntityManager::DeleteEntity(Entity* entity)
 {
@@ -54,4 +61,13 @@ void EntityManager::DrawEntities() const
         }
         glPopMatrix();
     }
+}
+
+Entity* EntityManager::GetEntityWithTag(std::string tag)
+{
+    for (Entity* e : m_Entities)
+    {
+        if (e->GetTag() == tag) return e;
+    }
+    return nullptr;
 }

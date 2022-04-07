@@ -23,8 +23,8 @@ public:
     void AddVelocity(Vector2f velocity);
 
 private:
-    Transform* m_Transform = nullptr;
-    Collider* m_Collider = nullptr;
+    Transform* m_pTransform = nullptr;
+    Collider* m_pCollider = nullptr;
     
     Vector2f m_Velocity = Vector2f(0, 0);
 };

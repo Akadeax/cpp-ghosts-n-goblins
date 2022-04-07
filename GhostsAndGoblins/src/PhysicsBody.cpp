@@ -20,21 +20,21 @@ PhysicsBody::~PhysicsBody()
 
 void PhysicsBody::Initialize()
 {
-    m_Collider = m_pParent->GetComponent<Collider>();
-    assert(m_Collider != nullptr && "Entity has physics body but no collider");
-    m_Transform = m_pParent->GetComponent<Transform>();
-    assert(m_Transform != nullptr && "Entity has physics body but no transform");
+    m_pCollider = m_pParent->GetComponent<Collider>();
+    assert(m_pCollider != nullptr && "Entity has physics body but no collider");
+    m_pTransform = m_pParent->GetComponent<Transform>();
+    assert(m_pTransform != nullptr && "Entity has physics body but no transform");
     GetPhysicsHandler()->AddPhysicsBody(this);
 }
 
 Transform* PhysicsBody::GetTransform()
 {
-    return m_Transform;
+    return m_pTransform;
 }
 
 Collider* PhysicsBody::GetCollider() const
 {
-    return m_Collider;
+    return m_pCollider;
 }
 
 Vector2f PhysicsBody::GetVelocity() const
