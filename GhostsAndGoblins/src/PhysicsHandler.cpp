@@ -37,8 +37,11 @@ void PhysicsHandler::UpdatePhysics(float deltaTime)
 
 			if (currentPhysicsBody->GetCollider()->IsAABBCollidingWith(currentCollider, currentPhysicsBody->GetVelocity() * deltaTime))
 			{
-				static int collC = 0;
-				std::cout << "Colliding " << collC++ << std::endl;
+				// Send both parties update
+				currentPhysicsBody->GetCollider()->CollidingUpdate(currentCollider, deltaTime);
+				currentCollider->CollidingUpdate(currentPhysicsBody->GetCollider(), deltaTime);
+
+				if (currentPhysicsBody->GetCollider()->IsTrigger() || currentCollider->IsTrigger()) continue;
 
 				Vector2f distance = currentPhysicsBody->GetCollider()->CalculateAABBDistanceTo(currentCollider);
 				Vector2f velocity = currentPhysicsBody->GetVelocity();
