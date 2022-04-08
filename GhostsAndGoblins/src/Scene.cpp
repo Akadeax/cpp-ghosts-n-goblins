@@ -58,7 +58,7 @@ void Scene::Draw() const
 	glPushMatrix();
 	m_pCamera->Draw();
 	m_pEntityManager->DrawEntities();
-	m_pPhysicsHandler->DrawColliders();
+	m_pPhysicsHandler->DebugDrawColliders();
 	glPopMatrix();
 }
 

@@ -6,6 +6,8 @@
 #include "Collider.h"
 #include "PhysicsBody.h"
 #include "utils.h"
+#include "collisions.h"
+#include "Entity.h"
 
 PhysicsHandler::PhysicsHandler(Scene* scene)
 {
@@ -74,7 +76,7 @@ void PhysicsHandler::UpdatePhysics(float deltaTime)
 	}
 }
 
-void PhysicsHandler::DrawColliders() const
+void PhysicsHandler::DebugDrawColliders() const
 {
 	for (Collider* coll : m_Colliders)
 	{
@@ -89,7 +91,6 @@ void PhysicsHandler::DrawColliders() const
 
 			Vector2f distance = currentPhysicsBody->GetCollider()->CalculateAABBDistanceTo(currentCollider);
 			Vector2f physicsBodyPos = currentPhysicsBody->GetTransform()->GetPosition();
-			//std::cout << distance.x << ", " << distance.y << std::endl;
 			utils::DrawLine(physicsBodyPos.ToPoint2f(), (physicsBodyPos + distance).ToPoint2f(), 2);
 		}
 	}
@@ -114,3 +115,30 @@ void PhysicsHandler::RemovePhysicsBody(PhysicsBody* physicsBody)
 {
 	m_PhysicsBodies.remove(physicsBody);
 }
+
+std::pair<bool, Collider*> PhysicsHandler::Linecast(Vector2f p1, Vector2f p2)
+{
+	return Linecast(p1, p2, "");
+}
+
+std::pair<bool, Collider*> PhysicsHandler::Linecast(Vector2f p1, Vector2f p2, std::string tag)
+{
+	for (Collider* currentCollider : m_Colliders)
+	{
+		Vector2f colliderBottomLeft = currentCollider->GetBottomLeftPosition();
+		Vector2f colliderSize = currentCollider->GetSize();
+		Rectf colliderRect = Rectf(colliderBottomLeft.x, colliderBottomLeft.y, colliderSize.x, colliderSize.y);
+
+		if (collisions::LineRect(p1, p2, colliderRect))
+		{
+			// Check if tag of hit object is correct
+			// or we're not checking for tag
+			if (tag == "" || currentCollider->CompareTag(tag))
+			{
+				return std::make_pair(true, currentCollider);
+			}
+		}
+	}
+	return std::make_pair(false, nullptr);
+}
+
