@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Collider.cpp" />
+    <ClCompile Include="src\collisions.cpp" />
     <ClCompile Include="src\PhysicsBody.cpp" />
     <ClCompile Include="src\PhysicsHandler.cpp" />
     <ClCompile Include="src\Scene.cpp" />
@@ -49,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Collider.h" />
+    <ClInclude Include="src\collisions.h" />
     <ClInclude Include="src\PhysicsBody.h" />
     <ClInclude Include="src\PhysicsHandler.h" />
     <ClInclude Include="src\Scene.h" />
