@@ -73,7 +73,7 @@ void Player::Update(float deltaTime)
 	Vector2f castBottomRight = playerPos + Vector2f(m_GroundedCheckXSize / 2, m_GroundedCheckYOffset);
 
 	std::pair<bool, Collider*> groundedResult = GetPhysicsHandler()->Linecast(castBottomLeft, castBottomRight);
-	m_IsGrounded = groundedResult.first;
+	m_IsGrounded = groundedResult.first && !groundedResult.second->IsTrigger();
 	m_Animator->SetParameter("isGrounded", m_IsGrounded);
 }
 

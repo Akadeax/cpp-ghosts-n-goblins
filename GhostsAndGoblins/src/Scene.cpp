@@ -128,13 +128,15 @@ void Scene::CreatePlatform()
 
 
 	m_pPlatform2 = m_pEntityManager->CreateEntity();
-	Transform* platformTransform2 = new Transform(m_pPlatform2, Vector2f(100, 150));
+	Transform* platformTransform2 = new Transform(m_pPlatform2, Vector2f(130, 70));
 	m_pPlatform2->AddComponent(platformTransform2);
 	platformTransform2->SetScale(0.5f);
 
 	m_pPlatform2->AddComponent(new Renderer(m_pPlatform2, platformTexture));
 
-	m_pPlatform2->AddComponent(new Collider(m_pPlatform2, Vector2f(0, 0), Vector2f(125, 50)));
+	Collider* platform2Coll = new Collider(m_pPlatform2, Vector2f(0, 0), Vector2f(125, 50));
+	platform2Coll->SetTrigger(true);
+	m_pPlatform2->AddComponent(platform2Coll);
 
 	m_pPlatform2->Initialize();
 }
