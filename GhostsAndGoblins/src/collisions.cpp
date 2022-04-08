@@ -9,6 +9,10 @@ bool collisions::PointRect(Vector2f p, Rectf rect)
 
 bool collisions::LineLine(Vector2f p1, Vector2f p2, Vector2f p3, Vector2f p4)
 {
+	utils::SetColor(Color4f(0, 1, 0, 1));
+	utils::DrawLine(p1.ToPoint2f(), p2.ToPoint2f(), 4);
+	utils::DrawLine(p3.ToPoint2f(), p4.ToPoint2f(), 4);
+
 	float uA = ((p4.x - p3.x) * (p1.y - p3.y) - (p4.y - p3.y) * (p1.x - p3.x)) / ((p4.y - p3.y) * (p2.x - p1.x) - (p4.x - p3.x) * (p2.y - p1.y));
 	float uB = ((p2.x - p1.x) * (p1.y - p3.y) - (p2.y - p1.y) * (p1.x - p3.x)) / ((p4.y - p3.y) * (p2.x - p1.x) - (p4.x - p3.x) * (p2.y - p1.y));
 

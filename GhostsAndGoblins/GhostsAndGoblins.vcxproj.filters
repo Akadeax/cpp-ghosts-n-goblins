@@ -106,7 +106,9 @@
     <ClCompile Include="src\PhysicsHandler.cpp">
       <Filter>Engine\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="src\collisions.cpp" />
+    <ClCompile Include="src\collisions.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -211,7 +213,9 @@
     <ClInclude Include="src\PhysicsHandler.h">
       <Filter>Engine\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="src\collisions.h" />
+    <ClInclude Include="src\collisions.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Framework">
