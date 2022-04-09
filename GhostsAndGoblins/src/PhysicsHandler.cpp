@@ -34,15 +34,11 @@ void PhysicsHandler::UpdatePhysics(float deltaTime)
 		{
 			if (currentPhysicsBody->GetCollider() == currentCollider) continue;
 
-
+			// physics body and collider are colliding
 			if (currentPhysicsBody->GetCollider()->IsAABBCollidingWith(currentCollider, currentPhysicsBody->GetVelocity() * deltaTime))
 			{
-				// Send both parties update
-				currentPhysicsBody->GetCollider()->CollidingUpdate(currentCollider, deltaTime);
-				currentCollider->CollidingUpdate(currentPhysicsBody->GetCollider(), deltaTime);
-
 				if (currentPhysicsBody->GetCollider()->IsTrigger() || currentCollider->IsTrigger()) continue;
-
+				
 				Vector2f distance = currentPhysicsBody->GetCollider()->CalculateAABBDistanceTo(currentCollider);
 				Vector2f velocity = currentPhysicsBody->GetVelocity();
 				float xAxisTimeToCollide = velocity.x != 0 ? std::abs(distance.x / velocity.x) : 0;
@@ -71,8 +67,6 @@ void PhysicsHandler::UpdatePhysics(float deltaTime)
 					));
 				}
 			}
-
-			
 		}
 		// Apply Velocity
 		currentPhysicsBody->GetTransform()->MovePosition(currentPhysicsBody->GetVelocity() * deltaTime);
