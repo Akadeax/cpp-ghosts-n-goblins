@@ -109,6 +109,9 @@
     <ClCompile Include="src\collisions.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\DetectionCollider.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -215,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="src\collisions.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DetectionCollider.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

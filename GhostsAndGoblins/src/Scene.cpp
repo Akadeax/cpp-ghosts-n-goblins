@@ -16,6 +16,7 @@
 #include "AnimatorRenderer.h"
 #include "Collider.h"
 #include "PhysicsBody.h"
+#include "DetectionCollider.h"
 
 #include "PlayerIdleState.h"
 #include "PlayerWalkState.h"
@@ -47,9 +48,7 @@ void Scene::Initialize()
 void Scene::Update(float deltaTime)
 {
 	m_pEntityManager->UpdateEntities(deltaTime);
-	// Resolve collisions twice to stabilize multi-collisions
-	m_pPhysicsHandler->UpdatePhysics(deltaTime / 2);
-	m_pPhysicsHandler->UpdatePhysics(deltaTime / 2);
+	m_pPhysicsHandler->Update(deltaTime);
 	m_pCamera->Update(deltaTime);
 }
 
@@ -80,7 +79,7 @@ Camera* Scene::GetCamera() const
 void Scene::CreatePlayer()
 {
 	m_pPlayer = m_pEntityManager->CreateEntity();
-	m_pPlayer->AddComponent(new Transform(m_pPlayer, Vector2f(50, 100)));
+	m_pPlayer->AddComponent(new Transform(m_pPlayer, Vector2f(150, 300)));
 
 	Texture* playerTexture = m_pGame->GetTextureCache()->GetTexture(TextureCache::Spritesheet::Player);
 	std::unordered_map<std::string, AnimatorState*> states = std::unordered_map<std::string, AnimatorState*>
@@ -122,7 +121,7 @@ void Scene::CreatePlatform()
 	
 	m_pPlatform->AddComponent(new Renderer(m_pPlatform, platformTexture));
 
-	m_pPlatform->AddComponent(new Collider(m_pPlatform, Vector2f(0, 0), Vector2f(125, 50)));
+	m_pPlatform->AddComponent(new DetectionCollider(m_pPlatform, Vector2f(0, 0), Vector2f(125, 50)));
 
 	m_pPlatform->Initialize();
 
@@ -134,8 +133,8 @@ void Scene::CreatePlatform()
 
 	m_pPlatform2->AddComponent(new Renderer(m_pPlatform2, platformTexture));
 
-	Collider* platform2Coll = new Collider(m_pPlatform2, Vector2f(0, 0), Vector2f(125, 50));
-	platform2Coll->SetTrigger(true);
+	Collider* platform2Coll = new DetectionCollider(m_pPlatform2, Vector2f(0, 0), Vector2f(125, 50));
+	platform2Coll->SetTrigger(false);
 	m_pPlatform2->AddComponent(platform2Coll);
 
 	m_pPlatform2->Initialize();

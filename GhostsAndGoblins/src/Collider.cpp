@@ -27,6 +27,18 @@ void Collider::Initialize()
 	GetPhysicsHandler()->AddCollider(this);
 }
 
+void Collider::OnCollisionUpdate(Collider* other, float deltaTime)
+{
+}
+
+void Collider::OnCollisionEnter(Collider* other, float deltaTime)
+{
+}
+
+void Collider::OnCollisionExit(Collider* other, float deltaTime)
+{
+}
+
 bool Collider::IsAABBCollidingWith(const Collider* other, Vector2f vel) const
 {
 	Rectf thisRect = Rectf(
@@ -87,14 +99,6 @@ Vector2f Collider::GetBottomLeftPosition() const
 		m_pTransform->GetPosition().x + m_Offset.x - (m_Size.x / 2),
 		m_pTransform->GetPosition().y + m_Offset.y - (m_Size.y / 2)
 	);
-}
-
-void Collider::CollidingUpdate(Collider* other, float deltaTime)
-{
-}
-
-void Collider::NotCollidingUpdate(float deltaTime)
-{
 }
 
 void Collider::DrawCollider() const

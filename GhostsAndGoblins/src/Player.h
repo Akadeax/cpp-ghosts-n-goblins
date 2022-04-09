@@ -20,12 +20,11 @@ private:
     Transform* m_Transform = nullptr;
     PhysicsBody* m_PhysicsBody = nullptr;
 
-    const float m_GroundedCheckYOffset = -14.f;
-    const float m_GroundedCheckXSize = 20.f;
-    const float m_GravityFactor = 1.f;
+    const float GROUNDED_CHECK_Y_OFFSET = -14.f;
+    const float GROUNDED_CHECK_X_SIZE = 22.f;
+    float m_GravityFactor = 1.f;
 
     bool m_IsGrounded = false;
     // TODO: Refactor into input manager
     bool m_SpaceLastFrame = false;
 };
-

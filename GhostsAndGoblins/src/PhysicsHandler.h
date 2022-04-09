@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include "Vector2f.h"
+#include <map>
 
 class Scene;
 class Collider;
@@ -12,7 +13,7 @@ public:
 	PhysicsHandler(Scene* scene);
 	~PhysicsHandler();
 
-	void UpdatePhysics(float deltaTime);
+	void Update(float deltaTime);
 	
 	void DebugDrawColliders() const;
 
@@ -30,5 +31,10 @@ private:
 	std::list<PhysicsBody*> m_PhysicsBodies;
 
 	Scene* m_pScene;
+
+	void ResolveCollisions(float deltaTime);
+
+	std::map<std::pair<PhysicsBody*, Collider*>, bool> m_LastFrameCollisions;
+	void NotifyColliders(float deltaTime);
 };
 

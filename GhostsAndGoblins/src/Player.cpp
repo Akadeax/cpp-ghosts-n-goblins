@@ -69,8 +69,8 @@ void Player::Update(float deltaTime)
 	Vector2f playerPos = m_PhysicsBody->GetTransform()->GetPosition();
 	// Offset both ground check points down and to the left/right according to consts
 	// If Anything is between these two points, player is grounded
-	Vector2f castBottomLeft = playerPos + Vector2f(-(m_GroundedCheckXSize / 2), m_GroundedCheckYOffset);
-	Vector2f castBottomRight = playerPos + Vector2f(m_GroundedCheckXSize / 2, m_GroundedCheckYOffset);
+	Vector2f castBottomLeft = playerPos + Vector2f(-(GROUNDED_CHECK_X_SIZE / 2), GROUNDED_CHECK_Y_OFFSET);
+	Vector2f castBottomRight = playerPos + Vector2f(GROUNDED_CHECK_X_SIZE / 2, GROUNDED_CHECK_Y_OFFSET);
 
 	std::pair<bool, Collider*> groundedResult = GetPhysicsHandler()->Linecast(castBottomLeft, castBottomRight);
 	m_IsGrounded = groundedResult.first && !groundedResult.second->IsTrigger();
@@ -80,5 +80,13 @@ void Player::Update(float deltaTime)
 void Player::Draw() const
 {
 	Transform* trans = m_PhysicsBody->GetTransform();
-	collisions::LineLine(Vector2f(-10, m_GroundedCheckYOffset), Vector2f(10, m_GroundedCheckYOffset), Vector2f(), Vector2f());
+	collisions::LineLine(
+	Vector2f(
+		-(GROUNDED_CHECK_X_SIZE / 2),
+		GROUNDED_CHECK_Y_OFFSET
+	), 
+	Vector2f(
+		GROUNDED_CHECK_X_SIZE / 2,
+		GROUNDED_CHECK_Y_OFFSET
+	), Vector2f(), Vector2f());
 }

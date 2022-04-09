@@ -10,11 +10,12 @@ class Collider :
 {
 public:
     Collider(Entity* entity, Vector2f offset, Vector2f size);
-    ~Collider();
+    virtual ~Collider();
     void Initialize() override;
 
-    virtual void CollidingUpdate(Collider* other, float deltaTime);
-    virtual void NotCollidingUpdate(float deltaTime);
+    virtual void OnCollisionUpdate(Collider* other, float deltaTime);
+    virtual void OnCollisionEnter(Collider* other, float deltaTime);
+    virtual void OnCollisionExit(Collider* other, float deltaTime);
 
     void DrawCollider() const;
 
