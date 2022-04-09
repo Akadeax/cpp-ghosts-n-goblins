@@ -97,6 +97,21 @@
     <ClCompile Include="src\Scene.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\Collider.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsBody.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsHandler.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\collisions.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DetectionCollider.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -192,6 +207,21 @@
     <ClInclude Include="src\Scene.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="src\Collider.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicsBody.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicsHandler.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\collisions.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DetectionCollider.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Framework">
@@ -220,6 +250,9 @@
     </Filter>
     <Filter Include="Game\States">
       <UniqueIdentifier>{37bd6d01-26e2-43b3-8067-08b632de801f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Physics">
+      <UniqueIdentifier>{988c2aca-f9f4-4c60-8896-cbadb6f84657}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

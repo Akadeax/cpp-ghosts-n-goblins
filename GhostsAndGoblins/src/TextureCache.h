@@ -8,7 +8,7 @@ class TextureCache final
 public:
 	enum class Spritesheet
 	{
-		Player,
+		Player, Platform,
 	};
 	TextureCache();
 	TextureCache& operator=(const TextureCache& other) = delete;

@@ -1,6 +1,7 @@
 #pragma once
 
 class Entity;
+class PhysicsHandler;
 
 class Component
 {
@@ -21,5 +22,7 @@ protected:
 	Entity* m_pParent;
 
 	Component(Entity* parent);
+
+	PhysicsHandler* GetPhysicsHandler() const;
 };
 

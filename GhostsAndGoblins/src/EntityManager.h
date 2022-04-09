@@ -1,21 +1,27 @@
 #pragma once
 #include <list>
 
+class Scene;
 class Entity;
 class Component;
 
 class EntityManager
 {
 public:
-	EntityManager();
+	EntityManager(Scene* scene);
 	~EntityManager();
 
 	Entity* CreateEntity();
+	Entity* CreateEntity(std::string tag);
 	void DeleteEntity(Entity* entity);
 
 	void UpdateEntities(float deltaTime);
 	void DrawEntities() const;
+
+	Entity* GetEntityWithTag(std::string tag);
 private:
+	Scene* m_pScene;
+
 	std::list<Entity*> m_Entities;
 };
 
