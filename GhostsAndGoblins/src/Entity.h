@@ -11,7 +11,7 @@ class Scene;
 class Entity
 {
 public:
-	Entity(Scene* scene);
+	Entity(Scene* scene, int updatePriority);
 
 	Entity& operator=(const Entity& other) = delete;
 	Entity(const Entity& other) = delete;
@@ -34,8 +34,12 @@ public:
 	Scene* GetScene() const;
 	InputHandler* GetInputHandler() const;
 
+	int GetUpdatePriority() const;
+
 private:
 	Scene* m_pScene;
+
+	const int m_UpdatePriority;
 
 	bool m_IsActive = true;
 	std::list<Component*> m_Components;

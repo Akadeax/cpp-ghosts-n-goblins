@@ -19,14 +19,25 @@ EntityManager::~EntityManager()
 
 Entity* EntityManager::CreateEntity()
 {
-    return CreateEntity("");
+    return CreateEntity(0, "");
 }
 
-Entity* EntityManager::CreateEntity(std::string tag)
+Entity* EntityManager::CreateEntity(int updatePriority)
 {
-    Entity* newEnt = new Entity(m_pScene);
-    m_Entities.push_back(newEnt);
-    newEnt->SetTag(tag);
+    return CreateEntity(updatePriority, "");
+}
+
+Entity* EntityManager::CreateEntity(int updatePriority, std::string tag)
+{
+    Entity* newEnt = new Entity(m_pScene, updatePriority);
+
+    std::list<Entity*>::iterator it = m_Entities.begin();
+    while (it != m_Entities.end() && (*it)->GetUpdatePriority() < updatePriority)
+    {
+        it++;
+    }
+    m_Entities.insert(it, newEnt);
+
     return newEnt;
 }
 

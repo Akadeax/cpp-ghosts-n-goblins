@@ -7,9 +7,9 @@
 #include "Scene.h"
 #include "Game.h"
 
-Entity::Entity(Scene* scene)
+Entity::Entity(Scene* scene, int updatePriority)
+	: m_UpdatePriority{updatePriority}, m_pScene{scene}
 {
-	m_pScene = scene;
 }
 
 Entity::~Entity()
@@ -67,4 +67,9 @@ Scene* Entity::GetScene() const
 InputHandler* Entity::GetInputHandler() const
 {
 	return m_pScene->GetGame()->GetInputHandler();
+}
+
+int Entity::GetUpdatePriority() const
+{
+	return m_UpdatePriority;
 }

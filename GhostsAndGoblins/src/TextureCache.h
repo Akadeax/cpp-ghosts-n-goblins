@@ -6,11 +6,12 @@ class Texture;
 class TextureCache final
 {
 public:
+	TextureCache();
+
 	enum class Spritesheet
 	{
-		Player, Platform,
+		Player, Stage
 	};
-	TextureCache();
 	TextureCache& operator=(const TextureCache& other) = delete;
 	TextureCache(const TextureCache& other) = delete;
 	TextureCache(TextureCache&&) = delete;

@@ -6,7 +6,7 @@
 TextureCache::TextureCache()
 {
 	m_SheetLocations[Spritesheet::Player] = "resources/player.png";
-	m_SheetLocations[Spritesheet::Platform] = "resources/platform.png";
+	m_SheetLocations[Spritesheet::Stage] = "resources/stage.png";
 }
 
 TextureCache::~TextureCache()

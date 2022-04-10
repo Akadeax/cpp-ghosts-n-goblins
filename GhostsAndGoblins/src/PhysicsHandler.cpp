@@ -50,7 +50,7 @@ void PhysicsHandler::DebugDrawColliders() const
 	{
 		for (Collider* currentCollider : m_Colliders)
 		{
-			if (currentPhysicsBody->GetCollider() == currentCollider) continue;
+			if (currentPhysicsBody->GetParent() == currentCollider->GetParent()) continue;
 
 			Vector2f distance = currentPhysicsBody->GetCollider()->CalculateAABBDistanceTo(currentCollider);
 			Vector2f physicsBodyPos = currentPhysicsBody->GetTransform()->GetPosition();
@@ -112,7 +112,7 @@ void PhysicsHandler::ResolveCollisions(float deltaTime)
 	{
 		for (Collider* currentCollider : m_Colliders)
 		{
-			if (currentPhysicsBody->GetCollider() == currentCollider) continue;
+			if (currentPhysicsBody->GetParent() == currentCollider->GetParent()) continue;
 
 			// physics body and collider are colliding
 			if (currentPhysicsBody->GetCollider()->IsAABBCollidingWith(currentCollider, currentPhysicsBody->GetVelocity() * deltaTime))
@@ -158,7 +158,7 @@ void PhysicsHandler::NotifyColliders(float deltaTime)
 	{
 		for (Collider* collider : m_Colliders)
 		{
-			if (physicsBody->GetCollider() == collider) continue;
+			if (physicsBody->GetCollider()->GetParent() == collider->GetParent()) continue;
 
 			std::pair currentCollisionPair = std::make_pair(physicsBody, collider);
 

@@ -39,10 +39,10 @@ void Scene::Initialize()
 {
 	m_pEntityManager = new EntityManager(this);
 	m_pPhysicsHandler = new PhysicsHandler(this);
-	m_pCamera = new Camera(Point2f(-60, -60), 2.5f);
+	m_pCamera = new Camera(Vector2f(0, 0), 2.7f);
 
+	CreateStage();
 	CreatePlayer();
-	CreatePlatform();
 }
 
 void Scene::Update(float deltaTime)
@@ -83,8 +83,9 @@ Camera* Scene::GetCamera() const
 
 void Scene::CreatePlayer()
 {
-	m_pPlayer = m_pEntityManager->CreateEntity();
-	m_pPlayer->AddComponent(new Transform(m_pPlayer, Vector2f(150, 300)));
+	m_pPlayer = m_pEntityManager->CreateEntity(100, "player");
+	Transform* playerTransform = new Transform(m_pPlayer, Vector2f(50, 300));
+	m_pPlayer->AddComponent(playerTransform);
 
 	Texture* playerTexture = m_pGame->GetTextureCache()->GetTexture(TextureCache::Spritesheet::Player);
 	std::unordered_map<std::string, AnimatorState*> states = std::unordered_map<std::string, AnimatorState*>
@@ -112,35 +113,45 @@ void Scene::CreatePlayer()
 	m_pPlayer->AddComponent(new PhysicsBody(m_pPlayer));
 
 	m_pPlayer->Initialize();
+	m_pCamera->SetFollowTarget(playerTransform);
 }
 
-void Scene::CreatePlatform()
+void Scene::CreateStage()
 {
-	Texture* platformTexture = m_pGame->GetTextureCache()->GetTexture(TextureCache::Spritesheet::Platform);
+	Texture* stageTexture = m_pGame->GetTextureCache()->GetTexture(TextureCache::Spritesheet::Stage);
 
-
-	m_pPlatform = m_pEntityManager->CreateEntity();
-	Transform* platformTransform = new Transform(m_pPlatform, Vector2f(50, 0));
-	m_pPlatform->AddComponent(platformTransform);
-	platformTransform->SetScale(0.5f);
+	m_pStage = m_pEntityManager->CreateEntity(-100, "level");
+	m_pStage->AddComponent(new Transform(m_pStage, Vector2f(stageTexture->GetWidth() / 2, stageTexture->GetHeight() / 2)));
 	
-	m_pPlatform->AddComponent(new Renderer(m_pPlatform, platformTexture));
+	m_pStage->AddComponent(new Renderer(m_pStage, stageTexture));
 
-	m_pPlatform->AddComponent(new DetectionCollider(m_pPlatform, Vector2f(0, 0), Vector2f(125, 50)));
+	// Colliders are normally centered on the Entity, so we have to
+	// convert to bottom-left-based for easier collider assignment
+	std::vector<std::pair<Vector2f, Vector2f>> stageColliders
+	{
+		// level collision
+		std::pair { Vector2f(0, 0), Vector2f(1663, 39) },
+		std::pair { Vector2f(596, 105), Vector2f(536, 15) },
+		// gravestones
+		std::pair { Vector2f(47, 40), Vector2f(16, 16) },
+		std::pair { Vector2f(239, 40), Vector2f(16, 16)},
+		std::pair { Vector2f(415, 40), Vector2f(16, 16) },
+		std::pair { Vector2f(527, 40), Vector2f(16, 16) },
+		std::pair { Vector2f(751, 40), Vector2f(16, 16) },
+		std::pair { Vector2f(959, 40), Vector2f(16, 16) },
+		std::pair { Vector2f(1103, 40), Vector2f(16, 16) },
+		std::pair { Vector2f(1263, 40), Vector2f(16, 16) },
+		std::pair { Vector2f(1519, 40), Vector2f(16, 16) },
+		std::pair { Vector2f(1519, 40), Vector2f(16, 16) }
+	};
+	
+	Vector2f bottomLeft = Vector2f(-stageTexture->GetWidth() / 2, -stageTexture->GetHeight() / 2);
+	for (auto& pair : stageColliders)
+	{
+		Vector2f offset = Vector2f(bottomLeft.x + pair.first.x + pair.second.x / 2, bottomLeft.y + pair.first.y + pair.second.y / 2);
+		m_pStage->AddComponent(new DetectionCollider(m_pStage, offset, pair.second));
+	}
 
-	m_pPlatform->Initialize();
 
-
-	m_pPlatform2 = m_pEntityManager->CreateEntity();
-	Transform* platformTransform2 = new Transform(m_pPlatform2, Vector2f(130, 70));
-	m_pPlatform2->AddComponent(platformTransform2);
-	platformTransform2->SetScale(0.5f);
-
-	m_pPlatform2->AddComponent(new Renderer(m_pPlatform2, platformTexture));
-
-	Collider* platform2Coll = new DetectionCollider(m_pPlatform2, Vector2f(0, 0), Vector2f(125, 50));
-	platform2Coll->SetTrigger(false);
-	m_pPlatform2->AddComponent(platform2Coll);
-
-	m_pPlatform2->Initialize();
+	m_pStage->Initialize();
 }

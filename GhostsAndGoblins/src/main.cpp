@@ -1,4 +1,5 @@
 #include "pch.h"
+
 #include "Core.h"
 #include <ctime>
 
@@ -11,7 +12,7 @@ int main( int argc, char *argv[] )
 
 	StartHeapControl();
 
-	Core* pCore{ new Core{ Window{ "Ghosts n' Goblins", 500, 500 } } };
+	Core* pCore{ new Core{ Window{ "Ghosts n' Goblins", 900, 600 } } };
 	pCore->Run();
 	delete pCore;
 

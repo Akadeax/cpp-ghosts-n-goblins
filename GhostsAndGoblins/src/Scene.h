@@ -34,8 +34,8 @@ private:
 	Entity* m_pPlayer = nullptr;
 	void CreatePlayer();
 
-	Entity* m_pPlatform = nullptr;
+	Entity* m_pStage = nullptr;
 	Entity* m_pPlatform2 = nullptr;
-	void CreatePlatform();
+	void CreateStage();
 };
 

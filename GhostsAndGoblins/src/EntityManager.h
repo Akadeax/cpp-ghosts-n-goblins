@@ -12,7 +12,8 @@ public:
 	~EntityManager();
 
 	Entity* CreateEntity();
-	Entity* CreateEntity(std::string tag);
+	Entity* CreateEntity(int updatePriority);
+	Entity* CreateEntity(int updatePriority, std::string tag);
 	void DeleteEntity(Entity* entity);
 
 	void UpdateEntities(float deltaTime);
