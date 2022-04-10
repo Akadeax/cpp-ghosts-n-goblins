@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InputHandler.cpp" />
     <ClCompile Include="src\DetectionCollider.cpp" />
     <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\collisions.cpp" />
@@ -50,6 +51,7 @@
     <ClCompile Include="src\TimedTransition.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\InputHandler.h" />
     <ClInclude Include="src\DetectionCollider.h" />
     <ClInclude Include="src\Collider.h" />
     <ClInclude Include="src\collisions.h" />

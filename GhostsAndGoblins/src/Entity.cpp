@@ -4,6 +4,8 @@
 #include "Entity.h"
 #include "Component.h"
 #include <iostream>
+#include "Scene.h"
+#include "Game.h"
 
 Entity::Entity(Scene* scene)
 {
@@ -60,4 +62,9 @@ bool Entity::IsActive() const
 Scene* Entity::GetScene() const
 {
 	return m_pScene;
+}
+
+InputHandler* Entity::GetInputHandler() const
+{
+	return m_pScene->GetGame()->GetInputHandler();
 }

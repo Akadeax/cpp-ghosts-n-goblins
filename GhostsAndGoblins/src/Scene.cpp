@@ -61,6 +61,11 @@ void Scene::Draw() const
 	glPopMatrix();
 }
 
+Game* Scene::GetGame() const
+{
+	return m_pGame;
+}
+
 EntityManager* Scene::GetEntityManager() const
 {
 	return m_pEntityManager;

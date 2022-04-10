@@ -11,6 +11,7 @@
 #include "PhysicsHandler.h"
 #include "utils.h"
 #include "collisions.h"
+#include "InputHandler.h"
 
 Player::Player(Entity* entity)
 	: Component(entity)
@@ -29,19 +30,19 @@ void Player::Initialize()
 
 void Player::Update(float deltaTime)
 {
-	const int MOVE_SPEED = 50;
-	const Uint8* state = SDL_GetKeyboardState(nullptr);
-	if (state[SDL_SCANCODE_A] && m_IsGrounded)
+	if (GetParent()->GetInputHandler()->GetKeyPressed(InputHandler::Input::WalkLeft))
 	{
-		m_PhysicsBody->SetXVelocity(-MOVE_SPEED);
-		m_Animator->SetParameter("isWalking", true);
 		m_Animator->SetFlipX(true);
-	}
-	else if (state[SDL_SCANCODE_D] && m_IsGrounded)
-	{
-		m_PhysicsBody->SetXVelocity(MOVE_SPEED);
 		m_Animator->SetParameter("isWalking", true);
+		if (m_IsGrounded)
+		m_PhysicsBody->SetXVelocity(-m_MoveSpeed);
+	}
+	else if (GetParent()->GetInputHandler()->GetKeyPressed(InputHandler::Input::WalkRight))
+	{
 		m_Animator->SetFlipX(false);
+		m_Animator->SetParameter("isWalking", true);
+		if(m_IsGrounded)
+		m_PhysicsBody->SetXVelocity(m_MoveSpeed);
 	}
 	else if(m_IsGrounded)
 	{
@@ -50,13 +51,10 @@ void Player::Update(float deltaTime)
 	}
 
 	// Jump
-	if (!m_SpaceLastFrame && state[SDL_SCANCODE_SPACE] && m_IsGrounded)
+	if (GetParent()->GetInputHandler()->GetKeyDown(InputHandler::Input::Jump) && m_IsGrounded)
 	{
-		m_PhysicsBody->AddVelocity(Vector2f(0, 150));
+		m_PhysicsBody->AddVelocity(Vector2f(0, m_JumpStrength));
 	}
-	// TODO: Rework
-	m_SpaceLastFrame = state[SDL_SCANCODE_SPACE];
-
 
 	// Apply gravity
 	if (!m_IsGrounded)
