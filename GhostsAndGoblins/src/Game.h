@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include "InputHandler.h"
 
 class Entity;
 class Scene;
@@ -26,11 +27,13 @@ public:
 	void ProcessMouseUpEvent(const SDL_MouseButtonEvent& e);
 
 	TextureCache* GetTextureCache();
+	InputHandler* GetInputHandler();
 
 private:
 	// DATA MEMBERS
 	const Window m_Window;
 	TextureCache* m_pTextureCache;
+	InputHandler* m_pInputHandler;
 	Scene* m_pScene;
 
 	// FUNCTIONS

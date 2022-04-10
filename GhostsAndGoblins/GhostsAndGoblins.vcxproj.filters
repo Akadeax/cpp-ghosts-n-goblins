@@ -106,10 +106,13 @@
     <ClCompile Include="src\PhysicsHandler.cpp">
       <Filter>Engine\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="src\collisions.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="src\DetectionCollider.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\collisions.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputHandler.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -216,10 +219,13 @@
     <ClInclude Include="src\PhysicsHandler.h">
       <Filter>Engine\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="src\collisions.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="src\DetectionCollider.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\collisions.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputHandler.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

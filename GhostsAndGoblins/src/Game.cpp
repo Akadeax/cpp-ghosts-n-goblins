@@ -5,7 +5,7 @@
 #include "Entity.h"
 #include "TextureCache.h"
 #include "Scene.h"
-
+#include  "InputHandler.h"
 
 Game::Game(const Window& window) 
 	:m_Window{window}
@@ -21,6 +21,7 @@ Game::~Game()
 void Game::Initialize()
 {
 	m_pTextureCache = new TextureCache();
+	m_pInputHandler = new InputHandler();
 	m_pScene = new Scene(this);
 
 	m_pScene->Initialize();
@@ -30,11 +31,13 @@ void Game::Cleanup()
 {
 	delete m_pTextureCache;
 	delete m_pScene;
+	delete m_pInputHandler;
 }
 
 void Game::Update(float deltaTime)
 {
 	m_pScene->Update(deltaTime);
+	m_pInputHandler->Update();
 }
 
 void Game::Draw() const
@@ -109,6 +112,11 @@ void Game::ProcessMouseUpEvent(const SDL_MouseButtonEvent& e)
 TextureCache* Game::GetTextureCache()
 {
 	return m_pTextureCache;
+}
+
+InputHandler* Game::GetInputHandler()
+{
+	return m_pInputHandler;
 }
 
 void Game::ClearBackground() const

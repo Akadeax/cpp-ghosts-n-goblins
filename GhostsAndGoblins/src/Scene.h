@@ -17,6 +17,7 @@ public:
 	void Update(float deltaTime);
 	void Draw() const;
 
+	Game* GetGame() const;
 	EntityManager* GetEntityManager() const;
 	PhysicsHandler* GetPhysicsHandler() const;
 	Camera* GetCamera() const;

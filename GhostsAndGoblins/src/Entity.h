@@ -3,6 +3,7 @@
 #include <iostream>
 #include <list>
 #include "Component.h"
+#include "InputHandler.h"
 
 class EntityManager;
 class Scene;
@@ -31,6 +32,7 @@ public:
 	bool IsActive() const;
 
 	Scene* GetScene() const;
+	InputHandler* GetInputHandler() const;
 
 private:
 	Scene* m_pScene;
@@ -39,10 +41,9 @@ private:
 	std::list<Component*> m_Components;
 	std::string m_Tag;
 
+	// Allow EntityManager to manage lifecycle of Entities
 	Entity();
 	virtual ~Entity();
-
-	// Allow EntityManager to manage lifecycle of Entities
 	friend class EntityManager;
 };
 
