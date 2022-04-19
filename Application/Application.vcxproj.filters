@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{b0ebf9dc-c1db-4f87-8536-133bfad4159c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelScene.cpp" />
+    <ClCompile Include="GhostsAndGoblins.cpp" />
+    <ClCompile Include="MoveZoomCamera.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LevelScene.h" />
+    <ClInclude Include="GhostsAndGoblins.h" />
+    <ClInclude Include="MoveZoomCamera.h" />
+  </ItemGroup>
+</Project>
