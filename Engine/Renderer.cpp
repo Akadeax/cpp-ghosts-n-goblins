@@ -8,13 +8,7 @@
 #include "Texture.h"
 
 Renderer::Renderer(Entity* parent, Texture* texture)
-	: Component(parent)
-{
-	m_pTexture = texture;
-
-}
-
-Renderer::~Renderer()
+	: Component(parent), m_pTexture{texture}
 {
 }
 
@@ -26,7 +20,6 @@ void Renderer::Initialize()
 
 void Renderer::Draw() const
 {
-	glRotatef(m_pParentTransform->GetRotation(), 0.f, 0.f, 1.f);
 
 	glTranslatef(m_pParentTransform->GetPosition().x, m_pParentTransform->GetPosition().y, 0);
 
@@ -37,12 +30,13 @@ void Renderer::Draw() const
 		0
 	);
 
+	glRotatef(m_pParentTransform->GetRotation(), 0.f, 0.f, 1.f);
+
 	DrawSprite();
 }
 
 void Renderer::DrawSprite() const
 {
-	const Transform* transform = m_pParentTransform;
 	m_pTexture->DrawCentered(Rectf(0, 0, m_pTexture->GetWidth(), m_pTexture->GetHeight()));
 }
 

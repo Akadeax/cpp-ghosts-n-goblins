@@ -8,13 +8,12 @@ class Transform final
 	: public Component
 {
 public:
-	Transform(Entity* parent, Vector2f startingPos);
-	Transform& operator=(const Transform& other) = delete;
-	Transform(const Transform& other) = delete;
-	Transform(Transform&&) = delete;
-	Transform& operator=(Transform&&) = delete;
-
-	~Transform();
+	explicit Transform(Entity* parent, Vector2f startingPos);
+	Transform& operator=(const Transform& rhs) = delete;
+	Transform& operator=(Transform&& rhs) = delete;
+	Transform(const Transform& rhs) = delete;
+	Transform(Transform&& rhs) = delete;
+	~Transform() = default;
 
 	Vector2f GetPosition() const;
 

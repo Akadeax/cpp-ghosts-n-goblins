@@ -5,12 +5,12 @@ class Game;
 class Core final
 {
 public:
-	explicit Core( const Window& window );
-	Core( const Core& other ) = delete;
-	Core& operator=( const Core& other ) = delete;
-	Core(Core&& other) = delete;
-	Core& operator=(Core&& other) = delete;
-	~Core( );
+	explicit Core(const Window& window);
+	Core& operator=(const Core& rhs) = delete;
+	Core& operator=(Core&& rhs) = delete;
+	Core(const Core& rhs) = delete;
+	Core(Core&& rhs) = delete;
+	~Core();
 
 	void Run(Game* game);
 	void ClearBackground( );

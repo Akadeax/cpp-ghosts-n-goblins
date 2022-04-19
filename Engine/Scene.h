@@ -8,12 +8,15 @@ class Camera;
 class Scene
 {
 public:
-	explicit Scene(Game* game, Camera* camera);
-	Scene(const Scene& other) = delete;
-	Scene& operator=(const Scene& other) = delete;
-	Scene(Scene&& other) = delete;
-	Scene& operator=(Scene&& other) = delete;
+	explicit Scene() = default;
+	Scene& operator=(const Scene& rhs) = delete;
+	Scene& operator=(Scene&& rhs) = delete;
+	Scene(const Scene& rhs) = delete;
+	Scene(Scene&& rhs) = delete;
 	virtual ~Scene();
+
+	void Initialize(Game* game, Camera* camera);
+	virtual void InitializeScene() = 0;
 
 	void Update(float deltaTime);
 	virtual void UpdateScene(float deltaTime) = 0;
@@ -22,11 +25,12 @@ public:
 	virtual void DrawUI() const = 0;
 	virtual void DrawScene() const = 0;
 
+	Game* GetGame() const;
 	Camera* GetCamera() const;
 
 protected:
-	Game* m_pGame;
+	Game* m_pGame{ nullptr };
 
-	EntityKeeper* m_pEntityKeeper;
-	Camera* m_pCamera;
+	EntityKeeper* m_pEntityKeeper{ nullptr };
+	Camera* m_pCamera{ nullptr };
 };

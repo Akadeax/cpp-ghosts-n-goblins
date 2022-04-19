@@ -5,12 +5,7 @@
 
 
 Transform::Transform(Entity* parent, Vector2f startingPos)
-	: Component(parent)
-{
-	m_Position = startingPos;
-}
-
-Transform::~Transform()
+	: Component(parent), m_Position{startingPos}
 {
 }
 

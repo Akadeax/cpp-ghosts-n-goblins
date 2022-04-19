@@ -3,14 +3,6 @@
 #include "InputHandler.h"
 #include <iostream>
 
-InputHandler::InputHandler()
-{
-}
-
-InputHandler::~InputHandler()
-{
-}
-
 void InputHandler::AddKey(std::string inputName, SDL_Scancode scancode)
 {
 	m_Keys[inputName] = scancode;

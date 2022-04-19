@@ -3,12 +3,12 @@
 class Camera
 {
 public:
-	Camera(float initialScale);
-	Camera(const Camera& other) = delete;
-	Camera& operator=(const Camera& other) = delete;
-	Camera(Camera&& other) = delete;
-	Camera& operator=(Camera&& other) = delete;
-	virtual ~Camera();
+	explicit Camera(float initialScale);
+	Camera& operator=(const Camera& rhs) = delete;
+	Camera& operator=(Camera&& rhs) = delete;
+	Camera(const Camera& rhs) = delete;
+	Camera(Camera&& rhs) = delete;
+	virtual ~Camera() = default;
 
 	Vector2f GetPosition() const;
 	void SetPosition(Vector2f newPos);

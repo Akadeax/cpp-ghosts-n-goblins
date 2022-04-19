@@ -34,17 +34,18 @@ void Collider::Update(float deltaTime)
 	for (size_t i{ 0 }; i < m_VerticesAmount; i++)
 	{
 		Vector2f v = m_RelativeVertices[i];
-		float newX = rotCos * v.x - rotSin * v.y;
-		float newY = rotSin * v.x + rotCos * v.y;
+		float newX = (rotCos * v.x - rotSin * v.y) + m_pTransform->GetPosition().x;
+		float newY = (rotSin * v.x + rotCos * v.y) + m_pTransform->GetPosition().y;
 		m_TransformedVertices[i] = Vector2f(newX, newY);
 	}
 }
 
 void Collider::Draw() const
 {
+	utils::SetColor(Color4f(1, 0, 0, 1));
 	size_t verticesAmt = m_TransformedVertices.size();
 	for (int i{ 0 }; i < verticesAmt; i++)
 	{
-		utils::DrawLine(m_TransformedVertices[i].ToPoint2f(), m_TransformedVertices[(i + 1) % verticesAmt].ToPoint2f(), 1.f);
+		utils::DrawPolygon(m_TransformedVertices, true, 3.f);
 	}
 }

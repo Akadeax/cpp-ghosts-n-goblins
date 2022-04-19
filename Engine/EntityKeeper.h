@@ -6,14 +6,14 @@ class Scene;
 class Entity;
 class Component;
 
-class EntityKeeper
+class EntityKeeper final
 {
 public:
 	explicit EntityKeeper(Scene* scene);
-	EntityKeeper& operator=(const EntityKeeper& other) = delete;
-	EntityKeeper(const EntityKeeper& other) = delete;
-	EntityKeeper(EntityKeeper&&) = delete;
-	EntityKeeper& operator=(EntityKeeper&&) = delete;
+	EntityKeeper& operator=(const EntityKeeper& rhs) = delete;
+	EntityKeeper& operator=(EntityKeeper&& rhs) = delete;
+	EntityKeeper(const EntityKeeper& rhs) = delete;
+	EntityKeeper(EntityKeeper&& rhs) = delete;
 	~EntityKeeper();
 
 	Entity* CreateEntity();

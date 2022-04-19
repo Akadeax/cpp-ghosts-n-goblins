@@ -9,12 +9,12 @@ class Renderer
 	: public Component
 {
 public:
-	Renderer(Entity* parent, Texture* texture);
-	Renderer& operator=(const Renderer& other) = delete;
-	Renderer(const Renderer& other) = delete;
-	Renderer(Renderer&&) = delete;
-	Renderer& operator=(Renderer&&) = delete;
-	virtual ~Renderer();
+	explicit Renderer(Entity* parent, Texture* texture);
+	Renderer& operator=(const Renderer& rhs) = delete;
+	Renderer& operator=(Renderer&& rhs) = delete;
+	Renderer(const Renderer& rhs) = delete;
+	Renderer(Renderer&& rhs) = delete;
+	virtual ~Renderer() = default;
 
 	void Initialize() override;
 	// general draw call that applies to all renderer subclasses

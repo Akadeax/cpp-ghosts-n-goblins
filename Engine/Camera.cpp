@@ -9,10 +9,6 @@ Camera::Camera(float initialScale)
 {
 }
 
-Camera::~Camera()
-{
-}
-
 Vector2f Camera::GetPosition() const
 {
 	return m_Position;

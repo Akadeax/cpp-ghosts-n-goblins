@@ -5,8 +5,12 @@ class GhostsAndGoblins final :
     public Game
 {
 public:
-    GhostsAndGoblins(const Window& window);
-    ~GhostsAndGoblins();
+    explicit GhostsAndGoblins(const Window& window);
+	GhostsAndGoblins& operator=(const GhostsAndGoblins& rhs) = delete;
+	GhostsAndGoblins& operator=(GhostsAndGoblins&& rhs) = delete;
+	GhostsAndGoblins(const GhostsAndGoblins& rhs) = delete;
+	GhostsAndGoblins(GhostsAndGoblins&& rhs) = delete;
+	virtual ~GhostsAndGoblins() = default;
 
     void UpdateGame(float deltaTime) override;
 };

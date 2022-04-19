@@ -8,8 +8,9 @@
 #include <iostream>
 
 Game::Game(const Window& window, Scene* scene)
-	: m_Window(window), m_pScene{scene}, m_pInputHandler{new InputHandler()}
+	: m_Window(window), m_pInputHandler{ new InputHandler() }, m_pScene{scene}
 {
+	m_pScene->Initialize(this, nullptr);
 }
 
 Game::~Game()

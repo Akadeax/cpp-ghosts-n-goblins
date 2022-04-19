@@ -6,10 +6,6 @@ Component::Component(Entity* parent)
 {
 }
 
-Component::~Component()
-{
-}
-
 Entity* Component::GetParent() const
 {
 	return m_pParent;

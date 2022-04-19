@@ -6,12 +6,12 @@ class PhysicsHandler;
 class Component
 {
 public:
-	Component(Entity* parent);
-	Component& operator=(const Component& other) = delete;
-	Component(const Component& other) = delete;
-	Component(Component&&) = delete;
-	Component& operator=(Component&&) = delete;
-	virtual ~Component();
+	explicit Component(Entity* parent);
+	Component& operator=(const Component& rhs) = delete;
+	Component& operator=(Component&& rhs) = delete;
+	Component(const Component& rhs) = delete;
+	Component(Component&& rhs) = delete;
+	virtual ~Component() = default;
 
 	Entity* GetParent() const;
 

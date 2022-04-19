@@ -246,6 +246,18 @@ void utils::FillArc(const Point2f& center, float radX, float radY, float fromAng
 	FillArc(center.x, center.y, radX, radY, fromAngle, tillAngle);
 }
 
+void utils::DrawPolygon(const std::vector<Vector2f>& vertices, bool closed, float lineWidth)
+{
+	const size_t& vertexAmount = vertices.size();
+	std::vector<Point2f> convertedToPoints = std::vector<Point2f>(vertexAmount);
+	for (size_t i{ 0 }; i < vertexAmount; i++)
+	{
+		convertedToPoints[i] = vertices[i].ToPoint2f();
+	}
+
+	DrawPolygon(convertedToPoints, closed, lineWidth);
+}
+
 void utils::DrawPolygon(const std::vector<Point2f>& vertices, bool closed, float lineWidth)
 {
 	DrawPolygon(vertices.data(), vertices.size(), closed, lineWidth);

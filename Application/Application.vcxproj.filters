@@ -12,10 +12,12 @@
     <ClCompile Include="LevelScene.cpp" />
     <ClCompile Include="GhostsAndGoblins.cpp" />
     <ClCompile Include="MoveZoomCamera.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LevelScene.h" />
     <ClInclude Include="GhostsAndGoblins.h" />
     <ClInclude Include="MoveZoomCamera.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
 </Project>

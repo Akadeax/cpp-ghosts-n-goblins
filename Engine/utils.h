@@ -45,6 +45,7 @@ namespace utils
 	void FillArc(const Point2f& center, float radX, float radY, float fromAngle, float tillAngle);
 
 	void DrawPolygon(const std::vector<Point2f>& vertices, bool closed = true, float lineWidth = 1.0f);
+	void DrawPolygon(const std::vector<Vector2f>& vertices, bool closed = true, float lineWidth = 1.0f);
 	void DrawPolygon(const Point2f* pVertices, size_t nrVertices, bool closed = true, float lineWidth = 1.0f);
 	void FillPolygon(const std::vector<Point2f>& vertices);
 	void FillPolygon(const Point2f* pVertices, size_t nrVertices);

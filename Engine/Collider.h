@@ -9,7 +9,13 @@ class Collider
 	: public Component
 {
 public:
-	Collider(Entity* parent, std::vector<Vector2f> vertices);
+	explicit Collider(Entity* parent, std::vector<Vector2f> vertices);
+	Collider& operator=(const Collider& rhs) = delete;
+	Collider& operator=(Collider&& rhs) = delete;
+	Collider(const Collider& rhs) = delete;
+	Collider(Collider&& rhs) = delete;
+	virtual ~Collider() = default;
+
 	void Initialize() override;
 
 	void Update(float deltaTime) override;

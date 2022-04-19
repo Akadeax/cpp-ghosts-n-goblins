@@ -11,10 +11,10 @@ class Scene;
 class Entity
 {
 public:
-	Entity& operator=(const Entity& other) = delete;
-	Entity(const Entity& other) = delete;
-	Entity(Entity&&) = delete;
-	Entity& operator=(Entity&&) = delete;
+	Entity& operator=(const Entity& rhs) = delete;
+	Entity& operator=(Entity&& rhs) = delete;
+	Entity(const Entity& rhs) = delete;
+	Entity(Entity&& rhs) = delete;
 
 	template<typename TComponent>
 	TComponent* GetComponent() const;
@@ -42,7 +42,7 @@ private:
 	std::string m_Tag;
 
 	// Allow EntityKeeper to manage lifecycle of Entities
-	Entity(Scene* scene, int updatePriority);
+	explicit Entity(Scene* scene, int updatePriority);
 	virtual ~Entity();
 	friend class EntityKeeper;
 };

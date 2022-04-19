@@ -7,8 +7,14 @@ class LevelScene final
 	: public Scene
 {
 public:
-	LevelScene(Game* game);
-	~LevelScene();
+	explicit LevelScene() = default;
+	LevelScene& operator=(const LevelScene& rhs) = delete;
+	LevelScene& operator=(LevelScene&& rhs) = delete;
+	LevelScene(const LevelScene& rhs) = delete;
+	LevelScene(LevelScene&& rhs) = delete;
+	virtual ~LevelScene() = default;
+
+	void InitializeScene() override;
 
 	void UpdateScene(float deltaTime) override;
 
@@ -16,6 +22,6 @@ public:
 	void DrawScene() const override;
 
 private:
-	Entity* m_pTest;
-	Entity* m_pBox;
+	Entity* m_pTest{ nullptr };
+	Entity* m_pBox{ nullptr };
 };

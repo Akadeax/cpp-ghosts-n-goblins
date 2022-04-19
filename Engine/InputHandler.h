@@ -7,12 +7,12 @@
 class InputHandler
 {
 public:
-	explicit InputHandler();
-	InputHandler(const InputHandler& other) = delete;
-	InputHandler& operator=(const InputHandler& other) = delete;
-	InputHandler(InputHandler&& other) = delete;
-	InputHandler& operator=(InputHandler&& other) = delete;
-	~InputHandler();
+	explicit InputHandler() = default;
+	InputHandler& operator=(const InputHandler& rhs) = delete;
+	InputHandler& operator=(InputHandler&& rhs) = delete;
+	InputHandler(const InputHandler& rhs) = delete;
+	InputHandler(InputHandler&& rhs) = delete;
+	virtual ~InputHandler() = default;
 
 	void AddKey(std::string inputName, SDL_Scancode scancode);
 

@@ -128,9 +128,6 @@ void Core::Run(Game* game)
 		return;
 	}
 
-	// Create the Game object
-	Game* pGame{ game };
-
 	// Main loop flag
 	bool quit{ false };
 
@@ -167,19 +164,20 @@ void Core::Run(Game* game)
 			// Prevent jumps in time caused by break points
 			elapsedSeconds = std::min(elapsedSeconds, m_MaxElapsedSeconds);
 
+
 			ClearBackground();
 
-			// Call the Game object 's Update function, using time in seconds (!)
-			pGame->Update(elapsedSeconds);
-
 			// Draw in the back buffer
-			pGame->Draw();
+			game->Draw();
+
+			// Call the Game object 's Update function, using time in seconds (!)
+			game->Update(elapsedSeconds);
 
 			// Update screen: swap back and front buffer
 			SDL_GL_SwapWindow(m_pWindow);
 		}
 	}
-	delete pGame;
+	delete game;
 }
 
 void Core::ClearBackground()

@@ -9,10 +9,10 @@ class Game
 {
 public:
 	explicit Game(const Window& window, Scene* scene);
-	Game(const Game& other) = delete;
-	Game& operator=(const Game& other) = delete;
-	Game(Game&& other) = delete;
-	Game& operator=(Game&& other) = delete;
+	Game& operator=(const Game& rhs) = delete;
+	Game& operator=(Game&& rhs) = delete;
+	Game(const Game& rhs) = delete;
+	Game(Game&& rhs) = delete;
 	~Game();
 
 	void Update(float deltaTime);
