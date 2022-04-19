@@ -13,6 +13,9 @@
     <Filter Include="ECS\Components">
       <UniqueIdentifier>{cf8fde76-2a7b-4e4b-a7c0-3c9fac69f6d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{340eaa41-ac5b-47cc-811b-0a65480407fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InputHandler.cpp" />
@@ -58,6 +61,9 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>ECS\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputHandler.h" />
@@ -102,6 +108,9 @@
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

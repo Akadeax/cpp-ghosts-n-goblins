@@ -6,6 +6,7 @@
 #include <EntityKeeper.h>
 #include <Transform.h>
 #include <Renderer.h>
+#include <Collider.h>
 #include <Texture.h>
 
 #include "LevelScene.h"
@@ -21,7 +22,22 @@ LevelScene::LevelScene(Game* game)
 	m_pTest->AddComponent(new Transform(m_pTest, Vector2f()));
 	Texture* testTex = new Texture("resources/test.png");
 	m_pTest->AddComponent(new Renderer(m_pTest, testTex));
+
+	m_pTest->AddComponent(new Collider(m_pTest, std::vector<Vector2f>{
+		Vector2f(-16, -16),
+		Vector2f(-16, 16),
+		Vector2f(16, 16),
+		Vector2f(16, -16)
+	}));
+
 	m_pTest->Initialize();
+
+
+
+	m_pBox = m_pEntityKeeper->CreateEntity();
+	m_pBox->AddComponent(new Transform(m_pBox, Vector2f(-50, -50)));
+	Texture* boxTex = new Texture("resources/box.png");
+	m_pTest->AddComponent(new Renderer(m_pTest, testTex));
 }
 
 LevelScene::~LevelScene()
@@ -30,16 +46,13 @@ LevelScene::~LevelScene()
 
 void LevelScene::UpdateScene(float deltaTime)
 {
+	m_pTest->GetComponent<Transform>()->Rotate(25 * deltaTime);
 }
 
 void LevelScene::DrawUI() const
 {
-	utils::DrawRect(25, 25, 100, 100, 5.f);
-	utils::DrawEllipse(Ellipsef(75, 75, 30, 30), 5.f);
 }
 
 void LevelScene::DrawScene() const
 {
-	utils::SetColor(Color4f(1, 1, 1, 1));
-	utils::DrawLine(Vector2f(20, 20), 1.f);
 }

@@ -27,16 +27,11 @@ public:
 	bool GetFlipY() const;
 	void SetFlipY(bool newState);
 
-	float GetRenderScale() const;
-	void SetRenderScale(float newScale);
-
 protected:
 	Texture* m_pTexture;
 	Transform* m_pParentTransform = nullptr;
 
 	bool m_FlipX = false;
 	bool m_FlipY = false;
-
-	float m_RenderScale = 1.f;
 };
 

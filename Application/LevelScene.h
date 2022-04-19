@@ -17,4 +17,5 @@ public:
 
 private:
 	Entity* m_pTest;
+	Entity* m_pBox;
 };

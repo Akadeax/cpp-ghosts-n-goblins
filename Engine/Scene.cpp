@@ -37,3 +37,8 @@ void Scene::Draw() const
 	DrawUI();
 	glPopMatrix();
 }
+
+Camera* Scene::GetCamera() const
+{
+	return m_pCamera;
+}

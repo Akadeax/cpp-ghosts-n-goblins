@@ -22,6 +22,8 @@ public:
 	virtual void DrawUI() const = 0;
 	virtual void DrawScene() const = 0;
 
+	Camera* GetCamera() const;
+
 protected:
 	Game* m_pGame;
 

@@ -26,11 +26,14 @@ void Renderer::Initialize()
 
 void Renderer::Draw() const
 {
+	glRotatef(m_pParentTransform->GetRotation(), 0.f, 0.f, 1.f);
 
 	glTranslatef(m_pParentTransform->GetPosition().x, m_pParentTransform->GetPosition().y, 0);
+
+	float renderScale = m_pParentTransform->GetScale();
 	glScalef(
-		m_FlipX ? -m_RenderScale : m_RenderScale,
-		m_FlipY ? -m_RenderScale : m_RenderScale,
+		m_FlipX ? -renderScale : renderScale,
+		m_FlipY ? -renderScale : renderScale,
 		0
 	);
 
@@ -62,15 +65,3 @@ void Renderer::SetFlipY(bool newState)
 {
 	m_FlipY = newState;
 }
-
-float Renderer::GetRenderScale() const
-{
-	return m_RenderScale;
-}
-
-void Renderer::SetRenderScale(float newScale)
-{
-	m_RenderScale = newScale;
-}
-
-

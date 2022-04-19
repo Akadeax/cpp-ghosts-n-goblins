@@ -21,6 +21,15 @@ public:
 	void SetPosition(Vector2f newPos);
 	void MovePosition(Vector2f moveVec);
 
+	float GetScale() const;
+	void SetScale(float newScale);
+
+	float GetRotation() const;
+	void SetRotation(float newRotation);
+	void Rotate(float rotateBy);
+
 private:
 	Vector2f m_Position = Vector2f(0, 0);
+	float m_Scale = 1.f;
+	float m_RotationAngleDegrees = 0.f;
 };
