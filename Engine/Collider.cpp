@@ -9,12 +9,10 @@
 #include <cassert>
 
 Collider::Collider(Entity* parent, std::vector<Vector2f> vertices)
-	: Component(parent)
+	: Component(parent), m_BaseVertices{vertices}
 {
 	assert(vertices.size() > 2 && "Not enough vertices given for collider");
 	m_VerticesAmount = vertices.size();
-
-	m_RelativeVertices = vertices;
 	m_TransformedVertices = std::vector<Vector2f>(m_VerticesAmount);
 }
 
@@ -33,9 +31,17 @@ void Collider::Update(float deltaTime)
 
 	for (size_t i{ 0 }; i < m_VerticesAmount; i++)
 	{
-		Vector2f v = m_RelativeVertices[i];
-		float newX = (rotCos * v.x - rotSin * v.y) + m_pTransform->GetPosition().x;
-		float newY = (rotSin * v.x + rotCos * v.y) + m_pTransform->GetPosition().y;
+		Vector2f base = m_BaseVertices[i];
+
+		// Scale
+		Vector2f scaled = base * m_pTransform->GetScale();
+		// Rotate
+		float newX = rotCos * scaled.x - rotSin * scaled.y;
+		float newY = rotSin * scaled.x + rotCos * scaled.y;
+		// Translate
+		newX += m_pTransform->GetPosition().x;
+		newY += m_pTransform->GetPosition().y;
+
 		m_TransformedVertices[i] = Vector2f(newX, newY);
 	}
 }

@@ -19,25 +19,24 @@ void LevelScene::InitializeScene()
 	// Center camera at start
 	m_pCamera->MovePosition(Vector2f(-450, -300));
 
-	m_pTest = m_pEntityKeeper->CreateEntity();
-	m_pTest->AddComponent(new Transform(m_pTest, Vector2f(20, 20)));
+	m_pPlayer = m_pEntityKeeper->CreateEntity(100);
+	m_pPlayer->AddComponent(new Transform(m_pPlayer, Vector2f(20, 20)));
 	Texture* testTex = new Texture("resources/test.png");
-	m_pTest->AddComponent(new Renderer(m_pTest, testTex));
+	m_pPlayer->AddComponent(new Renderer(m_pPlayer, testTex));
 
 
-	m_pTest->AddComponent(new Player(m_pTest));
-	m_pTest->AddComponent(new Collider(m_pTest, std::vector<Vector2f>{
+	m_pPlayer->AddComponent(new Player(m_pPlayer));
+	m_pPlayer->AddComponent(new Collider(m_pPlayer, std::vector<Vector2f>{
 		Vector2f(-16, -16),
 			Vector2f(-16, 16),
 			Vector2f(16, 16),
 			Vector2f(16, -16)
 	}));
 
-	m_pTest->Initialize();
+	m_pPlayer->Initialize();
 
 
-
-	m_pBox = m_pEntityKeeper->CreateEntity();
+	m_pBox = m_pEntityKeeper->CreateEntity(0);
 	m_pBox->AddComponent(new Transform(m_pBox, Vector2f(-50, -50)));
 	Texture* boxTex = new Texture("resources/box.png");
 	m_pBox->AddComponent(new Renderer(m_pBox, boxTex));
@@ -54,8 +53,7 @@ void LevelScene::InitializeScene()
 
 void LevelScene::UpdateScene(float deltaTime)
 {
-	std::cout << m_pTest->GetComponent<Transform>()->GetRotation() << std::endl;
-	m_pTest->GetComponent<Transform>()->Rotate(75 * deltaTime);
+	m_pPlayer->GetComponent<Transform>()->Rotate(75 * deltaTime);
 }
 
 void LevelScene::DrawUI() const

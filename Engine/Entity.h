@@ -23,13 +23,19 @@ public:
 
 	void Initialize();
 
-	void SetTag(std::string newTag);
+	// Non-Unique Identifiers that can be used to filter Entities
 	std::string GetTag() const;
+	void SetTag(std::string newTag);
 
+	// Inactive Entities are neither updated nor drawn
 	void SetActive(bool newState);
 	bool IsActive() const;
 
 	Scene* GetScene() const;
+
+	// Entities and all components within them are updated
+	// from highest update priority to lowest, so this value
+	// determines for example like render priority (!)
 	int GetUpdatePriority() const;
 
 private:
@@ -48,6 +54,7 @@ private:
 };
 
 // Definition in header because templates are... interesting
+// Fetches Component of type TComponent if this Entity has it
 template<typename TComponent>
 TComponent* Entity::GetComponent() const
 {

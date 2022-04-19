@@ -22,6 +22,6 @@ public:
 	void DrawScene() const override;
 
 private:
-	Entity* m_pTest{ nullptr };
+	Entity* m_pPlayer{ nullptr };
 	Entity* m_pBox{ nullptr };
 };

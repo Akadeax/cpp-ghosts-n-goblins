@@ -5,7 +5,7 @@
 
 class Transform;
 
-class Collider
+class Collider final
 	: public Component
 {
 public:
@@ -25,7 +25,10 @@ private:
 	Transform* m_pTransform{ nullptr };
 
 	size_t m_VerticesAmount;
-	std::vector<Vector2f> m_RelativeVertices;
+	// Non-transformed vertices in relation to the
+	// transforms position
+	const std::vector<Vector2f> m_BaseVertices;
+	// Computed transformed vertices (translated and rotated!)
 	std::vector<Vector2f> m_TransformedVertices;
 };
 
