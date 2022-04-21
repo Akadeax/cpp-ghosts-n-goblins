@@ -1,12 +1,14 @@
 #include "pch.h"
 
+#include <cassert>
+
+#include "PhysicsHandler.h"
 #include "Collider.h"
 #include "utils.h"
 #include "Entity.h"
 #include "Transform.h"
 #include "Scene.h"
 #include "Camera.h"
-#include <cassert>
 
 Collider::Collider(Entity* parent, std::vector<Vector2f> vertices)
 	: Component(parent), m_BaseVertices{vertices}
@@ -16,11 +18,21 @@ Collider::Collider(Entity* parent, std::vector<Vector2f> vertices)
 	m_TransformedVertices = std::vector<Vector2f>(m_VerticesAmount);
 }
 
+Collider::~Collider()
+{
+	GetPhysicsHandler()->RemoveCollider(this);
+}
+
 void Collider::Initialize()
 {
 	m_pTransform = m_pParent->GetComponent<Transform>();
 	assert(m_pTransform != nullptr && "Entity has collider but no transform");
+	GetPhysicsHandler()->AddCollider(this);
 }
+
+void Collider::OnCollisionUpdate(Collider* other, float deltaTime) { }
+void Collider::OnCollisionEnter(Collider* other, float deltaTime) { }
+void Collider::OnCollisionExit(Collider* other, float deltaTime) { }
 
 void Collider::Update(float deltaTime)
 {
@@ -52,6 +64,31 @@ void Collider::Draw() const
 	size_t verticesAmt = m_TransformedVertices.size();
 	for (int i{ 0 }; i < verticesAmt; i++)
 	{
-		utils::DrawPolygon(m_TransformedVertices, true, 3.f);
+		utils::DrawPolygon(m_TransformedVertices, true, 2.f);
 	}
+}
+
+bool Collider::IsTrigger() const
+{
+	return m_IsTrigger;
+}
+
+void Collider::SetTrigger(bool newVal)
+{
+	m_IsTrigger = newVal;
+}
+
+bool Collider::CompareTag(std::string tag)
+{
+	return m_pParent->GetTag() == tag;
+}
+
+const std::vector<Vector2f>& Collider::GetBaseVertices()
+{
+	return m_BaseVertices;
+}
+
+const std::vector<Vector2f>& Collider::GetTransformedVertices()
+{
+	return m_TransformedVertices;
 }

@@ -1,22 +1,28 @@
 #include "pch.h"
 
+#include <iostream>
+#include <fstream>
+
 #include "Game.h"
 #include "Texture.h"
-#include <cmath>
 #include "Scene.h"
 #include "InputHandler.h"
-#include <iostream>
+#include "TextureCache.h"
 
 Game::Game(const Window& window, Scene* scene)
-	: m_Window(window), m_pInputHandler{ new InputHandler() }, m_pScene{scene}
+	: m_Window(window),
+	m_pInputHandler{ new InputHandler() },
+	m_pScene{scene},
+	m_pTextureCache{ new TextureCache() }
 {
-	m_pScene->Initialize(this, nullptr);
+	m_pScene->Initialize(this);
 }
 
 Game::~Game()
 {
 	delete m_pInputHandler;
 	delete m_pScene;
+	delete m_pTextureCache;
 }
 
 void Game::Update(float deltaTime)
@@ -35,13 +41,33 @@ Window Game::GetWindow()
 {
 	return m_Window;
 }
-
-InputHandler* Game::GetInputHandler()
+InputHandler* Game::GetInputHandler() const
 {
 	return m_pInputHandler;
 }
 
-Scene* Game::GetScene()
+Scene* Game::GetScene() const
 {
 	return m_pScene;
+}
+
+TextureCache* Game::GetTextureCache() const
+{
+	return m_pTextureCache;
+}
+
+nlohmann::json Game::LoadJsonFile(std::string file)
+{
+	std::string levelJsonString;
+
+	std::ifstream levelFile;
+	levelFile.open(file);
+	if (levelFile)
+	{
+		std::ostringstream os;
+		os << levelFile.rdbuf();
+		levelJsonString = os.str();
+	}
+
+	return nlohmann::json::parse(levelJsonString);
 }

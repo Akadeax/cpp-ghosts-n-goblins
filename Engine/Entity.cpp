@@ -15,7 +15,7 @@ std::list<Component*> Entity::GetComponents() const
 
 void Entity::Initialize()
 {
-	for (auto& component : m_Components)
+	for (auto&& component : m_Components)
 	{
 		component->Initialize();
 	}

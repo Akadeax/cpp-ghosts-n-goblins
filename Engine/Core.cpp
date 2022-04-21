@@ -165,13 +165,15 @@ void Core::Run(Game* game)
 			elapsedSeconds = std::min(elapsedSeconds, m_MaxElapsedSeconds);
 
 
+
+
+			// Call the Game object 's Update function, using time in seconds (!)
+			game->Update(elapsedSeconds);
+
 			ClearBackground();
 
 			// Draw in the back buffer
 			game->Draw();
-
-			// Call the Game object 's Update function, using time in seconds (!)
-			game->Update(elapsedSeconds);
 
 			// Update screen: swap back and front buffer
 			SDL_GL_SwapWindow(m_pWindow);

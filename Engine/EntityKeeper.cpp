@@ -10,7 +10,7 @@ EntityKeeper::EntityKeeper(Scene* scene)
 
 EntityKeeper::~EntityKeeper()
 {
-    for (auto& entity : m_Entities)
+    for (auto&& entity : m_Entities)
     {
         delete entity;
         entity = nullptr;
@@ -30,6 +30,7 @@ Entity* EntityKeeper::CreateEntity(int updatePriority)
 Entity* EntityKeeper::CreateEntity(int updatePriority, std::string tag)
 {
     Entity* newEnt = new Entity(m_pScene, updatePriority);
+    newEnt->SetTag(tag);
 
     std::list<Entity*>::iterator it = m_Entities.begin();
     while (it != m_Entities.end() && (*it)->GetUpdatePriority() < updatePriority)

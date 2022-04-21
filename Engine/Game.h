@@ -1,9 +1,12 @@
 #pragma once
 #include <SDL.h>
+
 #include "structs.h"
+#include "json.hpp"
 
 class InputHandler;
 class Scene;
+class TextureCache;
 
 class Game
 {
@@ -21,13 +24,17 @@ public:
 	void Draw() const;
 
 	Window GetWindow();
-	InputHandler* GetInputHandler();
-	Scene* GetScene();
+	InputHandler* GetInputHandler() const;
+	Scene* GetScene() const;
+	TextureCache* GetTextureCache() const;
+
+	nlohmann::json LoadJsonFile(std::string file);
 
 protected:
 	const Window m_Window;
 
 	InputHandler* m_pInputHandler{ nullptr };
 	Scene* m_pScene{ nullptr };
+	TextureCache* m_pTextureCache{ nullptr };
 };
 

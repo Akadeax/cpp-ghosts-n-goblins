@@ -114,6 +114,12 @@ void Vector2f::Set(float newX, float newY)
 	y = newY;
 }
 
+void Vector2f::ClampX(float min, float max)
+{
+	if (x < min) x = min;
+	if (x > max) x = max;
+}
+
 // -------------------------
 // Member operators
 // -------------------------

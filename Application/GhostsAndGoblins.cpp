@@ -13,8 +13,7 @@ GhostsAndGoblins::GhostsAndGoblins(const Window& window)
 {
 	m_pInputHandler->AddKey("move_left", SDL_SCANCODE_A);
 	m_pInputHandler->AddKey("move_right", SDL_SCANCODE_D);
-	m_pInputHandler->AddKey("move_up", SDL_SCANCODE_W);
-	m_pInputHandler->AddKey("move_down", SDL_SCANCODE_S);
+	m_pInputHandler->AddKey("jump", SDL_SCANCODE_SPACE);
 }
 
 void GhostsAndGoblins::UpdateGame(float deltaTime)
