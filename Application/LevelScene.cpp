@@ -47,6 +47,11 @@ void LevelScene::UpdateScene(float deltaTime)
 	// Parallax the background
 	float newXPos = (m_pCamera->GetPosition().x * 0.2f) + (m_LevelSize.x / 2.f);
 	m_pBackgroundTransform->SetPosition(Vector2f(newXPos, 0));
+
+	if (m_pPlayerTransform->GetPosition().y < -100)
+	{
+		m_pGame->LoadScene(new LevelScene());
+	}
 }
 
 void LevelScene::DrawUI() const
@@ -116,28 +121,28 @@ void LevelScene::CreateLevel()
 	m_pLevel->AddComponent(new Transform(m_pLevel, Vector2f(m_LevelSize.x / 2, 0)));
 	m_pLevel->AddComponent(new Renderer(m_pLevel, foreground));
 
-	nlohmann::json file = m_pGame->LoadJsonFile("resources/level1.json");
-	std::vector<Vector2f> curr = file["colliders"];
 
-	std::vector<std::vector<Vector2f>> colliders
+	// Load level collision from json
+	nlohmann::json levelFile = m_pGame->LoadJsonFile("resources/level1.json");
+	for (auto& collider : levelFile.at("colliders"))
 	{
-		// 1st ground
-		{ Vector2f(0, 0), Vector2f(0, 38), Vector2f(1662, 38), Vector2f(1662, 0), },
-		// Left bound
-		{ Vector2f(-32, 0), Vector2f(-32, 200), Vector2f(0, 200), Vector2f(0, 0), },
-		// Gravestones
-		{ Vector2f(47, 38), Vector2f(47, 38 + 16), Vector2f(47 + 16, 38 + 16), Vector2f(47 + 16, 38), },
-	};
+		std::vector<Vector2f> currentVertices;
+		for (nlohmann::json& vertexJson : collider.at("vertices"))
+		{
+			Vector2f currentVertex = Vector2f();
+			currentVertex.x = vertexJson.at("x").get<float>();
+			currentVertex.y = vertexJson.at("y").get<float>();
+			currentVertices.push_back(currentVertex);
+		}
 
-	for (std::vector<Vector2f>& coll : colliders)
-	{
-		for (Vector2f& vec : coll)
+		for (Vector2f& vertex : currentVertices)
 		{
 			// Transform from centered to bottom-left
-			vec = Vector2f(vec.x - m_LevelSize.x / 2, vec.y - m_LevelSize.y / 2);
+			vertex.Set(vertex.x - m_LevelSize.x / 2, vertex.y - m_LevelSize.y / 2);
 		}
-		m_pLevel->AddComponent(new Collider(m_pLevel, coll));
-	}
+
+		m_pLevel->AddComponent(new Collider(m_pLevel, currentVertices));
+	} 
 
 	m_pLevel->Initialize();
 }

@@ -9,9 +9,8 @@
 #include "InputHandler.h"
 #include "TextureCache.h"
 
-Game::Game(const Window& window, Scene* scene)
-	: m_Window(window),
-	m_pInputHandler{ new InputHandler() },
+Game::Game(Scene* scene)
+	: m_pInputHandler{ new InputHandler() },
 	m_pScene{scene},
 	m_pTextureCache{ new TextureCache() }
 {
@@ -37,10 +36,6 @@ void Game::Draw() const
 	m_pScene->Draw();
 }
 
-Window Game::GetWindow()
-{
-	return m_Window;
-}
 InputHandler* Game::GetInputHandler() const
 {
 	return m_pInputHandler;
@@ -70,4 +65,11 @@ nlohmann::json Game::LoadJsonFile(std::string file)
 	}
 
 	return nlohmann::json::parse(levelJsonString);
+}
+
+void Game::LoadScene(Scene* newScene)
+{
+	delete m_pScene;
+	m_pScene = newScene;
+	m_pScene->Initialize(this);
 }

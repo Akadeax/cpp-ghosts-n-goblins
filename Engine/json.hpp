@@ -94,8 +94,11 @@ SOFTWARE.
 #include <cstdint> // uint8_t
 #include <string> // string
 
+
+
 namespace nlohmann
 {
+
 namespace detail
 {
 ///////////////////////////

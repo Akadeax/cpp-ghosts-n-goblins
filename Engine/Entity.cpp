@@ -58,7 +58,7 @@ Entity::Entity(Scene* scene, int updatePriority)
 
 Entity::~Entity()
 {
-	for (Component* comp : m_Components)
+	for (auto&& comp : m_Components)
 	{
 		delete comp;
 		comp = nullptr;

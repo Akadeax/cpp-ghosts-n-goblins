@@ -5,7 +5,7 @@ class Game;
 class Core final
 {
 public:
-	explicit Core(const Window& window);
+	explicit Core(std::string windowName, float width, float height);
 	Core& operator=(const Core& rhs) = delete;
 	Core& operator=(Core&& rhs) = delete;
 	Core(const Core& rhs) = delete;

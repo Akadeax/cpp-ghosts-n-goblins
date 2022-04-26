@@ -5,8 +5,8 @@
 #include <chrono>
 #include "Game.h"
 
-Core::Core( const Window& window )
-	: m_Window{window}
+Core::Core(std::string windowName, float width, float height)
+	: m_Window{ Window{ windowName, width, height } }
 	, m_Initialized{false}
 	, m_pWindow{nullptr}
 	, m_pContext{nullptr}

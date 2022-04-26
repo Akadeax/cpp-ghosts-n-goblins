@@ -13,7 +13,6 @@ EntityKeeper::~EntityKeeper()
     for (auto&& entity : m_Entities)
     {
         delete entity;
-        entity = nullptr;
     }
 }
 

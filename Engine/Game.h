@@ -11,7 +11,7 @@ class TextureCache;
 class Game
 {
 public:
-	explicit Game(const Window& window, Scene* scene);
+	explicit Game(Scene* scene);
 	Game& operator=(const Game& rhs) = delete;
 	Game& operator=(Game&& rhs) = delete;
 	Game(const Game& rhs) = delete;
@@ -23,16 +23,15 @@ public:
 
 	void Draw() const;
 
-	Window GetWindow();
 	InputHandler* GetInputHandler() const;
 	Scene* GetScene() const;
 	TextureCache* GetTextureCache() const;
 
 	nlohmann::json LoadJsonFile(std::string file);
 
-protected:
-	const Window m_Window;
+	void LoadScene(Scene* newScene);
 
+protected:
 	InputHandler* m_pInputHandler{ nullptr };
 	Scene* m_pScene{ nullptr };
 	TextureCache* m_pTextureCache{ nullptr };

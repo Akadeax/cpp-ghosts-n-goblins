@@ -8,8 +8,8 @@
 #include "GhostsAndGoblins.h"
 #include "LevelScene.h"
 
-GhostsAndGoblins::GhostsAndGoblins(const Window& window)
-	: Game(window, new LevelScene())
+GhostsAndGoblins::GhostsAndGoblins()
+	: Game(new LevelScene())
 {
 	m_pInputHandler->AddKey("move_left", SDL_SCANCODE_A);
 	m_pInputHandler->AddKey("move_right", SDL_SCANCODE_D);

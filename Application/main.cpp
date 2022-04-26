@@ -15,10 +15,8 @@ int main( int argc, char *argv[] )
 	srand(static_cast<unsigned int>(time(nullptr)));
 
 	StartHeapControl();
-	Window window = Window{ "Ghosts n' Goblins", constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT };
-	Core* pCore{ new Core{ window } };
-	GhostsAndGoblins* game = new GhostsAndGoblins(window);
-	pCore->Run(game);
+	Core* pCore{ new Core("Ghosts n' Goblins", constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT) };
+	pCore->Run(new GhostsAndGoblins());
 	delete pCore;
 
 	DumpMemoryLeaks();

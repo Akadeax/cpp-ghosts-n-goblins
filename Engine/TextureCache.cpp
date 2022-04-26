@@ -10,6 +10,8 @@ TextureCache::~TextureCache()
 
 void TextureCache::LoadTexture(std::string name, std::string resourceLocation)
 {
+	if (m_Textures.count(name) == 1) return;
+
 	m_Textures[name] = new Texture(resourceLocation);
 }
 
