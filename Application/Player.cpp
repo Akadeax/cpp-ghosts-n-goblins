@@ -27,11 +27,19 @@ void Player::Initialize()
 	assert(m_pPhysicsBody != nullptr && "Player has no physics body");
 	m_pAnimator = m_pParent->GetComponent<AnimatorRenderer>();
 	assert(m_pAnimator != nullptr && "Player has no animator");
+	m_pCollider = m_pParent->GetComponent<Collider>();
+	assert(m_pCollider != nullptr && "Player has no collider");
+
+	m_pCollider->SetBaseVertices(std::vector<Vector2f>{
+		Vector2f(-m_ColliderWidth / 2, -m_ColliderHeight / 2),
+		Vector2f(-m_ColliderWidth / 2, m_ColliderHeight / 2),
+		Vector2f(m_ColliderWidth / 2, m_ColliderHeight / 2),
+		Vector2f(m_ColliderWidth / 2, -m_ColliderHeight / 2)
+	});
 }
 
 void Player::Update(float deltaTime)
 {
-
 	UpdateMovement();
 	CheckGrounded();
 
@@ -48,6 +56,7 @@ void Player::Update(float deltaTime)
 	}
 
 	UpdateJump();
+	UpdateShooting();
 }
 
 void Player::Draw() const
@@ -64,8 +73,7 @@ void Player::UpdateMovement()
 
 	if (input->GetKeyPressed("move_left"))
 	{
-		m_pAnimator->SetFlipX(true);
-
+		m_CurrentLookDir = -1;
 		if (m_IsGrounded)
 		{
 			m_CurrentMoveDir = -1;
@@ -74,8 +82,7 @@ void Player::UpdateMovement()
 	}
 	else if (input->GetKeyPressed("move_right"))
 	{
-		m_pAnimator->SetFlipX(false);
-
+		m_CurrentLookDir = 1;
 		if (m_IsGrounded)
 		{
 			m_CurrentMoveDir = 1;
@@ -91,7 +98,38 @@ void Player::UpdateMovement()
 		}
 	}
 
+
+	// Crouching
+	m_IsCrouching = input->GetKeyPressed("crouch") && m_IsGrounded;
+	m_pAnimator->SetParameter("isCrouching", m_IsCrouching);
+
+	if (m_IsCrouching)
+	{
+		m_CurrentMoveDir = 0;
+
+		// set shortened collider
+		m_pCollider->SetBaseVertices(std::vector<Vector2f>{
+			Vector2f(-m_ColliderWidth / 2, -m_ColliderHeight / 2),
+			Vector2f(-m_ColliderWidth / 2, -m_ColliderHeight / 2 + m_ColliderHeight * m_CrouchShortenFactor),
+			Vector2f(m_ColliderWidth / 2, -m_ColliderHeight / 2 + m_ColliderHeight * m_CrouchShortenFactor),
+			Vector2f(m_ColliderWidth / 2, -m_ColliderHeight / 2)
+		});
+	}
+	else
+	{
+		// set back to normal collider
+		m_pCollider->SetBaseVertices(std::vector<Vector2f>{
+			Vector2f(-m_ColliderWidth / 2, -m_ColliderHeight / 2),
+			Vector2f(-m_ColliderWidth / 2, m_ColliderHeight / 2),
+			Vector2f(m_ColliderWidth / 2, m_ColliderHeight / 2),
+			Vector2f(m_ColliderWidth / 2, -m_ColliderHeight / 2)
+		});
+	}
+
+
+
 	m_pPhysicsBody->SetXVelocity(m_MoveSpeed * m_CurrentMoveDir);
+	m_pAnimator->SetFlipX(m_CurrentLookDir == -1);
 }
 
 void Player::CheckGrounded()
@@ -115,5 +153,9 @@ void Player::UpdateJump()
 	{
 		m_pPhysicsBody->SetYVelocity(m_JumpStrength);
 	}
+}
+
+void Player::UpdateShooting()
+{
 }
 

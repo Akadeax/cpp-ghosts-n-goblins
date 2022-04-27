@@ -31,6 +31,7 @@ public:
 	bool CompareTag(std::string tag);
 
 	const std::vector<Vector2f>& GetBaseVertices();
+	void SetBaseVertices(std::vector<Vector2f> newVertices);
 	const std::vector<Vector2f>& GetTransformedVertices();
 
 private:
@@ -41,7 +42,7 @@ private:
 
 	size_t m_VerticesAmount;
 	// Non-transformed vertices in relation to the transforms position
-	const std::vector<Vector2f> m_BaseVertices;
+	std::vector<Vector2f> m_BaseVertices;
 	// Computed transformed vertices (translated and rotated!)
 	std::vector<Vector2f> m_TransformedVertices;
 };

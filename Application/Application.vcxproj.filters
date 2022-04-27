@@ -32,6 +32,9 @@
     <ClCompile Include="PlayerCamera.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerCrouchState.cpp">
+      <Filter>Player\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LevelScene.h" />
@@ -53,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="PlayerCamera.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCrouchState.h">
+      <Filter>Player\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

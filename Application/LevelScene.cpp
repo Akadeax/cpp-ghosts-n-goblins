@@ -22,6 +22,7 @@
 #include "Player.h"
 #include "PlayerIdleState.h"
 #include "PlayerWalkState.h"
+#include "PlayerCrouchState.h"
 #include "PlayerJumpState.h"
 #include "PlayerCamera.h"
 
@@ -74,6 +75,7 @@ void LevelScene::CreatePlayer()
 		{ "idle", new PlayerIdleState() },
 		{ "walk", new PlayerWalkState() },
 		{ "jump", new PlayerJumpState() },
+		{ "crouch", new PlayerCrouchState() },
 	};
 
 
@@ -85,18 +87,17 @@ void LevelScene::CreatePlayer()
 		new ConditionalTransition("idle", "jump", std::unordered_map<std::string, int>{ {"isGrounded", 0}, }),
 		new ConditionalTransition("walk", "jump", std::unordered_map<std::string, int>{ {"isGrounded", 0}, }),
 		new ConditionalTransition("jump", "idle", std::unordered_map<std::string, int>{ {"isGrounded", 1}, }),
+
+		new ConditionalTransition("idle", "crouch", std::unordered_map<std::string, int>{ {"isCrouching", 1}, }),
+		new ConditionalTransition("walk", "crouch", std::unordered_map<std::string, int>{ {"isCrouching", 1}, }),
+		new ConditionalTransition("crouch", "idle", std::unordered_map<std::string, int>{ {"isCrouching", 0}, }),
 	};
 
 	m_pPlayer->AddComponent(new AnimatorRenderer(m_pPlayer, playerTex, states, transitions, "idle"));
 
 
 	m_pPlayer->AddComponent(new Player(m_pPlayer));
-	m_pPlayer->AddComponent(new Collider(m_pPlayer, std::vector<Vector2f>{
-		Vector2f(-12, -12),
-		Vector2f(-12, 12),
-		Vector2f(12, 12),
-		Vector2f(12, -12)
-	}));
+	m_pPlayer->AddComponent(new Collider(m_pPlayer, std::vector<Vector2f>{}));
 
 	m_pPlayer->AddComponent(new PhysicsBody(m_pPlayer));
 

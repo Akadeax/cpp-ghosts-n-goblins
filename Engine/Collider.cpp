@@ -13,8 +13,8 @@
 Collider::Collider(Entity* parent, std::vector<Vector2f> vertices)
 	: Component(parent), m_BaseVertices{vertices}
 {
-	assert(vertices.size() > 2 && "Not enough vertices given for collider");
 	m_VerticesAmount = vertices.size();
+	assert((m_VerticesAmount > 2 || m_VerticesAmount == 0) && "Not enough vertices given for collider");
 	m_TransformedVertices = std::vector<Vector2f>(m_VerticesAmount);
 }
 
@@ -41,6 +41,7 @@ void Collider::Update(float deltaTime)
 	float rotSin = std::sin(rotation);
 	float rotCos = std::cos(rotation);
 
+	// Transform all vertices to actual world position
 	for (size_t i{ 0 }; i < m_VerticesAmount; i++)
 	{
 		Vector2f base = m_BaseVertices[i];
@@ -86,6 +87,13 @@ bool Collider::CompareTag(std::string tag)
 const std::vector<Vector2f>& Collider::GetBaseVertices()
 {
 	return m_BaseVertices;
+}
+
+void Collider::SetBaseVertices(std::vector<Vector2f> newVertices)
+{
+	m_BaseVertices = newVertices;
+	m_VerticesAmount = newVertices.size();
+	m_TransformedVertices = std::vector<Vector2f>(m_VerticesAmount);
 }
 
 const std::vector<Vector2f>& Collider::GetTransformedVertices()
