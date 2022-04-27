@@ -2,6 +2,7 @@
 #include <Scene.h>
 
 class Entity;
+class Transform;
 
 class LevelScene final
 	: public Scene
@@ -22,6 +23,14 @@ public:
 	void DrawScene() const override;
 
 private:
-	Entity* m_pTest{ nullptr };
-	Entity* m_pBox{ nullptr };
+	Entity* m_pPlayer{ nullptr };
+	Transform* m_pPlayerTransform{ nullptr };
+
+	Vector2f m_LevelSize{ Vector2f() };
+	Entity* m_pLevel{ nullptr };
+	Entity* m_pLevelBackground{ nullptr };
+	Transform* m_pBackgroundTransform{ nullptr };
+
+	void CreatePlayer();
+	void CreateLevel();
 };

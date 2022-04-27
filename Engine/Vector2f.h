@@ -76,6 +76,9 @@ struct Vector2f final
 	// Sets the values of x and y
 	void Set( float newX, float newY );
 
+	// Clamp values of Vector
+	void ClampX(float min, float max);
+
 	// -------------------------
 	// Datamembers 
 	// -------------------------

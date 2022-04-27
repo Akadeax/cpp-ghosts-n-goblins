@@ -19,14 +19,23 @@
     <ClCompile Include="GhostsAndGoblins.cpp" />
     <ClCompile Include="LevelScene.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MoveZoomCamera.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerCamera.cpp" />
+    <ClCompile Include="PlayerCrouchState.cpp" />
+    <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerJumpState.cpp" />
+    <ClCompile Include="PlayerWalkState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="constants.hpp" />
     <ClInclude Include="GhostsAndGoblins.h" />
     <ClInclude Include="LevelScene.h" />
-    <ClInclude Include="MoveZoomCamera.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerCamera.h" />
+    <ClInclude Include="PlayerCrouchState.h" />
+    <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerJumpState.h" />
+    <ClInclude Include="PlayerWalkState.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

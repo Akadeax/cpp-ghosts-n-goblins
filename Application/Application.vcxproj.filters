@@ -4,6 +4,12 @@
     <Filter Include="Core">
       <UniqueIdentifier>{b0ebf9dc-c1db-4f87-8536-133bfad4159c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{90f65e66-b792-49e0-8d8c-71cb6a64dbcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\States">
+      <UniqueIdentifier>{c25509d8-9c05-4c17-80b8-db70b896228c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -11,13 +17,48 @@
     </ClCompile>
     <ClCompile Include="LevelScene.cpp" />
     <ClCompile Include="GhostsAndGoblins.cpp" />
-    <ClCompile Include="MoveZoomCamera.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpState.cpp">
+      <Filter>Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerWalkState.cpp">
+      <Filter>Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdleState.cpp">
+      <Filter>Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCamera.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCrouchState.cpp">
+      <Filter>Player\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LevelScene.h" />
     <ClInclude Include="GhostsAndGoblins.h" />
-    <ClInclude Include="MoveZoomCamera.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerIdleState.h">
+      <Filter>Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpState.h">
+      <Filter>Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerWalkState.h">
+      <Filter>Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCamera.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCrouchState.h">
+      <Filter>Player\States</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

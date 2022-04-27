@@ -5,7 +5,7 @@
 
 class Transform;
 
-class Collider
+class Collider final
 	: public Component
 {
 public:
@@ -14,18 +14,36 @@ public:
 	Collider& operator=(Collider&& rhs) = delete;
 	Collider(const Collider& rhs) = delete;
 	Collider(Collider&& rhs) = delete;
-	virtual ~Collider() = default;
+	virtual ~Collider();
 
 	void Initialize() override;
+
+	virtual void OnCollisionUpdate(Collider* other, float deltaTime);
+	virtual void OnCollisionEnter(Collider* other, float deltaTime);
+	virtual void OnCollisionExit(Collider* other, float deltaTime);
 
 	void Update(float deltaTime) override;
 	void Draw() const override;
 
+	bool IsTrigger() const;
+	void SetTrigger(bool newVal);
+
+	bool CompareTag(std::string tag);
+
+	const std::vector<Vector2f>& GetBaseVertices();
+	void SetBaseVertices(std::vector<Vector2f> newVertices);
+	const std::vector<Vector2f>& GetTransformedVertices();
+
 private:
 	Transform* m_pTransform{ nullptr };
 
+	// Whether the collider is pass-through
+	bool m_IsTrigger{ false };
+
 	size_t m_VerticesAmount;
-	std::vector<Vector2f> m_RelativeVertices;
+	// Non-transformed vertices in relation to the transforms position
+	std::vector<Vector2f> m_BaseVertices;
+	// Computed transformed vertices (translated and rotated!)
 	std::vector<Vector2f> m_TransformedVertices;
 };
 

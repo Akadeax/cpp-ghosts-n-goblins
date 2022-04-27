@@ -5,7 +5,7 @@ class GhostsAndGoblins final :
     public Game
 {
 public:
-    explicit GhostsAndGoblins(const Window& window);
+    explicit GhostsAndGoblins();
 	GhostsAndGoblins& operator=(const GhostsAndGoblins& rhs) = delete;
 	GhostsAndGoblins& operator=(GhostsAndGoblins&& rhs) = delete;
 	GhostsAndGoblins(const GhostsAndGoblins& rhs) = delete;

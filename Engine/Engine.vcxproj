@@ -11,37 +11,62 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationEndTransition.cpp" />
+    <ClCompile Include="AnimationFrame.cpp" />
+    <ClCompile Include="AnimatorRenderer.cpp" />
+    <ClCompile Include="AnimatorState.cpp" />
+    <ClCompile Include="AnimatorTransition.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="collisions.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ConditionalTransition.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityKeeper.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="PhysicsBody.cpp" />
+    <ClCompile Include="PhysicsHandler.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="structs.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureCache.cpp" />
+    <ClCompile Include="TimedTransition.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Vector2f.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimationEndTransition.h" />
+    <ClInclude Include="AnimationFrame.h" />
+    <ClInclude Include="AnimatorRenderer.h" />
+    <ClInclude Include="AnimatorState.h" />
+    <ClInclude Include="AnimatorTransition.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="collisions.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ConditionalTransition.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityKeeper.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PhysicsBody.h" />
+    <ClInclude Include="PhysicsHandler.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureCache.h" />
+    <ClInclude Include="TimedTransition.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2f.h" />

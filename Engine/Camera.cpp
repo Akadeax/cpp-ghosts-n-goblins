@@ -30,6 +30,7 @@ void Camera::Update(float deltaTime)
 
 void Camera::Draw() const
 {
-	glTranslatef(-m_Position.x, -m_Position.y, 0);
 	glScalef(m_Scale, m_Scale, 0);
+
+	glTranslatef(-m_Position.x, -m_Position.y, 0);
 }

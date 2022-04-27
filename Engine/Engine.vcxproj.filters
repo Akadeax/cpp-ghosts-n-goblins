@@ -16,6 +16,12 @@
     <Filter Include="Physics">
       <UniqueIdentifier>{340eaa41-ac5b-47cc-811b-0a65480407fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{a67d3b1d-ca76-4f05-9cb3-29bba1f3334e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation\Transition">
+      <UniqueIdentifier>{32aa1a38-85cc-4df0-9789-631525d037f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InputHandler.cpp" />
@@ -64,6 +70,40 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsBody.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsHandler.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="collisions.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureCache.cpp" />
+    <ClCompile Include="AnimatorRenderer.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationFrame.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatorState.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatorTransition.cpp">
+      <Filter>Animation\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="ConditionalTransition.cpp">
+      <Filter>Animation\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationEndTransition.cpp">
+      <Filter>Animation\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="TimedTransition.cpp">
+      <Filter>Animation\Transition</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputHandler.h" />
@@ -111,6 +151,43 @@
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsBody.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsHandler.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="collisions.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCache.h" />
+    <ClInclude Include="AnimatorRenderer.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationFrame.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatorState.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatorTransition.h">
+      <Filter>Animation\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionalTransition.h">
+      <Filter>Animation\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationEndTransition.h">
+      <Filter>Animation\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="TimedTransition.h">
+      <Filter>Animation\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Preset</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

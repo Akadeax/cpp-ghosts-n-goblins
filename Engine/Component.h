@@ -22,4 +22,5 @@ public:
 protected:
 	Entity* m_pParent;
 
+	PhysicsHandler* GetPhysicsHandler();
 };

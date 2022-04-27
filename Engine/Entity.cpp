@@ -15,7 +15,7 @@ std::list<Component*> Entity::GetComponents() const
 
 void Entity::Initialize()
 {
-	for (auto& component : m_Components)
+	for (auto&& component : m_Components)
 	{
 		component->Initialize();
 	}
@@ -58,7 +58,7 @@ Entity::Entity(Scene* scene, int updatePriority)
 
 Entity::~Entity()
 {
-	for (Component* comp : m_Components)
+	for (auto&& comp : m_Components)
 	{
 		delete comp;
 		comp = nullptr;
