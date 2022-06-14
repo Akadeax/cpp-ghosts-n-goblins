@@ -20,7 +20,6 @@ void Renderer::Initialize()
 
 void Renderer::Draw() const
 {
-
 	glTranslatef(m_pParentTransform->GetPosition().x, m_pParentTransform->GetPosition().y, 0);
 
 	float renderScale = m_pParentTransform->GetScale();

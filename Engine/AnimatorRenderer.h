@@ -22,6 +22,8 @@ public:
     AnimatorRenderer(AnimatorRenderer&& rhs) = delete;
     virtual ~AnimatorRenderer();
 
+    virtual void Initialize() override final;
+
     int GetParameter(std::string paramName);
     void SetParameter(std::string paramName, int newValue);
 

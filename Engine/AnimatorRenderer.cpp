@@ -35,6 +35,14 @@ AnimatorRenderer::~AnimatorRenderer()
 	}
 }
 
+void AnimatorRenderer::Initialize()
+{
+	for (auto&& state : m_States)
+	{
+		state.second->Initialize();
+	}
+}
+
 int AnimatorRenderer::GetParameter(std::string paramName)
 {
 	return m_Parameters[paramName];

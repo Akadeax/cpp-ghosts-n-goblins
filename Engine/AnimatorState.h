@@ -16,6 +16,7 @@ public:
 
 	Animation* GetAnimation() const;
 
+	virtual void Initialize();
 	virtual void OnStateEnter(AnimatorRenderer* animator);
 	virtual void OnStateUpdate(AnimatorRenderer* animator, float deltaTime);
 	virtual void OnStateExit(AnimatorRenderer* animator);
