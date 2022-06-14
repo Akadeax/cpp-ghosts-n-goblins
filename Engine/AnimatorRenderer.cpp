@@ -1,11 +1,14 @@
 #include "pch.h"
 
+#include <cassert>
+
 #include "AnimatorRenderer.h"
 #include "AnimatorTransition.h"
 #include "AnimationFrame.h"
 #include "Animation.h"
 #include "Texture.h"
 #include "AnimatorState.h"
+#include "Transform.h"
 
 AnimatorRenderer::AnimatorRenderer(
 	Entity* parent,
@@ -37,6 +40,9 @@ AnimatorRenderer::~AnimatorRenderer()
 
 void AnimatorRenderer::Initialize()
 {
+	m_pParentTransform = m_pParent->GetComponent<Transform>();
+	assert(m_pParentTransform != nullptr && "Entity has renderer component but not transform component");
+
 	for (auto&& state : m_States)
 	{
 		state.second->Initialize();
