@@ -18,6 +18,10 @@ Animation* AnimatorState::GetAnimation() const
 	return m_pAnimation;
 }
 
+void AnimatorState::Initialize()
+{
+}
+
 void AnimatorState::OnStateEnter(AnimatorRenderer* animator)
 {
 }

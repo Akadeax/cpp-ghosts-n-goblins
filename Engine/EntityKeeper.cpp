@@ -31,6 +31,7 @@ Entity* EntityKeeper::CreateEntity(int updatePriority, std::string tag)
     Entity* newEnt = new Entity(m_pScene, updatePriority);
     newEnt->SetTag(tag);
 
+    // insert object correctly based on update priority
     std::list<Entity*>::iterator it = m_Entities.begin();
     while (it != m_Entities.end() && (*it)->GetUpdatePriority() < updatePriority)
     {
